@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID> <!-- Required -->
+<VIDEO_ID>3508</VIDEO_ID> <!-- Required -->
 
 </VIDEO_WIDGET>
 
@@ -28,16 +28,18 @@ When dissecting a problem statement, pay extremely close attention to the phrasi
 ## 1. Multiplication Principle (The "AND" Rule)
 
 The Multiplication Principle states:
-*"If one event can occur in $m$ ways and a second event can occur in $n$ ways after the first event has occurred, then the two events can occur together in $m \times n$ ways."*
+_"If one event can occur in $m$ ways and a second event can occur in $n$ ways after the first event has occurred, then the two events can occur together in $m \times n$ ways."_
 
 ### Example: Selecting a Boy AND a Girl
+
 **Scenario:** A class consists of 18 girls and 15 boys. The teacher needs to select exactly one girl **AND** exactly one boy to represent the class in a competition.
 
 **Calculation:**
+
 - The number of ways to select the girl: 18
 - The number of ways to select the boy: 15
 
-Since the teacher must make *both* choices (one girl **AND** one boy), we multiply the possibilities:
+Since the teacher must make _both_ choices (one girl **AND** one boy), we multiply the possibilities:
 $$18 \times 15 = 270 \text{ ways}$$
 
 **Why?**
@@ -50,12 +52,14 @@ Imagine making a tree diagram. For the 1st selected girl, there are 15 different
 ## 2. Addition Principle (The "OR" Rule)
 
 The Addition Principle states:
-*"If one event can occur in $m$ ways and a mutually exclusive second event can occur in $n$ ways, then the first event **OR** the second event can occur in $m + n$ ways."*
+_"If one event can occur in $m$ ways and a mutually exclusive second event can occur in $n$ ways, then the first event **OR** the second event can occur in $m + n$ ways."_
 
 ### Example: Selecting a Boy OR a Girl
+
 **Scenario:** A class consists of 18 girls and 15 boys. The teacher needs to select exactly one student (either a girl **OR** a boy) to be the class monitor.
 
 **Calculation:**
+
 - The number of ways to select a girl: 18
 - The number of ways to select a boy: 15
 
