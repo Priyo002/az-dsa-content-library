@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID> <!-- Required -->
+<VIDEO_ID>3519</VIDEO_ID> <!-- Required -->
 
 </VIDEO_WIDGET>
 
@@ -10,7 +10,8 @@
 
 What if you're on a treasure hunt, but you drop your compass and need to walk backward to the previous clue? A Singly Linked List can't help you—it only goes forward!
 
-Enter the **Doubly Linked List**. In this structure, every node is upgraded to contain *three* things:
+Enter the **Doubly Linked List**. In this structure, every node is upgraded to contain _three_ things:
+
 1. The **Data**.
 2. A **Next Pointer** (pointing forward).
 3. A **Prev Pointer** (pointing backward).
@@ -46,7 +47,7 @@ int main() {
 
     // 2. Link them together (Both forward and backward!)
     head->next = second;
-    
+
     second->prev = head;
     second->next = third;
 
@@ -61,8 +62,10 @@ int main() {
 Doubly linked lists require slightly more pointer rewiring (to keep the `prev` pointers aligned), but offer much better versatility.
 
 #### Traversal
-You can start at the `head` and go forward using `next`, OR start at the `tail` and go backward using `prev`. 
-- *Time Complexity*: `O(N)`.
+
+You can start at the `head` and go forward using `next`, OR start at the `tail` and go backward using `prev`.
+
+- _Time Complexity_: `O(N)`.
 
 ```cpp
 // Traverse backward starting from a known node!
@@ -80,7 +83,8 @@ void traverseBackward(DoublyNode* tail) {
 
 **At the Front (Head)**
 Make the new node's `next` point to the current `head`, and update the old head's `prev` pointer. Finally, update the `head` to be the new node.
-- *Time Complexity*: `O(1)`
+
+- _Time Complexity_: `O(1)`
 
 ```cpp
 void insertAtFrontDoubly(DoublyNode*& head, int val) {
@@ -95,7 +99,8 @@ void insertAtFrontDoubly(DoublyNode*& head, int val) {
 
 **At the Back (Tail)**
 Traverse the list to find the very last node, and make its `next` point to the new node, and the new node's `prev` to point to the last node.
-- *Time Complexity*: `O(N)` (Because we must traverse to find the tail).
+
+- _Time Complexity_: `O(N)` (Because we must traverse to find the tail).
 
 ```cpp
 void insertAtBackDoubly(DoublyNode*& head, int val) {
@@ -114,8 +119,9 @@ void insertAtBackDoubly(DoublyNode*& head, int val) {
 ```
 
 **At Any Specific Position**
-Traverse to the node *just before* the desired position. Rewire the four affected pointers carefully.
-- *Time Complexity*: `O(N)` (Due to traversal).
+Traverse to the node _just before_ the desired position. Rewire the four affected pointers carefully.
+
+- _Time Complexity_: `O(N)` (Due to traversal).
 
 ```cpp
 void insertAtPositionDoubly(DoublyNode*& head, int val, int pos) {
@@ -143,7 +149,8 @@ void insertAtPositionDoubly(DoublyNode*& head, int val, int pos) {
 
 **At the Front (Head)**
 Move the `head` pointer to `head->next`, ensure its `prev` pointer is set to `nullptr`, and delete the old head.
-- *Time Complexity*: `O(1)`
+
+- _Time Complexity_: `O(1)`
 
 ```cpp
 void deleteFrontDoubly(DoublyNode*& head) {
@@ -159,7 +166,8 @@ void deleteFrontDoubly(DoublyNode*& head) {
 
 **At the Back (Tail)**
 Traverse to the end, step back using the `prev` pointer, set the second-to-last node's `next` to `nullptr`, and delete the tail.
-- *Time Complexity*: `O(N)` (Because we don't have a global tail pointer).
+
+- _Time Complexity_: `O(N)` (Because we don't have a global tail pointer).
 
 ```cpp
 // Without a global tail pointer
@@ -180,8 +188,9 @@ void deleteBackDoubly(DoublyNode*& head) {
 ```
 
 **At Any Specific Position**
-Traverse to the node *just before* the one you want to delete. Rewire the pointers to completely skip over the target node in both directions.
-- *Time Complexity*: `O(N)`
+Traverse to the node _just before_ the one you want to delete. Rewire the pointers to completely skip over the target node in both directions.
+
+- _Time Complexity_: `O(N)`
 
 ```cpp
 void deleteAtPositionDoubly(DoublyNode*& head, int pos) {
@@ -195,7 +204,7 @@ void deleteAtPositionDoubly(DoublyNode*& head, int pos) {
         temp = temp->next;
     }
     if (temp == nullptr || temp->next == nullptr) return; // Out of bounds
-    
+
     DoublyNode* toDelete = temp->next;
     temp->next = toDelete->next;
     if (toDelete->next != nullptr) {
@@ -242,4 +251,3 @@ int main() {
 > 🚀 **Next Up:** You now understand arrays, stacks, queues, and linked lists conceptually. It's time to get our hands dirty! Let's combine these concepts and actually **Implement a Stack using an Array** from scratch.
 
 </READING_WIDGET>
-

@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID> <!-- Required -->
+<VIDEO_ID>3517</VIDEO_ID> <!-- Required -->
 
 </VIDEO_WIDGET>
 
@@ -31,12 +31,12 @@ Just like the Stack, restricting how we access the data makes a Queue incredibly
 
 1. **Push / Enqueue (`push(x)`):** Adds element `x` to the absolute Back of the queue.
 2. **Pop / Dequeue (`pop()`):** Removes the element currently sitting at the Front of the queue.
-3. **Front (`front()`):** Returns the value of the first element waiting in line *without* removing it.
+3. **Front (`front()`):** Returns the value of the first element waiting in line _without_ removing it.
 4. **Back (`back()`):** Returns the value of the last element that just joined the line.
 5. **Size (`size()`):** Returns the total number of elements currently waiting in the queue.
 6. **IsEmpty (`empty()`):** Checks if the queue has zero elements.
 
-> 🚨 **The CP Trap: Popping an Empty Queue** 
+> 🚨 **The CP Trap: Popping an Empty Queue**
 > Exactly like a Stack, calling `.pop()`, `.front()`, or `.back()` on an empty Queue will cause a fatal **Segmentation Fault** and instantly crash your program! Always verify the queue isn't empty first.
 
 ```cpp
@@ -79,9 +79,10 @@ When data is coming in faster than you can process it, you store it in a Queue s
 > 💡 **CP Insight:** The absolute most important use case for a Queue in Competitive Programming is **Breadth-First Search (BFS)**. If you need to search a maze or a graph level-by-level (exploring all immediate neighbors before moving further away), a Queue is the mandatory data structure.
 
 ### Famous Queue Applications:
+
 1. **Printer Spooling:** If 5 people in an office hit "Print" at the same time, the printer puts the documents in a Queue and prints them in the exact order they were received.
 2. **CPU Task Scheduling:** Your computer's processor uses Queues to decide which background app gets access to the CPU next.
-3. **Customer Support Hotlines:** "Your call is important to us. You are currently 3rd in line." 
+3. **Customer Support Hotlines:** "Your call is important to us. You are currently 3rd in line."
 
 <img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/d96dd8f1-719d-45e0-834d-167c321a4a24.png" alt="Cpu Task Queue" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
@@ -95,6 +96,7 @@ Let's look at the absolute quintessential beginner Queue problem: **Number of Re
 You have a function `ping(int t)` that receives a ping at time `t`. You need to return the number of pings that have occurred exactly within the time frame `[t - 3000, t]`.
 
 **Examples:**
+
 - `ping(1)` $\rightarrow$ Returns `1` (Ping at `t=1` is inside `[-2999, 1]`)
 - `ping(100)` $\rightarrow$ Returns `2` (Pings at `1, 100` are inside `[-2900, 100]`)
 - `ping(3001)` $\rightarrow$ Returns `3` (Pings at `1, 100, 3001` are inside `[1, 3001]`)
@@ -103,13 +105,14 @@ You have a function `ping(int t)` that receives a ping at time `t`. You need to 
 ### The Intuition
 
 Why is a Queue the perfect data structure here? Because of the **"Oldest Data Expires First"** rule.
-As time moves forward, the oldest pings expire and need to be thrown away. 
+As time moves forward, the oldest pings expire and need to be thrown away.
 "Oldest element in, is the first element out" is the exact definition of **First-In-First-Out (FIFO)**!
 
 ### The Algorithm
+
 1. Every time a `ping(t)` arrives, `push` it to the Back of the queue.
 2. The current valid time window is `[t - 3000, t]`.
-3. Check the `front()` of the queue (which holds the absolute oldest ping). If that oldest ping happened *before* `t - 3000`, it has expired!
+3. Check the `front()` of the queue (which holds the absolute oldest ping). If that oldest ping happened _before_ `t - 3000`, it has expired!
 4. `pop()` the expired ping from the front. Repeat this until the `front()` ping is safely inside the 3000ms window.
 5. Finally, the queue now strictly contains only valid pings. Simply return the `size()` of the queue!
 
@@ -127,17 +130,17 @@ public:
     RecentCounter() {
         // Queue starts empty
     }
-    
+
     int ping(int t) {
         // 1. Add the new ping to the back of the line
         q.push(t);
-        
+
         // 2. Remove all expired pings from the front of the line
         // We use a while loop because multiple old pings might have expired!
         while (!q.empty() && q.front() < t - 3000) {
             q.pop();
         }
-        
+
         // 3. The queue size now represents the number of valid recent calls
         return q.size();
     }

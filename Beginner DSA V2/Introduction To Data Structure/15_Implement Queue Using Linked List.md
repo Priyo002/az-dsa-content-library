@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID> <!-- Required -->
+<VIDEO_ID>3523</VIDEO_ID> <!-- Required -->
 
 </VIDEO_WIDGET>
 
@@ -9,10 +9,12 @@
 # Implementing a Queue Using a Linked List
 
 A linked list provides a far superior and simpler approach to building a basic queue. Because a queue modifies both ends of the data (inserting at the back, deleting from the front), we just need to maintain **two pointers** on our linked list:
+
 1. `front`: Points to the head of the linked list (used for Dequeue).
 2. `rear`: Points to the tail of the linked list (used for Enqueue).
 
 ### Why use a Linked List?
+
 - **No shifting required**: We just rewire a pointer to remove the front element, leaving the rest of the queue untouched!
 - **Fast operations**: Both Enqueue and Dequeue are strictly `O(1)` time complexity.
 - **Dynamic Size**: No need to define a maximum `capacity` like we do in arrays!
@@ -28,7 +30,7 @@ class Node {
 public:
     int data;
     Node* next;
-    
+
     Node(int new_data) {
         data = new_data;
         next = nullptr;
@@ -55,7 +57,7 @@ public:
     // Enqueue: Add to the rear (O(1))
     void enqueue(int new_data) {
         Node* newNode = new Node(new_data);
-        
+
         // If queue is empty, the new node is both front and rear
         if (isEmpty()) {
             front = rear = newNode;
@@ -73,21 +75,21 @@ public:
             cout << "Queue Underflow!\n";
             return -1;
         }
-        
+
         Node* temp = front;
         int removedData = temp->data;
-        
+
         // Move front to the next node
         front = front->next;
-        
+
         // If the queue becomes empty after dequeue, rear must also become nullptr
         if (front == nullptr) {
             rear = nullptr;
         }
-        
+
         delete temp; // Free memory!
         currSize--;
-        
+
         return removedData;
     }
 
@@ -114,4 +116,3 @@ public:
 > 🚀 **Up Next:** Incredible work! You have successfully mastered the theory and implementation of Stacks, Queues, and Linked Lists. It's time to cement these skills. Dive into the final **Practice Problems** and prove your mastery!
 
 </READING_WIDGET>
-

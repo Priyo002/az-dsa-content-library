@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID> <!-- Required -->
+<VIDEO_ID>3516</VIDEO_ID> <!-- Required -->
 
 </VIDEO_WIDGET>
 
@@ -8,7 +8,7 @@
 
 # The Stack Data Structure
 
-Imagine you are at a buffet and you see a massive stack of clean plates. If you want a plate, you take the one resting precisely on the very top. When the dishwasher brings out freshly cleaned plates, they don't shove them into the bottom or middle of the pile—they place them directly on top. 
+Imagine you are at a buffet and you see a massive stack of clean plates. If you want a plate, you take the one resting precisely on the very top. When the dishwasher brings out freshly cleaned plates, they don't shove them into the bottom or middle of the pile—they place them directly on top.
 
 This simple real-world mechanism perfectly describes one of the most powerful structures in Computer Science: **The Stack**.
 
@@ -33,11 +33,11 @@ Here are the fundamental operations:
 
 1. **Push (`push(x)`):** Adds element `x` to the absolute top of the stack.
 2. **Pop (`pop()`):** Removes the element currently sitting at the top of the stack.
-3. **Top / Peek (`top()`):** Returns the value of the top element *without* removing it.
+3. **Top / Peek (`top()`):** Returns the value of the top element _without_ removing it.
 4. **Size (`size()`):** Returns the total number of elements currently in the stack.
 5. **IsEmpty (`empty()`):** Checks if the stack has zero elements.
 
-> 🚨 **The CP Trap: Popping an Empty Stack** 
+> 🚨 **The CP Trap: Popping an Empty Stack**
 > If you call `.pop()` or `.top()` on an empty stack, your C++ program will instantly crash with a **Segmentation Fault**! Always securely wrap your pops with an `if (!st.empty())` check.
 
 ```cpp
@@ -71,23 +71,25 @@ int main() {
 
 ## 3. How is a Stack Built? (The Underlying Reality)
 
-A Stack is technically an **Abstract Data Type (ADT)**. This means "Stack" is just a set of rules (LIFO). It doesn't magically exist in memory on its own. 
+A Stack is technically an **Abstract Data Type (ADT)**. This means "Stack" is just a set of rules (LIFO). It doesn't magically exist in memory on its own.
 
-Under the hood, a Stack is actually just an **Array** or a **Linked List** wearing a disguise! 
+Under the hood, a Stack is actually just an **Array** or a **Linked List** wearing a disguise!
+
 - If you use an Array to build a stack, `push()` just means `arr[size] = x`, and `pop()` just means `size--`.
 
 ---
 
 ## 4. Why Do We Need Stacks?
 
-If a stack is just a restricted Array, why not just use an Array for everything? 
-Because **restrictions breed safety and specialized algorithms**. 
+If a stack is just a restricted Array, why not just use an Array for everything?
+Because **restrictions breed safety and specialized algorithms**.
 
 By forcing data into a LIFO pattern, Stacks naturally solve problems that involve "undoing" actions or matching pairs from the inside out.
 
 > 💡 **CP Insight:** If a problem requires you to process the most recently seen items first, or requires you to "backtrack" to an earlier state, a Stack is almost always the required Data Structure.
 
 ### Famous Stack Applications:
+
 1. **The Undo Button:** Every time you type a word in your text editor, it gets pushed to a stack. When you hit `Ctrl + Z` (Undo), it pops the last word off the top!
 2. **Web Browser History:** Clicking a link pushes your current page onto a stack. Hitting the "Back" button pops it to take you to the previous page.
 3. **Function Call Stack:** When a function calls another function, your computer's OS uses a stack to remember where to return to when the inner function finishes!
@@ -103,11 +105,13 @@ Let's look at the absolute quintessential Stack problem: **Valid Parentheses**.
 
 **The Problem:** Given a string `s` containing just the characters `(`, `)`, `{`, `}`, `[` and `]`, determine if the input string is valid.
 An input string is valid if:
+
 1. Open brackets must be closed by the same type of brackets.
 2. Open brackets must be closed in the correct order.
 3. Every close bracket has a corresponding open bracket of the same type.
 
 **Examples:**
+
 - `s = "()"` $\rightarrow$ `true`
 - `s = "()[]{}"` $\rightarrow$ `true`
 - `s = "(]"` $\rightarrow$ `false`
@@ -117,10 +121,11 @@ An input string is valid if:
 ### The Intuition
 
 Why is a Stack the perfect data structure here? Because of the **"Inside-Out"** matching rule.
-If you have a string like `([])`, the most recently opened bracket `[` must be the very first one to be closed `]`. 
+If you have a string like `([])`, the most recently opened bracket `[` must be the very first one to be closed `]`.
 "Most recently opened must be closed first" is the exact definition of **Last-In-First-Out (LIFO)**!
 
 ### The Algorithm
+
 1. Iterate through every character in the string.
 2. If it is an **opening bracket** `(`, `{`, or `[`, push it onto the stack.
 3. If it is a **closing bracket** `)`, `}`, or `]`:
@@ -134,22 +139,22 @@ If you have a string like `([])`, the most recently opened bracket `[` must be t
 ```cpp
 bool isValid(string s) {
     stack<char> st;
-    
+
     for (char c : s) {
         // If it's an opening bracket, push to stack
         if (c == '(' || c == '{' || c == '[') {
             st.push(c);
-        } 
+        }
         // If it's a closing bracket
         else {
             // Guard against Segmentation Fault!
             if (st.empty()) return false;
-            
+
             char top = st.top();
-            
+
             // Check for perfect match
-            if ((c == ')' && top == '(') || 
-                (c == '}' && top == '{') || 
+            if ((c == ')' && top == '(') ||
+                (c == '}' && top == '{') ||
                 (c == ']' && top == '[')) {
                 st.pop(); // Match found, remove it
             } else {
@@ -157,7 +162,7 @@ bool isValid(string s) {
             }
         }
     }
-    
+
     // If the stack is empty, all brackets were matched!
     return st.empty();
 }

@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID> <!-- Required -->
+<VIDEO_ID>3522</VIDEO_ID> <!-- Required -->
 
 </VIDEO_WIDGET>
 
@@ -16,8 +16,8 @@ Just like stacks, we can build queues using either **Arrays** or **Linked Lists*
 
 ---
 
-
 To implement a queue using a standard fixed-size array, we need to keep track of a few things:
+
 1. An integer array (`arr`) to store the elements.
 2. A `capacity` variable to track the maximum number of elements the queue can hold.
 3. A `size` variable to track the current number of elements inside the queue.
@@ -25,11 +25,11 @@ To implement a queue using a standard fixed-size array, we need to keep track of
 ### Core Operations
 
 - **Enqueue (Insert)**: Add an element to the back of the queue (at index `size`). If `size == capacity`, the queue is full (**Queue Overflow**).
-  - *Time Complexity*: `O(1)`
+  - _Time Complexity_: `O(1)`
 - **Dequeue (Remove)**: Remove the element at the front of the queue (at index `0`). However, because it's an array, removing index `0` leaves an empty gap at the beginning! To fix this, we must **shift every single remaining element one position to the left**. If `size == 0`, the queue is empty (**Queue Underflow**).
-  - *Time Complexity*: `O(N)` 🚨 *(Due to shifting)*
+  - _Time Complexity_: `O(N)` 🚨 _(Due to shifting)_
 - **getFront / getRear**: Return the elements at index `0` and index `size - 1` respectively.
-  - *Time Complexity*: `O(1)`
+  - _Time Complexity_: `O(1)`
 
 ### Code Implementation (Simple Array Queue)
 
@@ -92,7 +92,7 @@ public:
 };
 ```
 
-> 🚨 **The Terrible `O(N)` Limitation:** Did you notice that `dequeue()` uses a `for` loop? Shifting every element in an array takes `O(N)` time. This is painfully slow! In the real world, if we *must* use an array for a queue (to take advantage of CPU caching), we use a clever technique called a **Circular Queue** to ensure both enqueue and dequeue are `O(1)`. But for now, let's look at a much simpler way to get `O(1)` speed!
+> 🚨 **The Terrible `O(N)` Limitation:** Did you notice that `dequeue()` uses a `for` loop? Shifting every element in an array takes `O(N)` time. This is painfully slow! In the real world, if we _must_ use an array for a queue (to take advantage of CPU caching), we use a clever technique called a **Circular Queue** to ensure both enqueue and dequeue are `O(1)`. But for now, let's look at a much simpler way to get `O(1)` speed!
 
 ---
 

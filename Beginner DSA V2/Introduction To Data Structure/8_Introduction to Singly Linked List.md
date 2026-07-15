@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID> <!-- Required -->
+<VIDEO_ID>3518</VIDEO_ID> <!-- Required -->
 
 </VIDEO_WIDGET>
 
@@ -8,7 +8,7 @@
 
 # Introduction to Singly Linked List
 
-Imagine you're playing a massive treasure hunt game. You find a clue, and it doesn't just give you the prize—it gives you a piece of information and the exact coordinates of where to find the *next* clue. You follow the chain, clue by clue, until you reach the end. 
+Imagine you're playing a massive treasure hunt game. You find a clue, and it doesn't just give you the prize—it gives you a piece of information and the exact coordinates of where to find the _next_ clue. You follow the chain, clue by clue, until you reach the end.
 
 This is exactly how a **Linked List** works in computer science! Instead of storing everything in one massive, perfectly aligned row (like an Array), a Linked List scatters its data across memory. Each piece of data simply holds a "clue"—a pointer—telling the computer exactly where to find the next piece.
 
@@ -20,8 +20,8 @@ Like Arrays, Stacks, and Queues, a Linked List is a **Linear Data Structure**. T
 
 ---
 
-
 In a **Singly Linked List**, each element is called a **Node**. A node contains two things:
+
 1. The **Data** (the actual value you want to store).
 2. The **Next Pointer** (the exact memory address of the next node in the chain).
 
@@ -68,8 +68,10 @@ int main() {
 Let's dive into how we manipulate a Singly Linked List.
 
 #### Traversal
+
 Traversal is the act of visiting every single node in the list. Start at the `head` and hop to the `next` pointer until you hit `NULL`.
-- *Time Complexity*: `O(N)` (You have to visit $N$ elements).
+
+- _Time Complexity_: `O(N)` (You have to visit $N$ elements).
 
 ```cpp
 // Traverse and print the list
@@ -87,7 +89,8 @@ void traverseList(Node* head) {
 
 **At the Front (Head)**
 Make the new node's `next` point to the current `head`, and then update the `head` to be the new node.
-- *Time Complexity*: `O(1)` (Instant! No shifting needed).
+
+- _Time Complexity_: `O(1)` (Instant! No shifting needed).
 
 ```cpp
 void insertAtFront(Node*& head, int val) {
@@ -98,8 +101,9 @@ void insertAtFront(Node*& head, int val) {
 ```
 
 **At the Back (Tail)**
-Traverse the list to find the very last node, and make its `next` point to the new node. 
-- *Time Complexity*: `O(N)` (Because you have to traverse to find the tail).
+Traverse the list to find the very last node, and make its `next` point to the new node.
+
+- _Time Complexity_: `O(N)` (Because you have to traverse to find the tail).
 
 ```cpp
 void insertAtBack(Node*& head, int val) {
@@ -117,8 +121,9 @@ void insertAtBack(Node*& head, int val) {
 ```
 
 **At Any Specific Position (0-indexed)**
-Traverse the list to the node *just before* the desired position. Rewire the previous node's `next` to point to the new node, and the new node's `next` to point to the rest of the chain.
-- *Time Complexity*: `O(N)` (Due to traversal).
+Traverse the list to the node _just before_ the desired position. Rewire the previous node's `next` to point to the new node, and the new node's `next` to point to the rest of the chain.
+
+- _Time Complexity_: `O(N)` (Due to traversal).
 
 ```cpp
 void insertAtPosition(Node*& head, int val, int pos) {
@@ -132,7 +137,7 @@ void insertAtPosition(Node*& head, int val, int pos) {
         temp = temp->next;
     }
     if (temp == nullptr) return; // Position out of bounds
-    
+
     newNode->next = temp->next;
     temp->next = newNode;
 }
@@ -142,7 +147,8 @@ void insertAtPosition(Node*& head, int val, int pos) {
 
 **At the Front (Head)**
 Simply move the `head` pointer to `head->next` and delete the old head.
-- *Time Complexity*: `O(1)`
+
+- _Time Complexity_: `O(1)`
 
 ```cpp
 void deleteFront(Node*& head) {
@@ -154,8 +160,9 @@ void deleteFront(Node*& head) {
 ```
 
 **At the Back (Tail)**
-You must traverse the entire list to find the *second to last* node, change its `next` to `nullptr`, and delete the last node.
-- *Time Complexity*: `O(N)`
+You must traverse the entire list to find the _second to last_ node, change its `next` to `nullptr`, and delete the last node.
+
+- _Time Complexity_: `O(N)`
 
 ```cpp
 void deleteBack(Node*& head) {
@@ -175,8 +182,9 @@ void deleteBack(Node*& head) {
 ```
 
 **At Any Specific Position**
-Traverse to the node *just before* the one you want to delete. Change its `next` pointer to skip over the target node.
-- *Time Complexity*: `O(N)`
+Traverse to the node _just before_ the one you want to delete. Change its `next` pointer to skip over the target node.
+
+- _Time Complexity_: `O(N)`
 
 ```cpp
 void deleteAtPosition(Node*& head, int pos) {
@@ -190,7 +198,7 @@ void deleteAtPosition(Node*& head, int pos) {
         temp = temp->next;
     }
     if (temp == nullptr || temp->next == nullptr) return; // Out of bounds
-    
+
     Node* toDelete = temp->next;
     temp->next = temp->next->next;
     delete toDelete;
