@@ -111,6 +111,12 @@ Instead, the universally accepted CP trick to create an Indexed Multiset is to u
 The first integer is your actual value, and the second integer is a unique ID (usually the current time or a rising counter) to force every pair to be mathematically unique.
 
 ```cpp
+#include <iostream>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+
 // 1. Define the PBDS using a pair
 typedef tree<pair<int, int>, null_type, less<pair<int, int>>, rb_tree_tag, tree_order_statistics_node_update> indexed_multiset;
 
