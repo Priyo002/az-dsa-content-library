@@ -8,6 +8,8 @@
 
 # The Priority Queue (Heap) Data Structure
 
+> *In competitive programming, time is everything. The STL Priority Queue is your ultimate shortcut for automatically keeping data sorted without having to constantly call `sort()`.*
+
 Imagine you are a doctor in an Emergency Room. Patients are constantly arriving. Do you treat them in the exact order they arrived (FIFO, like a normal Queue)? No! You treat the patient with the most severe injury first, regardless of when they walked through the door.
 
 In Computer Science, a queue that automatically brings the "most important" element to the absolute front is called a **Priority Queue**. 
@@ -94,6 +96,42 @@ Calling `sort()` takes $O(N \log N)$ time. If you insert $N$ items one by one an
 A Priority Queue handles $N$ insertions dynamically in just **$O(N \log N)$** total time!
 
 > 💡 **CP Insight:** If a problem requires you to repeatedly find the "minimum", "maximum", "cheapest", or "closest" element amidst a constantly changing stream of data, a Priority Queue is almost always the answer.
+
+---
+
+## 4. Practice Problem: Last Stone Weight (Easy)
+
+**The Problem:** You are given an array of stone weights. Every turn, you smash the two heaviest stones together. If they have the same weight, both are destroyed. If one is heavier, the remaining weight goes back into the pile. What is the weight of the last remaining stone?
+**The Direct Application:** A pure Max-Heap simulation! We load all stones into a Priority Queue, `.pop()` the top two to smash them, and `.push()` the remainder back in until the queue is empty or has 1 stone.
+
+### The Code (C++)
+
+```cpp
+#include <iostream>
+#include <queue>
+#include <vector>
+using namespace std;
+
+int lastStoneWeight(vector<int>& stones) {
+    // 1. Build a Max-Heap from the array in O(N) time!
+    priority_queue<int> maxHeap(stones.begin(), stones.end());
+    
+    // 2. Simulate the smashing process
+    while (maxHeap.size() > 1) {
+        int y = maxHeap.top(); // Heaviest
+        maxHeap.pop();
+        int x = maxHeap.top(); // Second Heaviest
+        maxHeap.pop();
+        
+        if (y > x) {
+            maxHeap.push(y - x); // Push the remainder back
+        }
+    }
+    
+    // 3. Return the last stone (or 0 if none remain)
+    return maxHeap.empty() ? 0 : maxHeap.top();
+}
+```
 
 ---
 

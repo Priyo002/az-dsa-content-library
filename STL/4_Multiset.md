@@ -8,6 +8,8 @@
 
 # The Multiset Data Structure
 
+> *Sometimes you need the strict sorting of a Set, but you can't afford to lose duplicate data. The STL Multiset bridges this gap, giving you the best of both worlds!*
+
 In the previous lesson, we learned that a `std::set` is incredibly powerful because it automatically sorts everything in $O(\log N)$ time. But there was one major limitation: **it strictly rejects duplicates.**
 
 What if you are tracking the high scores of a video game? If two players both score `10,000` points, you can't just delete one of them! You need a data structure that maintains the perfect sorted order of a Binary Search Tree, but *allows* duplicate values to coexist peacefully.
@@ -106,6 +108,42 @@ Since the multiset is always sorted, the minimum is always at the front, and the
 ```cpp
 int min_val = *ms.begin();   // Smallest element
 int max_val = *ms.rbegin();  // Largest element (Reverse Begin)
+```
+
+---
+
+## 4. Practice Problem: Closest Number in a Data Stream (Medium)
+
+**The Problem:** You are receiving a continuous stream of numbers. At any point, given a query number `X`, you must find the smallest number currently in your stream that is greater than or equal to `X`. (Duplicates are possible in the stream).
+**The Direct Application:** This is the absolute bread-and-butter of a Multiset! Because a multiset automatically sorts the stream and handles duplicates, we can simply call `ms.lower_bound(X)` to find the closest valid number in exactly $O(\log N)$ time.
+
+### The Code (C++)
+
+```cpp
+#include <iostream>
+#include <set>
+using namespace std;
+
+class StreamQueries {
+    multiset<int> ms;
+    
+public:
+    // 1. Add a number to the stream in O(log N)
+    void addNumber(int num) {
+        ms.insert(num);
+    }
+    
+    // 2. Find closest number >= X in O(log N)
+    int getClosest(int x) {
+        auto it = ms.lower_bound(x);
+        
+        if (it != ms.end()) {
+            return *it; // Found a valid number!
+        } else {
+            return -1;  // No number is >= X
+        }
+    }
+};
 ```
 
 ---

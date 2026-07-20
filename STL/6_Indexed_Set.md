@@ -8,6 +8,12 @@
 
 # The Indexed Set (Policy-Based Data Structure)
 
+> *When the standard STL containers aren't enough, C++ hides a secret weapon. Policy-Based Data Structures (PBDS) give you the sorting power of a Set, combined with the index access of an Array.*
+
+In competitive programming, there are times when the standard C++ STL falls short. What happens when you have a constantly changing collection of numbers, and you need to rapidly find:
+1. The K-th smallest element?
+2. How many elements are strictly smaller than X?
+
 We have learned that `std::set` is fantastic at keeping elements sorted and finding them in $O(\log N)$ time. However, it has one fatal flaw in C++: **You cannot access elements by their index.**
 
 If you have a set of `[10, 20, 30, 40]`, you cannot simply ask C++ for `set[2]` to get `30`. You would have to iterate through the set one by one, which takes massive $O(N)$ time.
@@ -126,6 +132,42 @@ int main() {
     cout << "Elements strictly smaller than 10: " << count << "\n";
     
     return 0;
+}
+```
+
+---
+
+## 4. Practice Problem: Count Inversions (Medium)
+
+**The Problem:** Given an array, find how many pairs of indices $(i, j)$ exist such that $i < j$ and $nums[i] > nums[j]$. In simpler terms: how many numbers to the right are strictly smaller than the current number?
+**The Direct Application:** This is the quintessential PBDS problem! We iterate through the array backwards. For each number, we use `.order_of_key(num)` to instantly count how many numbers currently in the tree are strictly smaller than `num`. Then, we `.insert(num)` into the tree. 
+
+### The Code (C++)
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+
+typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> indexed_set;
+
+int countInversions(vector<int>& nums) {
+    indexed_set pbds;
+    int inversions = 0;
+    
+    // Iterate backwards
+    for (int i = nums.size() - 1; i >= 0; i--) {
+        // Count how many elements currently in the PBDS are smaller
+        inversions += pbds.order_of_key(nums[i]);
+        
+        // Insert current element for the next iterations
+        pbds.insert(nums[i]);
+    }
+    
+    return inversions;
 }
 ```
 

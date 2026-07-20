@@ -8,7 +8,9 @@
 
 # The Map Data Structure
 
-Imagine you have a physical English dictionary. You open it to look up the word "Algorithm." The word itself is unique—there is only one entry for "Algorithm" in the book. However, the definition assigned to it might be identical to another word's definition. 
+> *Why limit yourself to indexing arrays with integers? The C++ STL Map allows you to create lightning-fast lookup tables using strings, pairs, or any data type as the key.*
+
+In the previous lessons, we learned how to store and sort raw numbers using Sets and Multisets. But what if you want to store a relationship between two pieces of data? Imagine you have a physical English dictionary. You open it to look up the word "Algorithm." The word itself is unique—there is only one entry for "Algorithm" in the book. However, the definition assigned to it might be identical to another word's definition. 
 
 In Computer Science, this concept of linking a unique **Key** to a specific **Value** is called a **Map** (also known as a Dictionary or an Associative Array).
 
@@ -136,6 +138,41 @@ public:
         return {}; // Should never reach here if a solution is guaranteed
     }
 };
+```
+
+---
+
+## 5. Practice Problem: Two Sum (Easy)
+
+**The Problem:** Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.
+**The Direct Application:** The quintessential map problem! We can solve this in a single $O(N)$ pass. As we iterate through the array, we calculate the `needed_value = target - nums[i]`. We use an `unordered_map` to instantly check if we've seen that value before. If yes, we win! If not, we save the current number and its index in the map.
+
+### The Code (C++)
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+using namespace std;
+
+vector<int> twoSum(vector<int>& nums, int target) {
+    // Map to store: <Number, Index>
+    unordered_map<int, int> seen;
+    
+    for (int i = 0; i < nums.size(); i++) {
+        int needed = target - nums[i];
+        
+        // 1. Check if the complement exists in O(1) time
+        if (seen.count(needed)) {
+            return {seen[needed], i};
+        }
+        
+        // 2. Otherwise, save the current number and its index
+        seen[nums[i]] = i;
+    }
+    
+    return {};
+}
 ```
 
 ---

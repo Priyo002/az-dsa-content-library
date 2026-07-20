@@ -8,6 +8,8 @@
 
 # The Set Data Structure
 
+> *Tired of writing loops to check for duplicate numbers? The C++ STL provides the Set to instantly deduplicate your data and answer existence queries in milliseconds.*
+
 Imagine you have a magic bag. No matter how many identical red balls you throw into it, when you open the bag, there is always exactly one red ball inside. Furthermore, the bag somehow automatically organizes everything inside it from smallest to largest.
 
 In Computer Science, this unique, auto-organizing container is called a **Set**. 
@@ -108,6 +110,40 @@ This allows you to find the "next largest available number" in exactly $O(\log N
 
 > ⚠️ **Syntax Warning:** 
 > Always use the member function `orderedSet.lower_bound(x)` which runs in $O(\log N)$. NEVER use the global algorithm `std::lower_bound(orderedSet.begin(), orderedSet.end(), x)`. Because a set does not have random access iterators, the global algorithm will quietly degrade to $O(N)$ time and TLE your solution!
+
+---
+
+## 5. Practice Problem: Intersection of Two Arrays (Easy)
+
+**The Problem:** Given two integer arrays, return an array of their intersection (the numbers that exist in both arrays). Each element in the result must be unique.
+**The Direct Application:** The perfect job for a Set! We can instantly deduplicate the first array by tossing it into an `unordered_set`. Then, we loop through the second array and use `.count()` to check for matches in $O(1)$ time!
+
+### The Code (C++)
+
+```cpp
+#include <iostream>
+#include <unordered_set>
+#include <vector>
+using namespace std;
+
+vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+    // 1. Deduplicate nums1 into a set
+    unordered_set<int> set1(nums1.begin(), nums1.end());
+    vector<int> result;
+    
+    // 2. Check each element of nums2
+    for (int num : nums2) {
+        if (set1.count(num)) {
+            result.push_back(num);
+            
+            // 3. Erase it so we don't push duplicates into the result!
+            set1.erase(num);
+        }
+    }
+    
+    return result;
+}
+```
 
 ---
 

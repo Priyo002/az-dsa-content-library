@@ -8,6 +8,8 @@
 
 # The Deque (Double-Ended Queue) Data Structure
 
+> *Welcome to the STL! Instead of manually shifting arrays, the C++ Standard Template Library provides the Deque to instantly handle data at both ends.*
+
 Think about waiting in a normal queue: you enter at the back and exit at the front. But what if you wanted a more flexible line? Imagine a ticket counter where VIPs can cut straight to the front of the line, or where someone at the absolute back of the line can change their mind and leave without waiting. 
 
 In Computer Science, this flexible, two-way line is exactly what we call a **Deque** (pronounced "deck"), which stands for **Double-Ended Queue**.
@@ -78,6 +80,42 @@ int main() {
 If a Stack is LIFO and a Queue is FIFO, a Deque is the ultimate flexible buffer. It is used when you need constant time $O(1)$ insertions and deletions at **both** ends of your data.
 
 > 💡 **CP Insight:** The absolute most important use case for a Deque in Competitive Programming is the **Sliding Window Maximum** (or Minimum) problem. By maintaining a monotonic order of elements in the Deque, you can find the maximum value in a moving window in $O(1)$ time per step!
+
+---
+
+## 4. Practice Problem: Palindrome Checker (Easy)
+
+**The Problem:** Given a string, determine if it is a palindrome (reads the same forwards and backwards).
+**The Direct Application:** A Deque perfectly models this! We can push all characters into the Deque, and then simultaneously `.pop_front()` and `.pop_back()` to compare the ends. If they ever mismatch, it's not a palindrome.
+
+### The Code (C++)
+
+```cpp
+#include <iostream>
+#include <deque>
+#include <string>
+using namespace std;
+
+bool isPalindrome(string s) {
+    deque<char> dq;
+    
+    // Push all characters into the Deque
+    for (char c : s) {
+        dq.push_back(c);
+    }
+    
+    // Compare front and back until 0 or 1 character remains
+    while (dq.size() > 1) {
+        if (dq.front() != dq.back()) {
+            return false; // Mismatch found!
+        }
+        dq.pop_front();
+        dq.pop_back();
+    }
+    
+    return true; // It's a palindrome!
+}
+```
 
 ---
 
