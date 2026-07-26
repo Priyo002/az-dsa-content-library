@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3558</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -8,9 +8,9 @@
 
 # The Map Data Structure
 
-> *Why limit yourself to indexing arrays with integers? The C++ STL Map allows you to create lightning-fast lookup tables using strings, pairs, or any data type as the key.*
+> _Why limit yourself to indexing arrays with integers? The C++ STL Map allows you to create lightning-fast lookup tables using strings, pairs, or any data type as the key._
 
-In the previous lessons, we learned how to store and sort raw numbers using Sets and Multisets. But what if you want to store a relationship between two pieces of data? Imagine you have a physical English dictionary. You open it to look up the word "Algorithm." The word itself is unique—there is only one entry for "Algorithm" in the book. However, the definition assigned to it might be identical to another word's definition. 
+In the previous lessons, we learned how to store and sort raw numbers using Sets and Multisets. But what if you want to store a relationship between two pieces of data? Imagine you have a physical English dictionary. You open it to look up the word "Algorithm." The word itself is unique—there is only one entry for "Algorithm" in the book. However, the definition assigned to it might be identical to another word's definition.
 
 In Computer Science, this concept of linking a unique **Key** to a specific **Value** is called a **Map** (also known as a Dictionary or an Associative Array).
 
@@ -23,11 +23,13 @@ Just like Sets, C++ provides two entirely different engines for Maps. The distin
 <img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/ec1e3d9e-a519-4d80-a690-c14aa2b725f6.jpg" alt="Map Diagram" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ### `std::map` (Ordered Map)
+
 - **The Engine:** Powered by a balanced Binary Search Tree.
 - **The Guarantee:** The **Keys** are ALWAYS kept in strictly sorted (ascending) order.
 - **The Cost:** Inserting, deleting, or looking up a Key takes **$O(\log N)$ Time**.
 
 ### `std::unordered_map` (Unordered Map)
+
 - **The Engine:** Powered by a Hash Table.
 - **The Guarantee:** The Keys are scattered randomly. There is absolutely no order.
 - **The Cost:** Inserting, deleting, or looking up a Key takes blazing fast **$O(1)$ Average Time**.
@@ -95,15 +97,15 @@ Let's look at the absolute quintessential Map problem. This is arguably the most
 
 **Example:**
 Input: `nums = [2,7,11,15]`, `target = 9`
-Output: `[0,1]` *(Because nums[0] + nums[1] == 9)*
+Output: `[0,1]` _(Because nums[0] + nums[1] == 9)_
 
 ### The Intuition
 
 You could use two nested loops to check every possible pair, but that takes $O(N^2)$ time.
 
 Let's use an `unordered_map` to do it in **$O(N)$ Time**!
-As we iterate through the array, we look at the current number, let's say `2`. We know the target is `9`. This means we absolutely *need* to find a `7`. 
-Instead of searching the rest of the array for a `7`, we just ask our Map: *"Hey, have we seen a 7 earlier?"*
+As we iterate through the array, we look at the current number, let's say `2`. We know the target is `9`. This means we absolutely _need_ to find a `7`.
+Instead of searching the rest of the array for a `7`, we just ask our Map: _"Hey, have we seen a 7 earlier?"_
 If the Map says no, we store our current number `2` (and its index) in the Map for the future, and move on.
 
 The Map serves as our lightning-fast memory of everything we've seen so far!
@@ -158,19 +160,19 @@ using namespace std;
 vector<int> twoSum(vector<int>& nums, int target) {
     // Map to store: <Number, Index>
     unordered_map<int, int> seen;
-    
+
     for (int i = 0; i < nums.size(); i++) {
         int needed = target - nums[i];
-        
+
         // 1. Check if the complement exists in O(1) time
         if (seen.count(needed)) {
             return {seen[needed], i};
         }
-        
+
         // 2. Otherwise, save the current number and its index
         seen[nums[i]] = i;
     }
-    
+
     return {};
 }
 ```

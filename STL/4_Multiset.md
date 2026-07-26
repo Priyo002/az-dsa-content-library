@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3557</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -8,11 +8,11 @@
 
 # The Multiset Data Structure
 
-> *Sometimes you need the strict sorting of a Set, but you can't afford to lose duplicate data. The STL Multiset bridges this gap, giving you the best of both worlds!*
+> _Sometimes you need the strict sorting of a Set, but you can't afford to lose duplicate data. The STL Multiset bridges this gap, giving you the best of both worlds!_
 
 In the previous lesson, we learned that a `std::set` is incredibly powerful because it automatically sorts everything in $O(\log N)$ time. But there was one major limitation: **it strictly rejects duplicates.**
 
-What if you are tracking the high scores of a video game? If two players both score `10,000` points, you can't just delete one of them! You need a data structure that maintains the perfect sorted order of a Binary Search Tree, but *allows* duplicate values to coexist peacefully.
+What if you are tracking the high scores of a video game? If two players both score `10,000` points, you can't just delete one of them! You need a data structure that maintains the perfect sorted order of a Binary Search Tree, but _allows_ duplicate values to coexist peacefully.
 
 Enter the **Multiset**.
 
@@ -38,7 +38,7 @@ If your multiset is `[5, 10, 10, 10, 20]`, calling `ms.erase(10)` instantly dele
 
 > 🚨 **CP Insight: How to erase just ONE copy?**
 > If you only want to delete a single instance of `10`, you must find its iterator first, and then erase the iterator!
-> 
+>
 > **Wrong way (Deletes all 10s):**
 > `ms.erase(10);`
 >
@@ -58,7 +58,7 @@ using namespace std;
 
 int main() {
     multiset<int> ms;
-    
+
     ms.insert(10);
     ms.insert(20);
     ms.insert(10); // Duplicate allowed!
@@ -93,7 +93,7 @@ int main() {
 
 If you just want to count duplicates, a `std::map` (which we will learn next) is often better. However, a Multiset shines in one highly specific scenario: **Sliding Windows with changing minimums/maximums.**
 
-In a previous lesson, we used a `Deque` to find the maximum in a sliding window in $O(N)$ time. However, that only worked because we *only* cared about the absolute maximum. 
+In a previous lesson, we used a `Deque` to find the maximum in a sliding window in $O(N)$ time. However, that only worked because we _only_ cared about the absolute maximum.
 
 If a problem requires you to find the **Median**, or query the exact sorted order of a dynamically changing window of numbers, a Deque fails. You MUST use a Multiset!
 
@@ -104,7 +104,9 @@ If a problem requires you to find the **Median**, or query the exact sorted orde
 3. **Sliding Window Minimum/Maximum (Alternative):** If you struggle to implement the complex $O(N)$ Deque logic, a Multiset offers a simple $O(N \log K)$ alternative. Just insert the new element, erase the outgoing element's iterator, and the maximum is always `*ms.rbegin()`!
 
 ### Fetching the Min and Max in $O(1)$ Time:
+
 Since the multiset is always sorted, the minimum is always at the front, and the maximum is always at the back.
+
 ```cpp
 int min_val = *ms.begin();   // Smallest element
 int max_val = *ms.rbegin();  // Largest element (Reverse Begin)
@@ -126,17 +128,17 @@ using namespace std;
 
 class StreamQueries {
     multiset<int> ms;
-    
+
 public:
     // 1. Add a number to the stream in O(log N)
     void addNumber(int num) {
         ms.insert(num);
     }
-    
+
     // 2. Find closest number >= X in O(log N)
     int getClosest(int x) {
         auto it = ms.lower_bound(x);
-        
+
         if (it != ms.end()) {
             return *it; // Found a valid number!
         } else {

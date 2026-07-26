@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3559</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -8,9 +8,10 @@
 
 # The Indexed Set (Policy-Based Data Structure)
 
-> *When the standard STL containers aren't enough, C++ hides a secret weapon. Policy-Based Data Structures (PBDS) give you the sorting power of a Set, combined with the index access of an Array.*
+> _When the standard STL containers aren't enough, C++ hides a secret weapon. Policy-Based Data Structures (PBDS) give you the sorting power of a Set, combined with the index access of an Array._
 
 In competitive programming, there are times when the standard C++ STL falls short. What happens when you have a constantly changing collection of numbers, and you need to rapidly find:
+
 1. The K-th smallest element?
 2. How many elements are strictly smaller than X?
 
@@ -26,19 +27,23 @@ Enter the "secret weapon" of C++ Competitive Programmers: the **Policy-Based Dat
 
 ## 1. What is an Indexed Set?
 
-An Indexed Set is not part of the standard C++ `<set>` library. It is a GNU C++ extension that provides a highly augmented Binary Search Tree. 
+An Indexed Set is not part of the standard C++ `<set>` library. It is a GNU C++ extension that provides a highly augmented Binary Search Tree.
 
 It does everything a normal `std::set` does (insert, delete, find in $O(\log N)$), but it tracks the subtree sizes internally. This grants it **two literal superpowers** that standard sets do not possess.
 
 <img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/fed5192f-883c-458f-b0c3-f4e3277f0aaf.jpg" alt="Indexed Set Diagram" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ### Superpower 1: `find_by_order(k)`
+
 This function returns an iterator to the $k^{th}$ smallest element in the set (using 0-based indexing) in **$O(\log N)$ time**.
-* *Example: If the set is `[5, 10, 15, 20]`, `find_by_order(2)` returns an iterator pointing to `15`.*
+
+- _Example: If the set is `[5, 10, 15, 20]`, `find_by_order(2)` returns an iterator pointing to `15`._
 
 ### Superpower 2: `order_of_key(x)`
+
 This function returns the exact integer count of elements that are strictly smaller than `x` in **$O(\log N)$ time**.
-* *Example: If the set is `[5, 10, 15, 20]`, `order_of_key(12)` returns `2` (because only 5 and 10 are smaller).*
+
+- _Example: If the set is `[5, 10, 15, 20]`, `order_of_key(12)` returns `2` (because only 5 and 10 are smaller)._
 
 ---
 
@@ -65,7 +70,7 @@ typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_
 
 int main() {
     indexed_set s;
-    
+
     // Inserts elements exactly like a normal set
     s.insert(10);
     s.insert(20);
@@ -76,11 +81,11 @@ int main() {
 
     // === SUPERPOWER 1: find_by_order ===
     // Find the 2nd index (0-based)
-    auto it = s.find_by_order(2); 
+    auto it = s.find_by_order(2);
     cout << "The element at index 2 is: " << *it << "\n"; // Prints 30
 
     // 🚨 Safe querying (Preventing Segmentation Faults)
-    auto out_of_bounds = s.find_by_order(100); 
+    auto out_of_bounds = s.find_by_order(100);
     if (out_of_bounds != s.end()) {
         cout << *out_of_bounds << "\n";
     } else {
@@ -101,7 +106,7 @@ int main() {
 
 ---
 
-## 3. Creating an Indexed *Multiset*
+## 3. Creating an Indexed _Multiset_
 
 Just like a normal set, the standard `indexed_set` strictly rejects duplicates. But what if you want to allow duplicates (like a `std::multiset`) while keeping the superpowers?
 
@@ -130,13 +135,13 @@ int main() {
 
     // Both 10s are successfully stored!
     cout << "Size: " << ms.size() << "\n"; // Prints 2
-    
+
     // How to query the Multiset:
-    // To find how many numbers are strictly less than 10, 
+    // To find how many numbers are strictly less than 10,
     // we use a dummy ID of 0 (the absolute lowest possible ID).
-    int count = ms.order_of_key({10, 0}); 
+    int count = ms.order_of_key({10, 0});
     cout << "Elements strictly smaller than 10: " << count << "\n";
-    
+
     return 0;
 }
 ```
@@ -146,7 +151,7 @@ int main() {
 ## 4. Practice Problem: Count Inversions (Medium)
 
 **The Problem:** Given an array, find how many pairs of indices $(i, j)$ exist such that $i < j$ and $nums[i] > nums[j]$. In simpler terms: how many numbers to the right are strictly smaller than the current number?
-**The Direct Application:** This is the quintessential PBDS problem! We iterate through the array backwards. For each number, we use `.order_of_key(num)` to instantly count how many numbers currently in the tree are strictly smaller than `num`. Then, we `.insert(num)` into the tree. 
+**The Direct Application:** This is the quintessential PBDS problem! We iterate through the array backwards. For each number, we use `.order_of_key(num)` to instantly count how many numbers currently in the tree are strictly smaller than `num`. Then, we `.insert(num)` into the tree.
 
 ### The Code (C++)
 
@@ -163,16 +168,16 @@ typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_
 int countInversions(vector<int>& nums) {
     indexed_set pbds;
     int inversions = 0;
-    
+
     // Iterate backwards
     for (int i = nums.size() - 1; i >= 0; i--) {
         // Count how many elements currently in the PBDS are smaller
         inversions += pbds.order_of_key(nums[i]);
-        
+
         // Insert current element for the next iterations
         pbds.insert(nums[i]);
     }
-    
+
     return inversions;
 }
 ```

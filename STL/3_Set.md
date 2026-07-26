@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3556</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -8,13 +8,13 @@
 
 # The Set Data Structure
 
-> *Tired of writing loops to check for duplicate numbers? The C++ STL provides the Set to instantly deduplicate your data and answer existence queries in milliseconds.*
+> _Tired of writing loops to check for duplicate numbers? The C++ STL provides the Set to instantly deduplicate your data and answer existence queries in milliseconds._
 
 Imagine you have a magic bag. No matter how many identical red balls you throw into it, when you open the bag, there is always exactly one red ball inside. Furthermore, the bag somehow automatically organizes everything inside it from smallest to largest.
 
-In Computer Science, this unique, auto-organizing container is called a **Set**. 
+In Computer Science, this unique, auto-organizing container is called a **Set**.
 
-A Set is a mathematical concept translated into code: it is a collection of distinct elements. 
+A Set is a mathematical concept translated into code: it is a collection of distinct elements.
 
 ---
 
@@ -25,17 +25,19 @@ In C++, you actually have two different types of Sets at your disposal. Choosing
 <img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/975d792a-f8d4-495d-ac36-b7dab69b698f.jpg" alt="Set vs Unordered Set Diagram" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ### `std::set` (Ordered Set)
+
 - **The Engine:** Powered by a balanced Binary Search Tree (usually a Red-Black Tree).
 - **The Guarantee:** Elements are ALWAYS kept in strictly sorted (ascending) order.
 - **The Cost:** Because it has to maintain a complex tree structure, inserting, deleting, or finding an element takes **$O(\log N)$ Time**.
 
 ### `std::unordered_set` (Unordered Set)
+
 - **The Engine:** Powered by a Hash Table.
 - **The Guarantee:** Elements are scattered randomly in buckets. There is absolutely no order.
 - **The Cost:** Because it relies on direct mathematical hashing, inserting, deleting, or finding an element takes blazing fast **$O(1)$ Average Time**.
 
 > 💡 **CP Insight: Which one should you use?**
-> If you just need to check "Have I seen this number before?" or "Remove all duplicates," ALWAYS use `unordered_set` for that lightning-fast $O(1)$ time. 
+> If you just need to check "Have I seen this number before?" or "Remove all duplicates," ALWAYS use `unordered_set` for that lightning-fast $O(1)$ time.
 > Only use `set` if you explicitly need the data to be retrieved in **sorted order**, or if you need to perform binary-search style queries like `lower_bound()`.
 
 > 🚨 **The CP Trap: Anti-Hash Tests**
@@ -103,12 +105,12 @@ int main() {
 
 Because `std::set` is sorted, it unlocks powerful Binary Search capabilities that an `unordered_set` simply cannot do.
 
-1. **`lower_bound(x)`:** Returns an iterator to the *first element that is $\ge x$*.
-2. **`upper_bound(x)`:** Returns an iterator to the *first element that is strictly $> x$*.
+1. **`lower_bound(x)`:** Returns an iterator to the _first element that is $\ge x$_.
+2. **`upper_bound(x)`:** Returns an iterator to the _first element that is strictly $> x$_.
 
 This allows you to find the "next largest available number" in exactly $O(\log N)$ time, which is heavily tested in advanced Competitive Programming rounds!
 
-> ⚠️ **Syntax Warning:** 
+> ⚠️ **Syntax Warning:**
 > Always use the member function `orderedSet.lower_bound(x)` which runs in $O(\log N)$. NEVER use the global algorithm `std::lower_bound(orderedSet.begin(), orderedSet.end(), x)`. Because a set does not have random access iterators, the global algorithm will quietly degrade to $O(N)$ time and TLE your solution!
 
 ---
@@ -130,17 +132,17 @@ vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
     // 1. Deduplicate nums1 into a set
     unordered_set<int> set1(nums1.begin(), nums1.end());
     vector<int> result;
-    
+
     // 2. Check each element of nums2
     for (int num : nums2) {
         if (set1.count(num)) {
             result.push_back(num);
-            
+
             // 3. Erase it so we don't push duplicates into the result!
             set1.erase(num);
         }
     }
-    
+
     return result;
 }
 ```
