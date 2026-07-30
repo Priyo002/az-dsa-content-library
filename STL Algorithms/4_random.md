@@ -1,8 +1,16 @@
+<VIDEO_WIDGET>
+
+<VIDEO_ID>3569</VIDEO_ID>
+
+</VIDEO_WIDGET>
+
+<READING_WIDGET>
+
 <READING_WIDGET>
 
 # STL Algorithms: Random & Shuffling
 
-> *Welcome to the `<random>` library! In Competitive Programming, you will often need to generate random test cases, randomize QuickSort pivots to avoid $O(N^2)$ worst cases, or randomize array states. Let's learn how to do this safely and efficiently using modern C++.*
+> _Welcome to the `<random>` library! In Competitive Programming, you will often need to generate random test cases, randomize QuickSort pivots to avoid $O(N^2)$ worst cases, or randomize array states. Let's learn how to do this safely and efficiently using modern C++._
 
 ---
 
@@ -11,6 +19,7 @@
 If you search the internet for "how to generate a random number in C++," you will almost certainly find old tutorials telling you to use `rand() % N`. **Do not do this in Competitive Programming!**
 
 The legacy `rand()` function (inherited from C) has three massive flaws:
+
 1. **Low Maximum Limit:** On many compilers, `rand()` can only generate numbers up to `32767`. If you try to generate a random array index of size $10^5$, it will literally be impossible to reach the end of the array!
 2. **Modulo Bias:** Doing `rand() % N` mathematically favors smaller numbers. It is not perfectly uniform.
 3. **Predictability:** It uses a weak algorithm (Linear Congruential Generator) that can easily be "hacked" on platforms like Codeforces.
@@ -33,13 +42,13 @@ using namespace std;
 int main() {
     // 1. Create a "True Random" device to get a fresh, unpredictable seed
     random_device rd;
-    
+
     // 2. Initialize the Mersenne Twister generator using that seed
     mt19937 rng(rd());
-    
+
     // 3. Generate a massive 32-bit random number!
     cout << "Random Number: " << rng() << "\n";
-    
+
     return 0;
 }
 ```
@@ -64,15 +73,15 @@ using namespace std;
 int main() {
     random_device rd;
     mt19937 rng(rd());
-    
+
     // Define a perfectly uniform distribution from 1 to 6 (inclusive)
     uniform_int_distribution<int> dist(1, 6);
-    
+
     // Pass our generator into the distribution to "roll the dice"
     for (int i = 0; i < 5; i++) {
         cout << "Dice Roll: " << dist(rng) << "\n";
     }
-    
+
     return 0;
 }
 ```
@@ -95,16 +104,16 @@ using namespace std;
 
 int main() {
     vector<int> v = {1, 2, 3, 4, 5};
-    
+
     random_device rd;
     mt19937 rng(rd());
-    
+
     // Perfectly scramble the array using our generator!
     shuffle(v.begin(), v.end(), rng);
-    
+
     for (int x : v) cout << x << " ";
     cout << "\n";
-    
+
     return 0;
 }
 ```
@@ -126,16 +135,17 @@ using namespace std;
 int main() {
     // Obtain the exact number of nanoseconds since the UNIX epoch
     long long seed = chrono::steady_clock::now().time_since_epoch().count();
-    
+
     // Seed the generator using the clock!
     mt19937 rng(seed);
-    
+
     cout << "Unhackable Random Number: " << rng() << "\n";
-    
+
     return 0;
 }
 ```
-*Tip: Always use this `chrono` trick when competing on Codeforces!*
+
+_Tip: Always use this `chrono` trick when competing on Codeforces!_
 
 ---
 
@@ -146,6 +156,7 @@ int main() {
 
 **How does randomness work under the hood? (For Interviews):**
 If you ever use `std::shuffle` in an interview, the interviewer will ask you how it works. Under the hood, C++ uses the **Fisher-Yates (or Knuth) Shuffle** algorithm to guarantee a perfectly uniform distribution in exactly $O(N)$ time:
+
 1. Start from the last element (index $i = N - 1$).
 2. Pick a random index $j$ between $0$ and $i$ (inclusive).
 3. Swap the element at $i$ with the element at $j$.
@@ -165,20 +176,20 @@ using namespace std;
 
 int main() {
     vector<string> students = {"Alice", "Bob", "Charlie", "David", "Eve"};
-    
+
     // 1. Initialize our hacker-proof generator
     long long seed = chrono::steady_clock::now().time_since_epoch().count();
     mt19937 rng(seed);
-    
+
     // 2. We want a random index from 0 to N-1
     int n = students.size();
     uniform_int_distribution<int> dist(0, n - 1);
-    
+
     // 3. Roll the dice to pick a winner!
     int winning_index = dist(rng);
-    
+
     cout << "The winner is: " << students[winning_index] << "!\n";
-    
+
     return 0;
 }
 ```
