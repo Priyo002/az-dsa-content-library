@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3577</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -8,14 +8,14 @@
 
 # How `std::deque` Actually Works
 
-> *We just saw how Stacks and Queues rely on `std::deque` to allow $O(1)$ insertion at both the front and back without massive $O(N)$ reallocation penalties. But how does the Deque actually achieve this while still allowing $O(1)$ random access like `dq[i]`? Let's peel back the curtain!*
+> _We just saw how Stacks and Queues rely on `std::deque` to allow $O(1)$ insertion at both the front and back without massive $O(N)$ reallocation penalties. But how does the Deque actually achieve this while still allowing $O(1)$ random access like `dq[i]`? Let's peel back the curtain!_
 
 ---
 
 ## 1. The Myth of the Linked List
 
-When beginners hear "fast insertion at both ends," they immediately assume a Deque is just a Doubly Linked List. **This is completely wrong!** 
-A linked list (`std::list` in C++) has terrible cache locality and completely drops support for $O(1)$ random access (`list[5]` is illegal). 
+When beginners hear "fast insertion at both ends," they immediately assume a Deque is just a Doubly Linked List. **This is completely wrong!**
+A linked list (`std::list` in C++) has terrible cache locality and completely drops support for $O(1)$ random access (`list[5]` is illegal).
 
 A `std::deque` fully supports $O(1)$ random access (`dq[5]` works perfectly). It achieves this by using an incredibly clever hybrid architecture: an **Array of Arrays**.
 
@@ -25,11 +25,12 @@ A `std::deque` fully supports $O(1)$ random access (`dq[5]` works perfectly). It
 
 Instead of storing all elements in one massive contiguous chunk of memory (like a Vector), a Deque allocates memory in smaller, fixed-size chunks (often called "blocks" or "buffers").
 
-To keep track of all these chunks, the Deque maintains a central **Map** (not to be confused with `std::map`). This Map is simply a dynamic array of *pointers*, where each pointer points to one of the data chunks.
+To keep track of all these chunks, the Deque maintains a central **Map** (not to be confused with `std::map`). This Map is simply a dynamic array of _pointers_, where each pointer points to one of the data chunks.
 
 When you create a Deque, it looks like this:
+
 1. It allocates a central Map (array of pointers).
-2. It allocates a single data chunk and puts its pointer in the *middle* of the Map.
+2. It allocates a single data chunk and puts its pointer in the _middle_ of the Map.
 3. As you `push_back`, it fills the chunk from left to right.
 4. As you `push_front`, it fills the chunk from right to left!
 
@@ -40,6 +41,7 @@ When you create a Deque, it looks like this:
 If you keep calling `push_back` and the current chunk fills up, the Deque does **NOT** reallocate and copy all your data like a Vector does!
 
 Instead, it simply:
+
 1. Allocates a brand new, empty chunk.
 2. Adds a pointer to this new chunk in the central Map.
 3. Starts filling the new chunk.
@@ -56,7 +58,7 @@ Eventually, you will allocate so many chunks that the central array of pointers 
 
 ## 4. How does `dq[i]` work in $O(1)$ time?
 
-Since the data is broken up across multiple chunks, how can the Deque find `dq[1050]` instantly? 
+Since the data is broken up across multiple chunks, how can the Deque find `dq[1050]` instantly?
 Because every chunk is exactly the same fixed size (e.g., 512 elements), the Deque can use simple O(1) math to locate any index!
 
 1. **Which chunk is it in?** `Chunk Index = 1050 / 512 = 2` (It's in the 3rd chunk)
@@ -85,9 +87,9 @@ public:
         chunk_size = 512;
         map_capacity = 8;
         map = new T*[map_capacity];
-        
+
         // Start in the middle of the map to allow expansion in both directions!
-        map_start = map_capacity / 2; 
+        map_start = map_capacity / 2;
         map[map_start] = new T[chunk_size];
     }
 
@@ -95,13 +97,13 @@ public:
     T operator[](int global_index) {
         // Real deques track exactly where the 0th element starts in the first chunk!
         int absolute_index = global_index + front_element_offset;
-        
+
         // 1. Find which chunk the element is in
         int target_chunk = map_start + (absolute_index / chunk_size);
-        
+
         // 2. Find exactly where it is inside that chunk
         int offset = absolute_index % chunk_size;
-        
+
         // 3. Double Indirection (Follow map pointer -> go to offset)
         return map[target_chunk][offset];
     }
@@ -110,7 +112,7 @@ public:
 
 > 💡 **CP Insight: Vector vs Deque Speed**
 > If Deque allows $O(1)$ insertions at both ends and $O(1)$ random access, why don't we use it instead of Vector for everything?
-> 
+>
 > **Cache Locality!** Vectors are 100% contiguous, meaning the CPU can load the entire array into its ultra-fast L1 Cache. A Deque is broken into chunks scattered randomly across RAM. Traversing a Deque causes frequent "Cache Misses" when jumping between chunks, making a Deque roughly **2x to 3x slower** than a Vector in real-world iteration speed. Only use a Deque if you absolutely need `push_front`!
 
 ---

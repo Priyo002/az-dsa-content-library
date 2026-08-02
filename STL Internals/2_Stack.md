@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3575</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -8,13 +8,13 @@
 
 # How `std::stack` Actually Works
 
-> *When you create a Stack in C++, what is actually being created in memory? If you look closely at the C++ STL documentation, you'll realize that a Stack does not technically exist as a standalone data structure! Let's explore the concept of "Container Adaptors."*
+> _When you create a Stack in C++, what is actually being created in memory? If you look closely at the C++ STL documentation, you'll realize that a Stack does not technically exist as a standalone data structure! Let's explore the concept of "Container Adaptors."_
 
 ---
 
 ## 1. The Container Adaptor Secret
 
-In C++, a `std::stack` is **not** an independent data structure. It does not have its own unique memory management, pointers, or node systems. 
+In C++, a `std::stack` is **not** an independent data structure. It does not have its own unique memory management, pointers, or node systems.
 
 Instead, it is a **Container Adaptor**. This means it is simply a lightweight "wrapper" placed over an existing STL container (like a Vector, Deque, or List). The wrapper simply restricts your access to the underlying container, hiding everything except the Last-In, First-Out (LIFO) operations.
 
@@ -31,7 +31,7 @@ If you declare `stack<int> st;`, what container is it wrapping?
 By default, the C++ STL builds a Stack on top of a **`std::deque`**! (We will explore exactly how Deques work internally in a later module, but for now, know that they allocate memory in smaller chunks to avoid the massive $O(N)$ reallocation penalty of Vectors).
 
 Why not a Vector?
-Imagine you are using a `std::stack` backed by a `std::vector`. You push 1 million elements, and the vector fills its capacity. When you push the 1,000,001st element, the vector must halt your program, allocate a massive new array, and copy 1 million elements over. This single `push()` suddenly took $O(N)$ time instead of $O(1)$. 
+Imagine you are using a `std::stack` backed by a `std::vector`. You push 1 million elements, and the vector fills its capacity. When you push the 1,000,001st element, the vector must halt your program, allocate a massive new array, and copy 1 million elements over. This single `push()` suddenly took $O(N)$ time instead of $O(1)$.
 In systems programming, this sudden latency spike is unacceptable.
 
 Because a `std::deque` allocates memory in smaller chunks, it **never** copies old elements when expanding. Every single `push()` is strictly $O(1)$, making it the perfect, lag-free backing for a Stack.
@@ -51,20 +51,20 @@ using namespace std;
 
 int main() {
     // 1. A Stack backed by a Deque (The Default)
-    stack<int> default_stack; 
-    
+    stack<int> default_stack;
+
     // 2. A Stack backed by a Vector (Better cache locality!)
     stack<int, vector<int>> vector_stack;
-    
+
     // 3. A Stack backed by a Doubly Linked List (True O(1) guaranteed, bad cache)
     stack<int, list<int>> list_stack;
-    
+
     return 0;
 }
 ```
 
 > 💡 **CP Insight: When to swap the engine?**
-> In competitive programming, a `std::deque` is slightly slower than a `std::vector` because it is broken into chunks (Cache Misses). Since a Stack only adds and removes from the *back*, it never needs `push_front()`. Therefore, defining your stack as `stack<int, vector<int>>` will often run **faster** than the default stack!
+> In competitive programming, a `std::deque` is slightly slower than a `std::vector` because it is broken into chunks (Cache Misses). Since a Stack only adds and removes from the _back_, it never needs `push_front()`. Therefore, defining your stack as `stack<int, vector<int>>` will often run **faster** than the default stack!
 
 ---
 
@@ -78,7 +78,7 @@ template <typename T, typename Container = std::deque<T>>
 class MyStack {
 private:
     // The actual data structure doing the heavy lifting
-    Container c; 
+    Container c;
 
 public:
     // Is the stack empty? Just ask the container!

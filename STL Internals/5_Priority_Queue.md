@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3578</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -8,14 +8,14 @@
 
 # How `std::priority_queue` Actually Works
 
-> *When you push numbers into a `std::priority_queue`, it somehow always keeps the largest (or smallest) element instantly accessible at the `.top()`. It does this incredibly fast—$O(\log N)$ per insertion. Does it sort the entire array every time? Let's explore the magic of Heaps.*
+> _When you push numbers into a `std::priority_queue`, it somehow always keeps the largest (or smallest) element instantly accessible at the `.top()`. It does this incredibly fast—$O(\log N)$ per insertion. Does it sort the entire array every time? Let's explore the magic of Heaps._
 
 ---
 
 ## 1. The Container Adaptor
 
-Just like Stacks and standard Queues, a `std::priority_queue` is a **Container Adaptor**. It does not manage its own memory. 
-However, unlike Stacks (which use a Deque), a Priority Queue uses a **`std::vector`** as its default underlying container! 
+Just like Stacks and standard Queues, a `std::priority_queue` is a **Container Adaptor**. It does not manage its own memory.
+However, unlike Stacks (which use a Deque), a Priority Queue uses a **`std::vector`** as its default underlying container!
 
 But a Vector is just a straight line of memory. How does the Priority Queue quickly organize the elements? It uses the Vector to simulate a highly efficient tree structure called a **Binary Heap**.
 
@@ -24,6 +24,7 @@ But a Vector is just a straight line of memory. How does the Priority Queue quic
 ## 2. The Binary Heap (The Complete Tree)
 
 A Max-Heap is a binary tree with two strict rules:
+
 1. **The Heap Property:** Every parent node must be strictly greater than or equal to its children. (This guarantees the absolute largest element is always sitting at the root of the tree!).
 2. **The Complete Tree Property:** The tree must be perfectly filled from top to bottom, left to right. There are no "gaps."
 
@@ -49,9 +50,10 @@ This is a massive performance optimization! Instead of following slow memory poi
 ## 4. How `push()` Works ($O(\log N)$)
 
 When you `push()` a new element into a Priority Queue:
+
 1. It is appended to the very back of the Vector (which translates to adding a new leaf at the bottom right of the tree).
 2. **Heapify-Up:** The Priority Queue checks if this new element is larger than its parent `(i - 1) / 2`. If it is, they swap!
-3. It continues swapping upwards until the element is smaller than its parent or it reaches the root. 
+3. It continues swapping upwards until the element is smaller than its parent or it reaches the root.
 
 Since the tree is perfectly balanced, the maximum height is $\log_2(N)$. Therefore, it takes at most $O(\log N)$ swaps to bubble the new element up to its correct position.
 
@@ -60,9 +62,10 @@ Since the tree is perfectly balanced, the maximum height is $\log_2(N)$. Therefo
 ## 5. How `pop()` Works ($O(\log N)$)
 
 When you call `pop()`, the Priority Queue must remove the root element (index 0) without destroying the rest of the tree.
+
 1. It swaps the root element (index 0) with the very last element in the Vector.
 2. It deletes the last element (which was the old root). Now the root contains a very small, incorrect number.
-3. **Heapify-Down:** Starting at the root, it compares the element with its two children. It swaps the element with the *larger* of the two children.
+3. **Heapify-Down:** Starting at the root, it compares the element with its two children. It swaps the element with the _larger_ of the two children.
 4. It continues bubbling the small element downward until it is larger than both its children.
 
 Again, this takes at most $O(\log N)$ swaps!
@@ -83,7 +86,7 @@ private:
     void heapify_up(int index) {
         while (index > 0) {
             int parent = (index - 1) / 2;
-            
+
             // If the parent is smaller, swap them! (Max-Heap rule)
             if (heap[parent] < heap[index]) {
                 swap(heap[parent], heap[index]);
@@ -105,7 +108,7 @@ public:
         heap.push_back(value);          // Add to the bottom of the tree
         heapify_up(heap.size() - 1);    // Bubble it up to its correct spot
     }
-    
+
     // Helper to bubble down a small element
     void heapify_down(int index) {
         int size = heap.size();
@@ -146,6 +149,6 @@ public:
 - **Time Complexity:** $O(\log N)$ for `push()` and `pop()`
 - **Top Element Access:** $O(1)$ (`heap[0]`)
 
-> 🚀 **Next Up:** We've seen how Priority Queues use flat arrays to simulate trees. But what if we need a *real* tree structure? Let's dive into the complex world of Red-Black Trees in **Sets and Maps**!
+> 🚀 **Next Up:** We've seen how Priority Queues use flat arrays to simulate trees. But what if we need a _real_ tree structure? Let's dive into the complex world of Red-Black Trees in **Sets and Maps**!
 
 </READING_WIDGET>

@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3581</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -8,7 +8,7 @@
 
 # How `std::sort` Actually Works
 
-> *Now that you understand how all the underlying memory structures (Vectors, Trees, Heaps) work, let's explore the ultimate STL algorithm that operates on them: `std::sort`. When you type `sort(v.begin(), v.end());`, what is C++ actually doing? In FAANG interviews, candidates are frequently asked why they chose `std::sort` over writing MergeSort, and what algorithm is running under the hood. Let's peel back the curtain on one of the most brilliant algorithms ever designed.*
+> _Now that you understand how all the underlying memory structures (Vectors, Trees, Heaps) work, let's explore the ultimate STL algorithm that operates on them: `std::sort`. When you type `sort(v.begin(), v.end());`, what is C++ actually doing? In FAANG interviews, candidates are frequently asked why they chose `std::sort` over writing MergeSort, and what algorithm is running under the hood. Let's peel back the curtain on one of the most brilliant algorithms ever designed._
 
 ---
 
@@ -16,7 +16,7 @@
 
 Most beginners assume `std::sort` is just a standard QuickSort. However, pure QuickSort has a fatal flaw: if you give it a specifically crafted "bad" array, it degrades to $O(N^2)$ time, which will instantly cause a Time Limit Exceeded (TLE) error in Competitive Programming.
 
-To prevent this, C++ uses an algorithm called **IntroSort (Introspective Sort)**. 
+To prevent this, C++ uses an algorithm called **IntroSort (Introspective Sort)**.
 
 IntroSort is a highly optimized "hybrid" sorting algorithm. It doesn't just use one sorting method; it uses **three** different algorithms, dynamically switching between them during execution to achieve the absolute best performance possible in every scenario:
 
@@ -34,11 +34,11 @@ IntroSort begins by running a standard QuickSort. QuickSort works by picking a "
 
 Normally, the recursion tree is perfectly balanced. But what if the array is perfectly reverse-sorted, or a hacker feeds your algorithm an "Anti-QuickSort" test case? The recursion tree becomes deeply unbalanced, leading to $O(N^2)$ time and potentially a Stack Overflow.
 
-**The Fix:** 
+**The Fix:**
 IntroSort tracks its recursion depth. It calculates a maximum allowed depth limit using the formula:
 **`Max Depth = 2 * log2(N)`**
 
-If the QuickSort recursion ever hits this limit, IntroSort realizes: *"Uh oh, the pivot choices are terrible, we are heading towards $O(N^2)$!"* 
+If the QuickSort recursion ever hits this limit, IntroSort realizes: _"Uh oh, the pivot choices are terrible, we are heading towards $O(N^2)$!"_
 It immediately **aborts QuickSort** and switches to **HeapSort** for that specific subarray. Because HeapSort has a strict, mathematically guaranteed $O(N \log N)$ worst-case time, IntroSort is completely immune to worst-case test data!
 
 > 💡 **CP Insight: The Hacker Defense**
@@ -50,19 +50,19 @@ It immediately **aborts QuickSort** and switches to **HeapSort** for that specif
 
 As QuickSort partitions the array, the subarrays get smaller and smaller. Eventually, it is making recursive calls on arrays of size 5, 10, or 15.
 
-There is a problem here: setting up function calls (pushing to the call stack) and managing QuickSort logic on tiny arrays is actually slower than just using a basic $O(N^2)$ sort! 
+There is a problem here: setting up function calls (pushing to the call stack) and managing QuickSort logic on tiny arrays is actually slower than just using a basic $O(N^2)$ sort!
 
 **The Fix:**
-When a subarray shrinks to a size of **16 elements or fewer**, IntroSort stops partitioning entirely. It leaves these tiny chunks slightly unsorted. Once all the recursive QuickSort calls finish, the entire array is *mostly* sorted. 
+When a subarray shrinks to a size of **16 elements or fewer**, IntroSort stops partitioning entirely. It leaves these tiny chunks slightly unsorted. Once all the recursive QuickSort calls finish, the entire array is _mostly_ sorted.
 
-Finally, IntroSort runs a single pass of **InsertionSort** over the whole array. 
+Finally, IntroSort runs a single pass of **InsertionSort** over the whole array.
 Why InsertionSort? Because InsertionSort runs in incredibly fast $O(N)$ time on arrays that are nearly sorted. It also has perfect CPU cache locality, making it ridiculously fast at shifting those last few elements into place—a crucial hardware optimization when writing for low-latency or HFT systems where L1 cache misses are expensive.
 
 ---
 
-## 4. Why not use MergeSort? 
+## 4. Why not use MergeSort?
 
-A common interview question is: *"MergeSort guarantees $O(N \log N)$ worst-case time. Why doesn't C++ just use MergeSort instead of this complicated hybrid?"*
+A common interview question is: _"MergeSort guarantees $O(N \log N)$ worst-case time. Why doesn't C++ just use MergeSort instead of this complicated hybrid?"_
 
 The answer comes down to **Space Complexity**.
 MergeSort requires $O(N)$ auxiliary memory (an entirely separate temporary array) to merge the halves together. If you are sorting an array of 100 million integers, MergeSort will demand hundreds of megabytes of extra RAM!
@@ -82,16 +82,16 @@ To truly demystify `std::sort`, here is a simplified version of what the actual 
 // A simplified version of C++ std::sort (IntroSort)
 void introSort(int* begin, int* end, int depthLimit) {
     int size = end - begin;
-    
+
     // 1. Tiny array? HALT recursion and leave it unsorted for now!
     if (size <= 16) return;
-    
+
     // 2. Recursion getting too deep? Switch to HeapSort
     if (depthLimit == 0) {
         heapSort(begin, end);
         return;
     }
-    
+
     // 3. Otherwise, use QuickSort (Partition and recurse)
     int* pivot = partition(begin, end);
     introSort(begin, pivot, depthLimit - 1);
@@ -102,7 +102,7 @@ void introSort(int* begin, int* end, int depthLimit) {
 void sort(int* begin, int* end) {
     int size = end - begin;
     int maxDepth = 2 * log2(size);
-    
+
     introSort(begin, end, maxDepth); // Sorts the bulk of the data
     insertionSort(begin, end);       // ONE final global cleanup pass!
 }
