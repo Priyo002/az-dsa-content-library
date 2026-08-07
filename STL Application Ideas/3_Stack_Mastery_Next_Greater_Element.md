@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3589</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -8,7 +8,7 @@
 
 # Stack Mastery: Next Greater Element
 
-> *Finding the Next Greater Element (NGE) is a foundational pattern in competitive programming. If you try to solve it with nested loops, you will get an instant Time Limit Exceeded (TLE) on massive arrays. Let's master the "Monotonic Stack", a genius architecture that solves this in strict $O(N)$ time.*
+> _Finding the Next Greater Element (NGE) is a foundational pattern in competitive programming. If you try to solve it with nested loops, you will get an instant Time Limit Exceeded (TLE) on massive arrays. Let's master the "Monotonic Stack", a genius architecture that solves this in strict $O(N)$ time._
 
 ---
 
@@ -24,20 +24,21 @@ Output: `[5, 5, -1, -1]`
 You could use two `for` loops. For every element, scan the rest of the array to its right until you find a larger number. This is incredibly slow and will fail large test cases.
 
 **The Monotonic Stack Approach ($O(N)$):**
-Imagine tall and short people standing in a line, looking to the right. 
+Imagine tall and short people standing in a line, looking to the right.
 If a tall person is standing directly in front of a short person, the short person is completely hidden from anyone looking from the left! **If an element is smaller than the current element, it is completely useless to everyone on the left.**
 
 <img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/b1c96c74-3329-4d21-81eb-f76db5fa09e0.jpg" alt="Monotonic Stack Line of Sight" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
-This gives us our algorithm: We iterate from **Right to Left**, maintaining a stack of "useful" numbers. 
+This gives us our algorithm: We iterate from **Right to Left**, maintaining a stack of "useful" numbers.
 
 ---
 
 ## 2. The Algorithm (Right to Left)
 
 When looking at the current number:
-1. **Clear the Losers:** Look at the top of the stack. If the top of the stack is *smaller than or equal* to our current number, it is useless! Pop it! Keep popping until you find a number strictly greater than the current number, or the stack becomes empty.
-2. **Record the Answer:** 
+
+1. **Clear the Losers:** Look at the top of the stack. If the top of the stack is _smaller than or equal_ to our current number, it is useless! Pop it! Keep popping until you find a number strictly greater than the current number, or the stack becomes empty.
+2. **Record the Answer:**
    - If the stack is empty, there is no greater element to the right (Record `-1`).
    - If the stack is not empty, the top of the stack is our Next Greater Element!
 3. **Save Yourself:** Push the current number onto the stack, because it might be the Next Greater Element for someone further to the left.
@@ -45,6 +46,7 @@ When looking at the current number:
 Because the stack only ever holds numbers in strictly increasing order (from top to bottom), it is called a **Monotonic Stack**.
 
 ### The Code Implementation
+
 ```cpp
 #include <iostream>
 #include <vector>
@@ -54,13 +56,13 @@ using namespace std;
 vector<int> nextGreaterElement(const vector<int>& nums) {
     int n = nums.size();
     vector<int> result(n, -1); // Default all answers to -1
-    
+
     // We will use a vector as a stack for Zero-Overhead speed!
-    vector<int> st;             
+    vector<int> st;
 
     // Iterate from RIGHT to LEFT
     for (int i = n - 1; i >= 0; i--) {
-        
+
         // 1. Clear the Losers (Pop all elements smaller than or equal to current)
         while (!st.empty() && st.back() <= nums[i]) {
             st.pop_back();
@@ -89,10 +91,11 @@ vector<int> nextGreaterElement(const vector<int>& nums) {
 Beginners often look at the nested `while` loop inside the `for` loop and mistakenly assume the time complexity is $O(N^2)$. **This is a massive CP Trap!**
 
 Look closely at the mechanics of the stack:
+
 - Every single element is pushed onto the stack exactly **once**.
 - Every single element can be popped from the stack at most **once**.
 
-Because an element can never be popped twice, the `while` loop runs a total of at most $N$ times across the *entire execution* of the program, not per iteration. Therefore, the amortized time complexity is strictly **$O(N)$**.
+Because an element can never be popped twice, the `while` loop runs a total of at most $N$ times across the _entire execution_ of the program, not per iteration. Therefore, the amortized time complexity is strictly **$O(N)$**.
 
 ---
 
@@ -101,8 +104,9 @@ Because an element can never be popped twice, the `while` loop runs a total of a
 The Monotonic Stack is a template that can be slightly tweaked to solve dozens of complex FAANG interview questions.
 
 ### Variation 1: Storing Indices (The "Distance" Problem)
-What if the question asks: *"How many days do you have to wait until a warmer temperature?"* (Next Greater Element Distance). 
-Instead of pushing the *values* onto the stack, you push the **indices** of the values! 
+
+What if the question asks: _"How many days do you have to wait until a warmer temperature?"_ (Next Greater Element Distance).
+Instead of pushing the _values_ onto the stack, you push the **indices** of the values!
 
 ```cpp
 // 1. Clear losers by comparing values via indices
@@ -116,14 +120,17 @@ st.push_back(i);
 ```
 
 ### Variation 2: Circular Arrays
-What if the array wraps around? (e.g., the element to the right of the last element is the first element). 
+
+What if the array wraps around? (e.g., the element to the right of the last element is the first element).
 Instead of doing complex modulo math with indices, simply run the `for` loop from `(2 * n) - 1` down to `0`. Use `nums[i % n]` to access the elements. This effectively simulates placing two copies of the array side-by-side!
 
 ### Variation 3: Next Smallest Element
+
 To find the Next Smallest Element, simply change the `while` loop condition from `<= nums[i]` to `>= nums[i]`. Instead of popping the "losers" (small elements), you pop the "tall elements" because they are blocking the small elements behind them!
 
 ### Variation 4: Left-to-Right (Online Processing)
-What if the numbers are streaming in live, and you can't start from the right? You can iterate **Left-to-Right**! Instead of pushing answers to the stack, you push *unresolved indices*. When a new large number arrives, it acts as the "answer" for all the smaller unresolved indices currently sitting on the stack. You pop them, record the current number as their answer, and then push the current index to wait for its own greater element!
+
+What if the numbers are streaming in live, and you can't start from the right? You can iterate **Left-to-Right**! Instead of pushing answers to the stack, you push _unresolved indices_. When a new large number arrives, it acts as the "answer" for all the smaller unresolved indices currently sitting on the stack. You pop them, record the current number as their answer, and then push the current index to wait for its own greater element!
 
 ---
 
@@ -132,7 +139,5 @@ What if the numbers are streaming in live, and you can't start from the right? Y
 - **The Monotonic Stack:** A stack that maintains strictly increasing or decreasing elements to find the Next Greater/Smaller elements in $O(N)$ time.
 - **The Core Intuition:** Iterate backwards. Pop useless elements. Record the answer. Push yourself.
 - **Indices over Values:** If a problem requires "distance" or "width" (like the Largest Rectangle in Histogram problem), store array indices in the stack, not the actual values!
-
-
 
 </READING_WIDGET>

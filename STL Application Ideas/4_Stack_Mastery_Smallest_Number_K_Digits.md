@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3590</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -8,7 +8,7 @@
 
 # Stack Mastery: Smallest Number
 
-> *You are given a massive number represented as a string. Your task is to remove exactly `k` digits to form the smallest possible number. This is a classic Greedy FAANG question that seems impossible to optimize—until you realize it's secretly just another Monotonic Stack!*
+> _You are given a massive number represented as a string. Your task is to remove exactly `k` digits to form the smallest possible number. This is a classic Greedy FAANG question that seems impossible to optimize—until you realize it's secretly just another Monotonic Stack!_
 
 ---
 
@@ -21,10 +21,10 @@ Input: `num = "1432219"`, `k = 3`
 Output: `"1219"` (We removed the 4, 3, and the first 2).
 
 **Why does this work?**
-In mathematics, the most significant digits (the ones on the far left) have the massive power to make a number huge. 
+In mathematics, the most significant digits (the ones on the far left) have the massive power to make a number huge.
 Given the choice to remove a `9` at the very end of a number or a `2` at the very beginning, you almost always want to make the beginning as small as possible.
 
-**The Greedy Rule:** As we scan from left to right, if we encounter a new digit that is *smaller* than the previous digit, we should instantly destroy the previous digit!
+**The Greedy Rule:** As we scan from left to right, if we encounter a new digit that is _smaller_ than the previous digit, we should instantly destroy the previous digit!
 Why? Because replacing a larger leading digit with a smaller one guarantees a smaller final number.
 
 <img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/fb7bbfa2-d9c6-4e9d-a36f-e4cfef6073a0.jpg" alt="Monotonic Stack Greedy Destruction" style="max-width: 100%; height: auto;" identifier="az-img-upload">
@@ -50,11 +50,13 @@ We will maintain a stack (using a `std::string` for zero overhead) to build our 
 4. **Push:** Push the current digit onto the stack.
 
 ### The Exhaustion Trap
+
 What if the input is `"12345"` and `k = 3`?
-The numbers are already in perfect increasing order! The `while` loop condition (`current < stack.top()`) will never trigger. At the end of the loop, `k` will still be `3`. 
+The numbers are already in perfect increasing order! The `while` loop condition (`current < stack.top()`) will never trigger. At the end of the loop, `k` will still be `3`.
 **Solution:** If we finish the loop and `k > 0`, it means the stack is perfectly sorted from smallest to largest. We must simply chop off the largest numbers from the very end!
 
 ### The Code Implementation
+
 ```cpp
 #include <iostream>
 #include <string>
@@ -62,27 +64,27 @@ using namespace std;
 
 string removeKdigits(string num, int k) {
     // We use a string as our Stack for O(1) character appending!
-    string st = ""; 
-    
+    string st = "";
+
     for (char c : num) {
         // 1. The Purge: Destroy larger previous digits
         while (!st.empty() && st.back() > c && k > 0) {
             st.pop_back();
             k--;
         }
-        
+
         // 2. Prevent Leading Zeros
         if (!st.empty() || c != '0') {
             st.push_back(c);
         }
     }
-    
+
     // 3. The Exhaustion Trap: What if we still need to remove digits?
     while (!st.empty() && k > 0) {
         st.pop_back();
         k--;
     }
-    
+
     // 4. Edge Case: If we removed everything, return "0"
     return st.empty() ? "0" : st;
 }
@@ -105,9 +107,7 @@ string removeKdigits(string num, int k) {
 > Notice how we used `string st = "";`. While this is clean, `std::string` allocates memory dynamically as it grows. In a competitive programming environment where `num.length()` might be $10^6$, you can aggressively speed up this code by adding `st.reserve(num.length());` at the very beginning. This reserves a contiguous block of RAM upfront, entirely preventing slow reallocation overhead during the `push_back` phase!
 
 > 🚨 **The CP Trap: Removing vs Keeping**
-> Be careful with how questions are phrased! Leetcode usually asks to *Remove $K$ Digits*. Codeforces sometimes asks to *Form the smallest number having exactly $K$ digits*. 
+> Be careful with how questions are phrased! Leetcode usually asks to _Remove $K$ Digits_. Codeforces sometimes asks to _Form the smallest number having exactly $K$ digits_.
 > If you are asked to keep exactly $K$ digits, the core logic is mathematically identical, but your target removal count simply becomes `removals = num.length() - K`. Always read the problem statement carefully to know if $K$ is what you are destroying, or what you are saving!
-
-
 
 </READING_WIDGET>
