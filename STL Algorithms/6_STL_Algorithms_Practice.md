@@ -9,24 +9,24 @@ Now it's time to put your skills to the test. Try solving the following problems
 
 <RESOURCE_ITEM>
     <RESOURCE_ID>1</RESOURCE_ID>
-    <RESOURCE_TITLE>Priority Queue</RESOURCE_TITLE>
-    <RESOURCE_LINK>https://maang.in/problems/Priority-Queue-AZ101-364</RESOURCE_LINK>
+    <RESOURCE_TITLE>Generating Permutations AZ101</RESOURCE_TITLE>
+    <RESOURCE_LINK>https://maang.in/problems/Generating-Permutations-AZ101-366</RESOURCE_LINK>
     <RESOURCE_PLATFORM>OTHER</RESOURCE_PLATFORM>
     <RESOURCE_DESCRIPTION>Practice problem</RESOURCE_DESCRIPTION>
 </RESOURCE_ITEM>
 
 <RESOURCE_ITEM>
     <RESOURCE_ID>2</RESOURCE_ID>
-    <RESOURCE_TITLE>The Magical Candy Bag AZ101</RESOURCE_TITLE>
-    <RESOURCE_LINK>https://maang.in/problems/The-Magical-Candy-Bag-AZ101-365</RESOURCE_LINK>
+    <RESOURCE_TITLE>Towers AZ101</RESOURCE_TITLE>
+    <RESOURCE_LINK>https://maang.in/problems/Towers-AZ101-362</RESOURCE_LINK>
     <RESOURCE_PLATFORM>OTHER</RESOURCE_PLATFORM>
     <RESOURCE_DESCRIPTION>Practice problem</RESOURCE_DESCRIPTION>
 </RESOURCE_ITEM>
 
 <RESOURCE_ITEM>
     <RESOURCE_ID>3</RESOURCE_ID>
-    <RESOURCE_TITLE>Reduce the Array AZ101</RESOURCE_TITLE>
-    <RESOURCE_LINK>https://maang.in/problems/Reduce-the-Array-AZ101-376</RESOURCE_LINK>
+    <RESOURCE_TITLE>Count the Pairs</RESOURCE_TITLE>
+    <RESOURCE_LINK>https://maang.in/problems/Count-the-Pairs-396</RESOURCE_LINK>
     <RESOURCE_PLATFORM>OTHER</RESOURCE_PLATFORM>
     <RESOURCE_DESCRIPTION>Practice problem</RESOURCE_DESCRIPTION>
 </RESOURCE_ITEM>

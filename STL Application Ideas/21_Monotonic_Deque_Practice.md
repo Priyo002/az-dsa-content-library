@@ -9,8 +9,8 @@ Now it's time to put your skills to the test. Try solving the following problems
 
 <RESOURCE_ITEM>
     <RESOURCE_ID>1</RESOURCE_ID>
-    <RESOURCE_TITLE>Deque AZ101</RESOURCE_TITLE>
-    <RESOURCE_LINK>https://maang.in/problems/Deque-AZ101-353</RESOURCE_LINK>
+    <RESOURCE_TITLE>Maximum in Window</RESOURCE_TITLE>
+    <RESOURCE_LINK>https://maang.in/problems/Maximum-in-Window-77</RESOURCE_LINK>
     <RESOURCE_PLATFORM>OTHER</RESOURCE_PLATFORM>
     <RESOURCE_DESCRIPTION>Practice problem</RESOURCE_DESCRIPTION>
 </RESOURCE_ITEM>

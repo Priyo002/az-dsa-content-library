@@ -6,8 +6,6 @@
 
 <READING_WIDGET>
 
-<READING_WIDGET>
-
 # STL Algorithms: Random & Shuffling
 
 > _Welcome to the `<random>` library! In Competitive Programming, you will often need to generate random test cases, randomize QuickSort pivots to avoid $O(N^2)$ worst cases, or randomize array states. Let's learn how to do this safely and efficiently using modern C++._

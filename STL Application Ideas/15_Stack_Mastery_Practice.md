@@ -8,35 +8,43 @@ Now it's time to put your skills to the test. Try solving the following problems
 <EXTERNAL_WIDGET>
 
 <RESOURCE_ITEM>
+
     <RESOURCE_ID>1</RESOURCE_ID>
-    <RESOURCE_TITLE>Set AZ101</RESOURCE_TITLE>
-    <RESOURCE_LINK>https://maang.in/problems/Set-AZ101-356</RESOURCE_LINK>
+    <RESOURCE_TITLE>Nearest Smaller Values AZ101</RESOURCE_TITLE>
+    <RESOURCE_LINK>https://maang.in/problems/Nearest-Smaller-Values-AZ101-378</RESOURCE_LINK>
     <RESOURCE_PLATFORM>OTHER</RESOURCE_PLATFORM>
     <RESOURCE_DESCRIPTION>Practice problem</RESOURCE_DESCRIPTION>
+
 </RESOURCE_ITEM>
 
 <RESOURCE_ITEM>
+
     <RESOURCE_ID>2</RESOURCE_ID>
-    <RESOURCE_TITLE>Students and Grades</RESOURCE_TITLE>
-    <RESOURCE_LINK>https://maang.in/problems/Students-and-Grades-89</RESOURCE_LINK>
+    <RESOURCE_TITLE>Largest Rectangle</RESOURCE_TITLE>
+    <RESOURCE_LINK>https://maang.in/problems/Largest-Rectangle-461</RESOURCE_LINK>
     <RESOURCE_PLATFORM>OTHER</RESOURCE_PLATFORM>
     <RESOURCE_DESCRIPTION>Practice problem</RESOURCE_DESCRIPTION>
+
 </RESOURCE_ITEM>
 
 <RESOURCE_ITEM>
+
     <RESOURCE_ID>3</RESOURCE_ID>
-    <RESOURCE_TITLE>Set Operations AZ101</RESOURCE_TITLE>
-    <RESOURCE_LINK>https://maang.in/problems/Set-Operations-AZ101-372</RESOURCE_LINK>
+    <RESOURCE_TITLE>Rain Water</RESOURCE_TITLE>
+    <RESOURCE_LINK>https://maang.in/problems/Rain-Water-462</RESOURCE_LINK>
     <RESOURCE_PLATFORM>OTHER</RESOURCE_PLATFORM>
     <RESOURCE_DESCRIPTION>Practice problem</RESOURCE_DESCRIPTION>
+
 </RESOURCE_ITEM>
 
 <RESOURCE_ITEM>
+
     <RESOURCE_ID>4</RESOURCE_ID>
-    <RESOURCE_TITLE>Concatenate Array AZ101</RESOURCE_TITLE>
-    <RESOURCE_LINK>https://maang.in/problems/Concatenate-Array-AZ101-373</RESOURCE_LINK>
+    <RESOURCE_TITLE>Height of Soldiers</RESOURCE_TITLE>
+    <RESOURCE_LINK>https://maang.in/problems/Height-of-Soldiers-88</RESOURCE_LINK>
     <RESOURCE_PLATFORM>OTHER</RESOURCE_PLATFORM>
     <RESOURCE_DESCRIPTION>Practice problem</RESOURCE_DESCRIPTION>
+
 </RESOURCE_ITEM>
 
 </EXTERNAL_WIDGET>
