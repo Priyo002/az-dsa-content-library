@@ -1,0 +1,30 @@
+<READING_WIDGET>
+## Let's Practice!
+
+Now it's time to put your skills to the test. Try solving the following problems:
+
+</READING_WIDGET>
+
+<EXTERNAL_WIDGET>
+
+<RESOURCE_ITEM>
+
+    <RESOURCE_ID>1</RESOURCE_ID>
+    <RESOURCE_TITLE>Maximum in Window</RESOURCE_TITLE>
+    <RESOURCE_LINK>https://maang.in/problems/Maximum-in-Window-77</RESOURCE_LINK>
+    <RESOURCE_PLATFORM>OTHER</RESOURCE_PLATFORM>
+    <RESOURCE_DESCRIPTION>Practice problem</RESOURCE_DESCRIPTION>
+
+</RESOURCE_ITEM>
+
+<RESOURCE_ITEM>
+
+    <RESOURCE_ID>2</RESOURCE_ID>
+    <RESOURCE_TITLE>Minimum Penalty</RESOURCE_TITLE>
+    <RESOURCE_LINK>https://maang.in/problems/Minimum-Penalty-64</RESOURCE_LINK>
+    <RESOURCE_PLATFORM>OTHER</RESOURCE_PLATFORM>
+    <RESOURCE_DESCRIPTION>Practice problem</RESOURCE_DESCRIPTION>
+
+</RESOURCE_ITEM>
+
+</EXTERNAL_WIDGET>
