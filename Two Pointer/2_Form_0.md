@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3619</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -78,7 +78,7 @@ At every position of `head`:
 
 The general shape is:
 
-~~~cpp
+```cpp
 for (int head = 0; head < n; head++) {
     add(arr[head]);
 
@@ -90,7 +90,7 @@ for (int head = 0; head < n; head++) {
         process_current_window();
     }
 }
-~~~
+```
 
 > 💡 **Why is there no `tail`?** The left boundary is always `head - K + 1`. Since it can be calculated instantly, maintaining another pointer would be redundant.
 
@@ -108,27 +108,27 @@ $$1 \le K \le N$$
 
 For:
 
-~~~text
+```text
 arr = [3, 1, 4, 2, 8, 6, 5, 7]
 K = 3
-~~~
+```
 
 the windows are:
 
-| Window | Elements | Minimum |
-|---|---|---:|
-| 1 | `[3, 1, 4]` | 1 |
-| 2 | `[1, 4, 2]` | 1 |
-| 3 | `[4, 2, 8]` | 2 |
-| 4 | `[2, 8, 6]` | 2 |
-| 5 | `[8, 6, 5]` | 5 |
-| 6 | `[6, 5, 7]` | 5 |
+| Window | Elements    | Minimum |
+| ------ | ----------- | ------: |
+| 1      | `[3, 1, 4]` |       1 |
+| 2      | `[1, 4, 2]` |       1 |
+| 3      | `[4, 2, 8]` |       2 |
+| 4      | `[2, 8, 6]` |       2 |
+| 5      | `[8, 6, 5]` |       5 |
+| 6      | `[6, 5, 7]` |       5 |
 
 Therefore, the answer is:
 
-~~~text
+```text
 1 1 2 2 5 5
-~~~
+```
 
 We will solve this problem in two ways:
 
@@ -148,9 +148,9 @@ A `multiset` stores values in sorted order and allows duplicates. Both propertie
 
 If `window` is the multiset for the current window, its minimum is:
 
-~~~cpp
+```cpp
 *window.begin()
-~~~
+```
 
 ### Window Update
 
@@ -164,21 +164,21 @@ For every `head`:
 
 This is incorrect:
 
-~~~cpp
+```cpp
 window.erase(value);
-~~~
+```
 
 It erases **every occurrence** of `value` from a `multiset`.
 
 We need to erase only the occurrence that left the window:
 
-~~~cpp
+```cpp
 window.erase(window.find(value));
-~~~
+```
 
 ### Complete Implementation
 
-~~~cpp
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -224,7 +224,7 @@ int main() {
 
     return 0;
 }
-~~~
+```
 
 ### Complexity Analysis
 
@@ -269,9 +269,9 @@ The deque maintains three properties:
 
 Because the values are ordered, the front always represents the minimum:
 
-~~~cpp
+```cpp
 arr[dq.front()]
-~~~
+```
 
 ### Action 1: Remove Expired Indices
 
@@ -297,7 +297,7 @@ Insert `head` at the back. Once `head >= K - 1`, the index at the front gives th
 
 ### Complete Implementation
 
-~~~cpp
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -356,7 +356,7 @@ int main() {
 
     return 0;
 }
-~~~
+```
 
 ---
 
@@ -383,14 +383,14 @@ This is another example of **amortized analysis**: one iteration may perform sev
 
 ## 7. Multiset vs. Monotonic Deque
 
-| Property | Multiset | Monotonic Deque |
-|---|---|---|
-| What it stores | Every value in the window | Only useful candidate indices |
-| Minimum lookup | $O(1)$ | $O(1)$ |
-| Insert/remove cost | $O(\log K)$ | $O(1)$ amortized |
-| Total time | $O(N \log K)$ | $O(N)$ |
-| Extra space | $O(K)$ | $O(K)$ |
-| Ease of adaptation | Easier and more general | Faster but specialized |
+| Property           | Multiset                  | Monotonic Deque               |
+| ------------------ | ------------------------- | ----------------------------- |
+| What it stores     | Every value in the window | Only useful candidate indices |
+| Minimum lookup     | $O(1)$                    | $O(1)$                        |
+| Insert/remove cost | $O(\log K)$               | $O(1)$ amortized              |
+| Total time         | $O(N \log K)$             | $O(N)$                        |
+| Extra space        | $O(K)$                    | $O(K)$                        |
+| Ease of adaptation | Easier and more general   | Faster but specialized        |
 
 Use a multiset when you need a simple ordered representation of the whole window or must support operations beyond minimum/maximum.
 
