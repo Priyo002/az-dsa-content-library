@@ -231,6 +231,8 @@ kthMove(n - 1, aux, target, source, k - mid);
 
 > **CP Insight — Subtract everything you skip:** In the right block, subtract `L + 1`, not just `L`. The middle move also comes before the desired move. At `K = mid + 1`, the new local index must be exactly `1`.
 
+<img src="images/toh-three-blocks.png" alt="The Hanoi move sequence splits into a left subproblem, the central move, and a right subproblem; compare K with mid and subtract mid when entering the right block" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+
 ---
 
 ## 5. State and Recursive Contract
@@ -334,6 +336,8 @@ Moving disk 2 from 2 to 3
 
 We answered the query using two function calls, without generating the five earlier moves.
 
+<img src="images/toh-k6-dry-run.png" alt="For N equals 3 and K equals 6, skip the first four moves and query local move 2 of the right block, yielding disk 2 from rod 2 to rod 3" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+
 ---
 
 ## 7. Dry Run: A Path Through Both Left and Right Blocks
@@ -359,6 +363,8 @@ Notice two independent updates:
 2. The local index changes only when we skip a preceding block.
 
 For the original sample `N = 3`, `K = 4`, neither descent is needed: the first call has `mid = 4` and returns disk `3`, from `1` to `3`, immediately.
+
+<img src="images/toh-rod-role-path.png" alt="For N equals 4 and K equals 5, follow left, right, then left while updating source target and auxiliary roles; the answer is disk 1 from rod 3 to rod 1" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ---
 
