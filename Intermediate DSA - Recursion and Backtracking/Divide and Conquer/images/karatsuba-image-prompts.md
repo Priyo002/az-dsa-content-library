@@ -1,0 +1,16 @@
+# Karatsuba image prompts
+
+Generated with the built-in image-generation tool. Style and logo reference: `merge-sort-three-steps.png` in this directory. The two completed assets were visually checked for accurate labels, arithmetic, AlgoZenith branding, and a continuous rounded navy border.
+
+## karatsuba-digit-split.png
+
+Use case: scientific-educational. Generate a new 1536x1024 landscape teaching infographic for a Karatsuba lesson. The supplied image is STYLE AND LOGO REFERENCE ONLY, not content to reproduce. Match its cream background, hand-lettered dark navy text, pale-yellow rounded panels, pale-blue number boxes, red arrows, and thick continuous rounded navy OUTER BORDER visible on all four sides with generous safe margins. Upper-right include the blue triangular AlgoZenith A mark with white Z as in reference, with legible wordmark 'AlgoZenith' underneath. Maintain consistent uncluttered textbook visual style and accurate readable mathematical labels. No merge sort content. Title 'Split by digit position'. Show two large rows of decimal digit tiles. Row X tiles 1 2 | 3 4; label first two 'High: X_R = 12', last two 'Low: X_L = 34'. Row Y tiles 5 6 | 7 8; label first two 'High: Y_R = 56', last two 'Low: Y_L = 78'. Red arrows connect each group to its label. Below pale-yellow panel exact equations '1234 = 34 + 100 × 12' and '5678 = 78 + 100 × 56'. Bottom summary 'm = 2, q = 10² = 100' and 'X = X_L + qX_R     Y = Y_L + qY_R'. Small footer 'L = low-order digits; R = high-order digits'. Use typographic subscripts if feasible. High on written left, low on written right; never reverse.
+
+## karatsuba-dry-run.png
+
+Use case: scientific-educational. Generate a new 1536x1024 landscape teaching infographic for a Karatsuba lesson. The supplied image is STYLE AND LOGO REFERENCE ONLY, not content to reproduce. Match its cream background, hand-lettered dark navy text, pale-yellow rounded panels, pale-blue number boxes, red arrows, and thick continuous rounded navy OUTER BORDER visible on all four sides with generous safe margins. Upper-right include the blue triangular AlgoZenith A mark with white Z as in reference, with legible wordmark 'AlgoZenith' underneath. Maintain consistent uncluttered textbook visual style and accurate readable mathematical labels. No merge sort content. Title 'Dry run: 1234 × 5678'. Top slim panel 'X_L = 34, X_R = 12     Y_L = 78, Y_R = 56     q = 100'. Three blue bordered product cards 'Z_L = 34 × 78 = 2652', 'Z_R = 12 × 56 = 672', 'P = 46 × 134 = 6164'. Arrange as three full-width rows if text needs space. Red arrows lead to pale-yellow middle calculation 'Z_M = 6164 − 2652 − 672 = 2840'. Bottom pale-yellow panel heading 'Shift and add' followed three aligned lines '2652 + 100 × 2840 + 10000 × 672', '= 2652 + 284000 + 6720000', '= 7006652'. Final result in large navy type. Small footer 'Add shifted values with carries; do not concatenate.' Exact arithmetic, no additional products or numbers.
+
+## Generation note
+
+A separate three-products formula diagram was attempted but failed because the image-generation usage limit was reached. No missing asset is referenced by the lesson. The completed dry-run diagram includes the three-product calculation.
+
