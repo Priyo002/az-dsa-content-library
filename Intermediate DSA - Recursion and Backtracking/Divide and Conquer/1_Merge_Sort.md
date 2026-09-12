@@ -34,7 +34,7 @@ The key observation is:
 
 We will first understand that merge operation, then place it inside the recursive algorithm.
 
-<img src="images/merge-sort-three-steps.png" alt="Merge sort divides the sample array into two halves, sorts each half recursively, and merges them into 1, 2, 2, 3, 4, 5" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/107dbe4d-f816-4143-a622-23120342ce9c.png" alt="Merge sort divides the sample array into two halves, sorts each half recursively, and merges them into 1, 2, 2, 3, 4, 5" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ---
 
@@ -155,7 +155,7 @@ While both inputs still have elements:
 
 On equal values, take from the **left sequence**. We will explain why this preserves stability.
 
-<img src="images/merge-sort-three-pointers.png" alt="The merge pointers compare unread values 4 and 2, copy 2 from B into the six-cell output buffer, leave i at 1, and advance j to 1 and k to 2" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/54ed2d89-287b-4ee1-810f-86e75742faf5.png" alt="The merge pointers compare unread values 4 and 2, copy 2 from B into the six-cell output buffer, leave i at 1, and advance j to 1 and k to 2" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ### 4.2 Dry run of one merge
 
@@ -526,7 +526,7 @@ $$
 T(n) = \Theta(n\log n).
 $$
 
-<img src="images/merge-sort-level-cost.png" alt="Merge sort splits ranges into halves and quarters, with linear total merge work at each of logarithmically many merging levels, yielding Theta n log n time" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/f3f721e5-20eb-4867-a27b-60aa137e63a8.png" alt="Merge sort splits ranges into halves and quarters, with linear total merge work at each of logarithmically many merging levels, yielding Theta n log n time" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ### 10.2 Expanding the recurrence
 

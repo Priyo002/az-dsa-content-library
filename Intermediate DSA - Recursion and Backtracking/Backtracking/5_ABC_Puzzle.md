@@ -217,7 +217,7 @@ To see why, choose the three occupied positions. The leftmost letter is fixed by
 
 This is the search-space reduction that makes the given small constraints manageable.
 
-<img src="images/abc-puzzle-row-buckets.png" alt="ABC Puzzle row generation for N equals 5: sixty unique permutations are grouped into three buckets of twenty patterns by their first nonempty letter, and R selects the required bucket" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/131ee112-ebc7-48f3-aa4b-a5d86cab35c3.png" alt="ABC Puzzle row generation for N equals 5: sixty unique permutations are grouped into three buckets of twenty patterns by their first nonempty letter, and R selects the required bucket" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ---
 
@@ -326,7 +326,7 @@ Use **OR**, not XOR. Placing another letter in an already started column must le
 
 `newDone` receives its mask by value and returns the updated copy. The caller's mask is unchanged, so there is no explicit mask undo.
 
-<img src="images/abc-puzzle-column-start-mask.png" alt="Adding row dot B A dot C below A C dot dot B starts column 2 with the required A and changes the column-start mask from 10011 to 10111; set bits record started columns, not complete columns" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/aaf7fa4f-7027-402d-a8f1-3166e9f0b0a2.png" alt="Adding row dot B A dot C below A C dot dot B starts column 2 with the required A and changes the column-start mask from 10011 to 10111; set bits record started columns, not complete columns" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 The shared vector `curr_sol`, however, must be restored:
 
@@ -367,7 +367,7 @@ For example, with `N = 3`, `R = "AAA"`, and `C = "ABC"`, choosing `ABC` for ever
 
 Conversely, passing `is_valid` already implies that every column is nonempty. The `all_done` condition is logically redundant at success, but we retain it to make the intended completion test explicit and to match the supplied approach.
 
-<img src="images/abc-puzzle-column-validation.png" alt="A grid with three identical ABC rows passes the topmost checks but fails column validation; a counting argument shows that three distinct letters in every column and exactly 3N letters overall imply one of each letter per column" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/6d5aeab6-1c44-4dfe-9a3a-85cc92f9dfcd.png" alt="A grid with three identical ABC rows passes the topmost checks but fails column validation; a counting argument shows that three distinct letters in every column and exactly 3N letters overall imply one of each letter per column" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ---
 

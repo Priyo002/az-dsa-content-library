@@ -37,6 +37,10 @@ Starting with a clean white square, he performs the following process:
 
 Already black squares remain completely black. They are not replaced by another copy of the model.
 
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/19a7a127-7e8a-473e-864b-20247f15b3c2.png" alt="Fractal construction from step 0 to step 3 for the model with a black top-right cell: only white regions are subdivided while black regions remain solid" style="max-width: 100%; height: auto; box-sizing: border-box; border: 3px solid #0b2d72; border-radius: 12px; padding: 12px;" identifier="az-img-upload">
+
+*From left to right: steps 0, 1, 2, and 3 for the model `.* / ..`. Black regions remain black; only white regions are subdivided.*
+
 Print the final picture as an `nᵏ × nᵏ` character matrix.
 
 ### Constraints
@@ -156,6 +160,8 @@ $$
 
 The number of cells in the final answer is `n^(2k)`, not `n² × k`.
 
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/f44ce332-065e-4ba8-a5fe-1a9e0767e710.png" alt="AlgoZenith fractal progression from one white square to the 2 by 2 model and its 4 by 4 expansion; black blocks remain solid while white blocks repeat the model" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+
 ---
 
 ## 4. Define the Recursive State
@@ -251,6 +257,8 @@ In N-Queens or Sudoku, we undo a placement to explore an alternative configurati
 Sibling calls work on disjoint regions. A painted black block is final, and a white child call never needs to erase work done elsewhere. Undoing the paint would destroy part of the answer.
 
 > **Interview Insight — Recursion is not always backtracking:** Use the framework to define progress and transitions, but add an undo step only when exploring alternatives requires restoring shared state. This is deterministic recursive construction.
+
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/5a7f191a-5c8c-433c-95ab-690e7e2e9742.png" alt="AlgoZenith diagram of draw(0, 0, 8, 3): recurse into blocks at (0,0), (4,0), and (4,4), fill the block at (0,4) black, and stop at remaining equals zero without undoing completed regions" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ---
 

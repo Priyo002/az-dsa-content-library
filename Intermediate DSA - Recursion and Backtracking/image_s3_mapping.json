@@ -1,0 +1,19 @@
+{
+  "Backtracking/images/abc-puzzle-column-start-mask.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/aaf7fa4f-7027-402d-a8f1-3166e9f0b0a2.png",
+  "Backtracking/images/abc-puzzle-column-validation.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/6d5aeab6-1c44-4dfe-9a3a-85cc92f9dfcd.png",
+  "Backtracking/images/abc-puzzle-row-buckets.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/131ee112-ebc7-48f3-aa4b-a5d86cab35c3.png",
+  "Kth Solution/images/toh-rod-role-path.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/8bad33c4-084d-44f7-bb85-07ecab92d871.png",
+  "Kth Solution/images/toh-three-blocks.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/078704d3-fdc0-4645-b5c5-c01a91f7d095.png",
+  "Kth Solution/images/toh-k6-dry-run.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/771ca8af-89f9-4d38-a8ff-b0518063749c.png",
+  "Divide and Conquer/images/merge-sort-three-steps.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/107dbe4d-f816-4143-a622-23120342ce9c.png",
+  "Divide and Conquer/images/inversion-swap-parity.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/7157e7d9-340b-4ad0-b610-650898b7ed0d.png",
+  "Divide and Conquer/images/merge-sort-level-cost.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/f3f721e5-20eb-4867-a27b-60aa137e63a8.png",
+  "Divide and Conquer/images/karatsuba-dry-run.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/a3754e74-8cda-454f-a2d8-8fdd166c612f.png",
+  "Divide and Conquer/images/inversion-merge-count.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/3b32cf3f-4603-45b6-aa94-b65064fd0cdf.png",
+  "Divide and Conquer/images/karatsuba-digit-split.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/c86aba10-996d-4d4e-b8e2-7a8694529964.png",
+  "Divide and Conquer/images/merge-sort-three-pointers.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/54ed2d89-287b-4ee1-810f-86e75742faf5.png",
+  "Divide and Conquer/images/inversion-definition.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/2b600ff4-9d83-4e68-aece-ecf15410493e.png",
+  "Fractal Form/images/fractal-first-steps.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/f44ce332-065e-4ba8-a5fe-1a9e0767e710.png",
+  "Fractal Form/images/fractal-recursive-blocks.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/5a7f191a-5c8c-433c-95ab-690e7e2e9742.png",
+  "Fractal Form/images/fractal-problem-progression.png": "https://d3pdqc0wehtytt.cloudfront.net/media/9651/19a7a127-7e8a-473e-864b-20247f15b3c2.png"
+}
