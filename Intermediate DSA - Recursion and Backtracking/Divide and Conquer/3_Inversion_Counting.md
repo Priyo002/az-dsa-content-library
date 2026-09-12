@@ -45,7 +45,7 @@ The inversion pairs are:
 
 Therefore, the answer is **5**.
 
-<img src="images/inversion-definition.png" alt="AlgoZenith diagram showing the five inversion index pairs in 3, 1, 5, 2, 6, 3 and explaining why equal values are not inversions" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/2b600ff4-9d83-4e68-aece-ecf15410493e.png" alt="AlgoZenith diagram showing the five inversion index pairs in 3, 1, 5, 2, 6, 3 and explaining why equal values are not inversions" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 The pair `(0, 5)` is not an inversion because both values are `3`. Also, inversions need not involve adjacent elements: `(2, 5)` is a valid pair.
 
@@ -204,7 +204,7 @@ Using `<` in the first branch and counting unconditionally in `else` would also 
 
 > **Interview Insight — Derive the inequality from the definition:** An inversion uses strict `>`. The equality branch is a correctness decision, not just a sorting preference.
 
-<img src="images/inversion-merge-count.png" alt="AlgoZenith merge diagram showing that right value 2 forms two inversions with remaining left values 3 and 5; count mid minus i plus one and do not count equality" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/3b32cf3f-4603-45b6-aa94-b65064fd0cdf.png" alt="AlgoZenith merge diagram showing that right value 2 forms two inversions with remaining left values 3 and 5; count mid minus i plus one and do not count equality" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ---
 
@@ -527,7 +527,7 @@ Therefore, keep these conclusions separate:
 
 For the lecture's example, the strict inversion count is `5`, so bubble sort performs `5` swaps. Since that example contains duplicate `3`s, do not extend this to an unrestricted claim about every arbitrary-swap sorting algorithm.
 
-<img src="images/inversion-swap-parity.png" alt="AlgoZenith comparison of adjacent swaps, parity-flipping arbitrary swaps with distinct values, and the duplicate-value counterexample 2, 1, 1 to 1, 1, 2 whose inversion count changes from 2 to 0" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/7157e7d9-340b-4ad0-b610-650898b7ed0d.png" alt="AlgoZenith comparison of adjacent swaps, parity-flipping arbitrary swaps with distinct values, and the duplicate-value counterexample 2, 1, 1 to 1, 1, 2 whose inversion count changes from 2 to 0" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 > **CP Insight — Check the assumptions before using parity:** If a problem involves a permutation of distinct elements, inversion parity can constrain the parity of a swap sequence. If duplicates or different move rules are allowed, establish the property for those rules before applying it.
 

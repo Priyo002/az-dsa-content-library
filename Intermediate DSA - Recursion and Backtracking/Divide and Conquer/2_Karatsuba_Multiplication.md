@@ -171,7 +171,7 @@ X_R = 12
 
 Multiplication by `Bᵐ` shifts a number by `m` digit positions. It is not a general large-number multiplication: in a digit representation, it is a positional shift.
 
-<img src="images/karatsuba-digit-split.png" alt="AlgoZenith diagram splitting 1234 into high part 12 and low part 34, and 5678 into high part 56 and low part 78, using a two-digit shift of 100" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/c86aba10-996d-4d4e-b8e2-7a8694529964.png" alt="AlgoZenith diagram splitting 1234 into high part 12 and low part 34, and 5678 into high part 56 and low part 78, using a two-digit shift of 100" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ### Example: an odd number of digits
 
@@ -425,7 +425,7 @@ XY = Z_L + 100 × Z_M + 10000 × Z_R
 
 The result blocks can overlap after shifting because they may contain more than `m` digits. We **add** the shifted values with carries; we do not concatenate their decimal strings.
 
-<img src="images/karatsuba-dry-run.png" alt="AlgoZenith Karatsuba dry run: three products 2652, 672, and 6164 recover the middle term 2840, then shifted addition gives 1234 times 5678 equals 7006652" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/a3754e74-8cda-454f-a2d8-8fdd166c612f.png" alt="AlgoZenith Karatsuba dry run: three products 2652, 672, and 6164 recover the middle term 2840, then shifted addition gives 1234 times 5678 equals 7006652" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ---
 
