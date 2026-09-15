@@ -29,7 +29,7 @@ The **length** of a path is the number of edges traversed, not the number of ver
 
 ### Cycle
 
-A **cycle** follows edges back to its starting vertex, without repeating any other vertex or reusing an edge:
+A **cycle** follows one or more edges back to its starting vertex, without repeating any other vertex or reusing an edge:
 
 $$
 x_1 = x_r
@@ -55,7 +55,7 @@ The starting vertex is written again at the end to show that the loop closes. Th
 
 In an undirected graph like the one below, going along an edge and immediately coming back along that same edge does **not** form a simple cycle.
 
-<img src="images/paths-corrected.png" alt="Six-vertex graph with valid path, cycle, simple path, and simple cycle examples" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/94dbc7d1-76cd-4782-9d7e-c6ec6425d71d.png" alt="Six-vertex graph with valid path, cycle, simple path, and simple cycle examples" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 #### Reading the Examples
 
@@ -170,7 +170,7 @@ Vertex 4 is therefore not part of the same SCC as vertices 1, 2, and 3.
 
 This shows an important difference: **directed edges can exist between different SCCs**. A one-way connection does not merge two SCCs; mutual reachability is required.
 
-<img src="images/scc-corrected.png" alt="Three strongly connected components: a four-vertex directed loop, a singleton, and a three-vertex directed loop, with one-way links between groups" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/b886fe61-7e0d-46d6-af55-21ce68c20719.png" alt="Three strongly connected components: a four-vertex directed loop, a singleton, and a three-vertex directed loop, with one-way links between groups" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 #### Reading the Three SCCs
 
@@ -194,4 +194,4 @@ A single vertex can form an SCC even when it has incoming or outgoing edges. Wha
 - A non-empty undirected graph is **connected** when it has exactly one connected component.
 - An **SCC** requires mutual directed reachability, not merely a one-way connection.
 
-<READING_WIDGET>
+</READING_WIDGET>

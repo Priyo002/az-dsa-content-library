@@ -163,7 +163,7 @@ For a directed graph with no edges from a vertex to itself and at most one edge 
 
 In common algorithmic usage, graphs with \(O(n)\) edges are typical sparse graphs, while graphs with \(\Theta(n^2)\) edges are typical dense graphs. **There is no universal numerical cutoff** separating the two terms.
 
-<img src="images/sparse-dense-corrected.png" alt="Sparse and dense graphs compared by increasing edge count for the same number of vertices" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/c5ededb1-0d98-4032-94bf-f91303f6e5cb.png" alt="Sparse and dense graphs compared by increasing edge count for the same number of vertices" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 
 ### Degree in an Undirected Graph
