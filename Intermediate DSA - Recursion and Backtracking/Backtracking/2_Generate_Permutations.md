@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3672</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -215,12 +215,12 @@ The job of `rec(level)` is to print every unique completion of this prefix in le
 
 ## 5. Applying the LCCM Framework
 
-| Part | Question | Answer for this problem |
-| --- | --- | --- |
-| **Level** | Which part of the answer are we deciding? | The index `level` in the permutation |
-| **Choice** | What can be placed at this index? | Any distinct value present in the frequency map |
-| **Check** | Is this value still available? | `frequency[value] > 0` |
-| **Move** | How do we explore this decision? | Use one copy, append it, recurse, then restore both changes |
+| Part       | Question                                  | Answer for this problem                                     |
+| ---------- | ----------------------------------------- | ----------------------------------------------------------- |
+| **Level**  | Which part of the answer are we deciding? | The index `level` in the permutation                        |
+| **Choice** | What can be placed at this index?         | Any distinct value present in the frequency map             |
+| **Check**  | Is this value still available?            | `frequency[value] > 0`                                      |
+| **Move**   | How do we explore this decision?          | Use one copy, append it, recurse, then restore both changes |
 
 <img src="https://d3pdqc0wehtytt.cloudfront.net/media/9651/979f492a-ac19-4c9e-a5f3-b62f936840d0.png" alt="The Level, Choice, Check, and Move stages for generating unique permutations with a frequency map" style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
@@ -917,10 +917,10 @@ Consequently, decrementing and restoring `remaining` do not perform a fresh `O(l
 
 The practical choice is therefore:
 
-| Goal | Preferred implementation |
-| --- | --- |
-| Learn frequency-based LCCM clearly | Ordered frequency map |
-| Fast recursive implementation | Sorted vector + `used[]` |
+| Goal                                                 | Preferred implementation                      |
+| ---------------------------------------------------- | --------------------------------------------- |
+| Learn frequency-based LCCM clearly                   | Ordered frequency map                         |
+| Fast recursive implementation                        | Sorted vector + `used[]`                      |
 | Add constraints or pruning based on remaining counts | Frequency-based state may remain more natural |
 
 > **CP Insight — Asymptotic complexity is not the whole runtime:** Two implementations may explore the same recursion tree but have noticeably different execution times because of allocation, pointer chasing, branch prediction, and cache locality.
