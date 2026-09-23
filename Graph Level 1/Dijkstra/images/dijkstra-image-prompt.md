@@ -1,0 +1,10 @@
+# Dijkstra concept diagram
+
+- Mode: built-in image-generation tool; new scientific-educational illustration.
+- Style and logo reference: `../../Topological Ordering/images/kahn-indegrees-corrected.png`.
+- Final image: `dijkstra-tentative-and-final.png`.
+- Validation: exactly five vertices and five directed edges: 1→2 (7), 1→3 (2), 3→2 (1), 2→4 (2), 3→4 (8). Vertex 5 is isolated. Source 1 gives distances 0, 3, 2, 5, infinity. Finalization order is 1, 3, 2, 4. The progression strip is separate from graph edges. Border and proper AlgoZenith mark/wordmark are present.
+
+## Final prompt
+
+Use case: scientific-educational. Create a NEW Dijkstra algorithm diagram. Attached image is ONLY the style and AlgoZenith logo reference, not the graph to reproduce. Match cream background, rounded dark navy border on all sides, blue circular nodes with white numbers, dark arrowed edges, red handwritten edge weights, readable handwritten navy/teal text. Reproduce the reference's proper blue triangular AlgoZenith mark with white stylized Z and wordmark at top right. Landscape layout, large clear diagram. Title: 'Dijkstra: choose the smallest tentative distance'. Main graph has exactly 5 vertices: 1 at left center, 2 upper middle, 3 lower middle, 4 right center, 5 isolated at far right with no edges. Source label below vertex 1: 'Source'. Exactly five DIRECTED edges, with clear arrowheads at destination and red weights: 1 -> 2 weight 7, 1 -> 3 weight 2, 3 -> 2 weight 1 (vertical upward arrow), 2 -> 4 weight 2, 3 -> 4 weight 8. No other edges. Avoid crossings. Under graph put concise navy text: 'Vertex 2: tentative 7 -> improved 3 -> finalized 3'. Below that a clearly separate text strip labeled 'Finalization order (vertex: distance)' with '1:0  ->  3:2  ->  2:3  ->  4:5'. These strip arrows are progression markers, not graph edges. Under vertex 5 write 'Unreachable' and 'distance = infinity'. Do not connect vertex 5 to any other vertex. Keep logo and border complete, accurate weights and arrow directions, no extra vertices or labels. Purpose: distinguish discovery from finalization, no incorrect final distance 7 for vertex 2.
