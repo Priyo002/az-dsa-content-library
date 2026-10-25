@@ -27,7 +27,7 @@ In a **Singly Linked List**, each element is called a **Node**. A node contains 
 
 The very first node is universally known as the **Head**, and the very last node points to `NULL` to signify the absolute end of the chain.
 
-<img src="https://d3pdqc0wehtytt.cloudfront.net/academy-media/62/a7b10c0d-de88-446c-9e15-85d9b4a11b8e.png" alt="Singly Linked List Diagram" style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/singly-linked-list-structure-v2.png" alt="Singly linked list with nodes 10, 20 and 30, each containing data and a next pointer; head points to 10 and the final next pointer is nullptr." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ### Creating a Singly Linked List
 

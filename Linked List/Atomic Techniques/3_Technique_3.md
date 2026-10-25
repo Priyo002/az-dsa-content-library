@@ -75,7 +75,7 @@ Let:
 
 For a cyclic list, `n = x + y`. Here, `x = 3`, `y = 6`, and `n = 9`. If the cycle starts at `head`, then `x = 0`. For an acyclic list, `n` simply means its ordinary length.
 
-<img src="images/cycle-structure.png" alt="Nodes 1, 2, and 3 form a three-node prefix leading to cycle entry 4. The six-node cycle follows 4 to 5 to 6 to 7 to 8 to 9 and back to 4. The entry is highlighted, distinguishing the prefix from the cycle." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/cycle-structure-v2.png" alt="Nodes 1, 2, and 3 form a three-node prefix leading to cycle entry 4. The six-node cycle follows 4 to 5 to 6 to 7 to 8 to 9 and back to 4. The entry is labeled, distinguishing the prefix from the cycle." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ## 2. Approach 1: Remember Visited Nodes Using Hashing
 
@@ -310,7 +310,7 @@ Node* findCycleEntry(Node* head) {
 
 Return node `4`.
 
-<img src="images/cycle-entry-reset.png" alt="After Floyd's pointers meet at node 7, one pointer restarts at head node 1. Moving both one link per step produces pairs 1 and 7, 2 and 8, 3 and 9, then 4 and 4. Both partial paths converge at the same cycle entry, node 4, after three moves each." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/cycle-entry-reset-v2.png" alt="After Floyd's pointers meet at node 7, one pointer restarts at head node 1. Moving both one link per step produces pairs 1 and 7, 2 and 8, 3 and 9, then 4 and 4. Both partial paths converge at the same cycle entry, node 4, after three moves each." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 The diagram shows only the two paths followed during this reset phase, not every link in the original cycle. The small arrow labels count successive moves.
 
@@ -439,7 +439,7 @@ The function returns `true` if it removed a cycle, or `false` if there was no cy
 
 In the running example, `last` walks through nodes `4, 5, 6, 7, 8, 9`. Since node `9` points to the entry, we change `9->next` to `nullptr`. All nine nodes remain reachable from `head` in their original first-visit order.
 
-<img src="images/cycle-removal.png" alt="Before removal, nodes 1 through 9 are linked in order and node 9 points back to node 4, forming a cycle. After removal, the same nine nodes remain linked in order, but node 9 points to nullptr. Only the link that closes the cycle changes." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/cycle-removal-v2.png" alt="Before removal, nodes 1 through 9 are linked in order and node 9 points back to node 4, forming a cycle. After removal, the same nine nodes remain linked in order, but node 9 points to nullptr. Only the link that closes the cycle changes." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ### Why Not Cut at the Meeting Node?
 

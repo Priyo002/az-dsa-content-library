@@ -64,7 +64,7 @@ Imagine these illustrative addresses; they are labels, not actual addresses from
 
 With `head` pointing to address `1000`, following the links gives `10 -> 20 -> 30`, even though the addresses are not consecutive or increasing.
 
-<img src="images/array-vs-linked-list-memory.png" alt="Array cells 10, 20, and 30 occupy consecutive positions. Linked-list nodes are separate: head points to address 1000 containing 10 and next 2400; address 2400 contains 20 and next 1600; address 1600 contains 30 and next nullptr." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/array-vs-linked-list-memory-v2.png" alt="Array cells 10, 20, and 30 occupy consecutive positions. Linked-list nodes are separate: head points to address 1000 containing 10 and next 2400; address 2400 contains 20 and next 1600; address 1600 contains 30 and next nullptr." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 To reach the third node from `head`, we must follow two links. There is no general equivalent of constant-time array indexing: reaching the node at a given position takes **`O(n)` in the worst case** for a list of `n` nodes.
 
@@ -235,7 +235,7 @@ For this introduction, understanding the idea is sufficient. We will use ordinar
 
 ## 8. Comparing the Types
 
-<img src="images/linked-list-types.png" alt="Three lists containing 10, 20, and 30: a singly linked list follows next pointers to nullptr; a doubly linked list has forward next and backward prev pointers with nullptr at its ends; a circular singly linked list links node 30 back to head at node 10." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/linked-list-types-v2.png" alt="Three lists containing 10, 20, and 30: a singly linked list follows next pointers to nullptr; a doubly linked list has forward next and backward prev pointers with nullptr at its ends; a circular singly linked list links node 30 back to head at node 10." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 | Type | Link information per node | Movement | End condition |
 | --- | --- | --- | --- |

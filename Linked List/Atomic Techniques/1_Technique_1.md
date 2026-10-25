@@ -52,7 +52,7 @@ head2 -----------------> B1 -> B2 --+
 
 `A1`, `B1`, and `C1` are **node identities**, not necessarily the values stored inside them. There is only one actual `C1` node, reached from both `A5` and `B2`.
 
-<img src="images/intersection-shared-suffix.png" alt="List 1 has five separate nodes A1 through A5 and list 2 has two separate nodes B1 and B2. Both branches point to the same C1 node, followed by the shared C2 and C3 nodes and nullptr. Their total lengths are 8 and 5, and C1 is the first intersection node." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/intersection-shared-suffix-v2.png" alt="List 1 has five separate nodes A1 through A5 and list 2 has two separate nodes B1 and B2. Both branches point to the same C1 node, followed by the shared C2 and C3 nodes and nullptr. Their total lengths are 8 and 5, and C1 is the first intersection node." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 The lengths are:
 
@@ -178,9 +178,9 @@ The difference is `8 - 5 = 3`. Starting from `A1`, three moves take `p` to `A4`,
 
 “Nodes remaining” includes the node currently identified by the pointer.
 
-<img src="images/intersection-length-alignment.png" alt="Advance p by three links from A1 to A4 while q stays at B1. Both pointers now have five nodes remaining. Moving together gives A5 and B2 after one move, then the same C1 node after two moves. The skipped nodes remain in the list; only p changes position." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/intersection-length-alignment-v2.png" alt="Advance p by three links from A1 to A4 while q stays at B1. Both pointers now have five nodes remaining. Moving together gives A5 and B2 after one move, then the same C1 node after two moves. The skipped nodes remain in the list; only p changes position." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
-The faded nodes are skipped only by the pointer during alignment; they are not removed from the list.
+The first three nodes are skipped only by the pointer during alignment; they are not removed from the list.
 
 ### C++ Implementation
 

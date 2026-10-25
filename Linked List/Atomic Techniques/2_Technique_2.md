@@ -43,7 +43,7 @@ For both lists above, our answer is the node containing `30`. A problem that ask
 
 **Always clarify which middle is required when the length is even.** Neither convention is universally correct; it depends on the problem statement.
 
-<img src="images/middle-node-conventions.png" alt="In the five-node list 10, 20, 30, 40, 50, the only middle is 30. In the six-node list 10, 20, 30, 40, 50, 60, the first middle is 30 and the second middle is 40. This lesson chooses the first middle." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/middle-node-conventions-v2.png" alt="In the five-node list 10, 20, 30, 40, 50, the only middle is 30. In the six-node list 10, 20, 30, 40, 50, 60, the first middle is 30 and the second middle is 40. This lesson chooses the first middle." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ## 2. Approach 1: Count the Length, Then Walk to the Middle
 
@@ -232,7 +232,7 @@ Return the node containing `30`, the third of five nodes.
 
 Return the node containing `30`, the first middle. Moving `slow` once more would incorrectly select `40` for this convention.
 
-<img src="images/middle-node-slow-fast.png" alt="Three snapshots of the six-node list show slow and fast at 10 and 20 initially, at 20 and 40 after one iteration, and at 30 and 60 after two iterations. The compact first-middle loop stops because the next pointer of node 60 is null and returns node 30." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/middle-node-slow-fast-v2.png" alt="Three snapshots of the six-node list show slow and fast at 10 and 20 initially, at 20 and 40 after one iteration, and at 30 and 60 after two iterations. The compact first-middle loop stops because the next pointer of node 60 is null and returns node 30." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ## 5. Why Does the Slow Pointer Stop at the Middle?
 
