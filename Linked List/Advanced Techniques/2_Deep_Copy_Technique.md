@@ -258,7 +258,7 @@ After insertion, `copy->next` is the next original node. Advancing only to `cur-
 
 All original random pointers remain unchanged. All copied random pointers are still null at this point.
 
-<img src="images/deep-copy-interleaving.png" alt="Phase 1 inserts a new copy immediately after each original: A, A-prime, B, B-prime, C, C-prime, D, D-prime, E, E-prime, then nullptr. Teal nodes are originals and gold nodes are copies. Only next links are shown; original random pointers remain unchanged." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/deep-copy-interleaving-v2.png" alt="Phase 1 inserts a new copy immediately after each original: A, A-prime, B, B-prime, C, C-prime, D, D-prime, E, E-prime, then nullptr. All nodes are teal; prime labels identify newly allocated copies. Only next links are shown; original random pointers remain unchanged." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 **Finish this entire phase before assigning random pointers.** A random link may target an original node farther ahead whose copy has not yet been inserted.
 
@@ -272,7 +272,7 @@ For an original node `cur`:
 
 For example, `B->random` points to `D`. Since `D->next` points to `D'`, we set `B'->random` to `D'`.
 
-<img src="images/deep-copy-random-lookup.png" alt="Selected-link close-up after interleaving: original B points through next to its copy B-prime, and original D points through next to its copy D-prime. B's random pointer targets D; B-prime's random pointer must target D-prime. Thus the original random target's next pointer identifies the required copied target." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/deep-copy-random-lookup-v2.png" alt="Selected-link close-up after interleaving: original B points through next to its copy B-prime, and original D points through next to its copy D-prime. B's random pointer targets D; B-prime's random pointer must target D-prime. Thus the original random target's next pointer identifies the required copied target." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 This close-up shows only the links needed for the lookup, not the complete `next` chain. The vertical `next` arrows connect originals to their copies; the horizontal `random` arrows show the corresponding relationship in each list.
 
@@ -396,7 +396,7 @@ Copy:     A' -> B' -> C' -> D' -> E' -> nullptr
 
 No random pointers change in this phase. The originals retain their original random links, and the copies retain the copied random links established in phase 2.
 
-<img src="images/deep-copy-separation.png" alt="Phase 3 separates the interleaved chain into the restored original next chain A through E and an independent copied next chain A-prime through E-prime. Both lists end at nullptr. Random links are omitted from the diagram; copied random pointers already target copied nodes or nullptr." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/deep-copy-separation-v2.png" alt="Phase 3 separates the interleaved chain into the restored original next chain A through E and an independent copied next chain A-prime through E-prime. Both lists end at nullptr. Random links are omitted from the diagram; copied random pointers already target copied nodes or nullptr." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ## 8. Put the Three Phases Together
 

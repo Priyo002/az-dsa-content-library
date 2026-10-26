@@ -108,9 +108,9 @@ For the six-node example:
 
 All separate lists shown in the table end at `nullptr`.
 
-<img src="images/folding-pipeline.png" alt="Folding six nodes in three stages: split 1 through 6 into 1, 2, 3 and 4, 5, 6; reverse the second part to 6, 5, 4; then merge alternately to obtain 1, 6, 2, 5, 3, 4. Gold rings track the same three second-half nodes throughout. Each separate list ends at nullptr." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/folding-pipeline-v2.png" alt="Folding six nodes in three stages: split 1 through 6 into 1, 2, 3 and 4, 5, 6; reverse the second part to 6, 5, 4; then merge alternately to obtain 1, 6, 2, 5, 3, 4. Each separate list ends at nullptr." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
-The gold rings track nodes from the original second half. Their values and identities stay the same; only their links change.
+The same nodes are reused throughout. Their values and identities stay the same; only their links change.
 
 Reversing the second half converts the original back-to-front order into an ordinary forward traversal. We can now take one node from each part without searching for any tail.
 
@@ -403,7 +403,7 @@ Reverse second:  1 -> 2 -> 3    and    4 -> 5 -> 6
 Join:            1 -> 2 -> 3 -> 4 -> 5 -> 6
 ```
 
-<img src="images/unfolding-pipeline.png" alt="Unfolding 1, 6, 2, 5, 3, 4: the current odd positions yield 1, 2, 3 and the current even positions yield 6, 5, 4. Reverse the even-position list to 4, 5, 6, then join the two lists end to end to restore 1, 2, 3, 4, 5, 6. Position labels are distinct from node values, and every separate list ends at nullptr." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/unfolding-pipeline-v2.png" alt="Unfolding 1, 6, 2, 5, 3, 4: the current odd positions yield 1, 2, 3 and the current even positions yield 6, 5, 4. Reverse the even-position list to 4, 5, 6, then join the two lists end to end to restore 1, 2, 3, 4, 5, 6. Position labels are distinct from node values, and every separate list ends at nullptr." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 **Odd and even refer to positions, not data values.** In this example, the odd-position list contains the value `2`, and the even-position list contains `5`.
 

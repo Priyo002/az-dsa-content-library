@@ -127,7 +127,7 @@ Output:
 
 These endpoint meanings follow the standard's [container requirements](https://eel.is/c++draft/container.reqmts) and [reverse-iteration requirements](https://eel.is/c++draft/container.rev.reqmts).
 
-<img src="images/stl-list-iterator-boundaries.png" alt="Forward traversal starts at begin on 1 and moves through 2, 3, 4 and 5 to end. Reverse traversal starts at rbegin on 5 and moves through 4, 3, 2 and 1 to rend. Both end markers are not elements." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/stl-list-iterator-boundaries-v2.png" alt="Forward traversal starts at begin on 1 and moves through 2, 3, 4 and 5 to end. Reverse traversal starts at rbegin on 5 and moves through 4, 3, 2 and 1 to rend. Both end markers are not elements." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 The arrows show iterator movement, not internal pointer storage. The dashed circles are stopping markers, not extra list elements.
 
@@ -183,7 +183,7 @@ cout << *inserted << '\n';         // 10: insert returns the new iterator
 
 The element `2` changes its position in the sequence, but the iterator still identifies that **same element**. Existing element iterators remain valid after list insertion.
 
-<img src="images/stl-list-insert.png" alt="Inserting 10 before the iterator to 2 changes the list from 1, 2, 3, 4, 5 to 1, 10, 2, 3, 4, 5. The original iterator still identifies 2, while the returned inserted iterator identifies 10." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/stl-list-insert-v2.png" alt="Inserting 10 before the iterator to 2 changes the list from 1, 2, 3, 4, 5 to 1, 10, 2, 3, 4, 5. The original iterator still identifies 2, while the returned inserted iterator identifies 10." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 `insert(values.begin(), x)` inserts at the front; `insert(values.end(), x)` inserts at the back. Insertion at `end()` is valid even though reading `*end()` is not. For an empty list, `begin()` and `end()` represent the same insertion position.
 
@@ -217,7 +217,7 @@ cout << *it << '\n';          // 3
 
 The old iterator to `2` becomes **invalid** because that element no longer exists. The assignment replaces it with the returned iterator to `3`. Other element iterators remain valid. These guarantees are specified under [list modifiers](https://eel.is/c++draft/list.modifiers).
 
-<img src="images/stl-list-erase.png" alt="Erasing the element 2 changes the list from 1, 2, 3, 4, 5 to 1, 3, 4, 5. Assigning the iterator returned by erase makes it identify 3; the old iterator to the erased element is invalid." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/stl-list-erase-v2.png" alt="Erasing the element 2 changes the list from 1, 2, 3, 4, 5 to 1, 3, 4, 5. Assigning the iterator returned by erase makes it identify 3; the old iterator to the erased element is invalid." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 Do not call `erase(end())`: there is no element to remove there. After erasing the last element, check the returned iterator against `end()` before dereferencing it.
 

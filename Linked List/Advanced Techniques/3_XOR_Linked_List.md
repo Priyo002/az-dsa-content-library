@@ -136,7 +136,7 @@ next address in this traversal = 328 ^ 300 = 100
 
 The same stored field supports both directions.
 
-<img src="images/xor-neighbour-recovery.png" alt="Three nodes A, B, and C have illustrative addresses 100, 200, and 300. Their XOR link fields are 200, 328, and 200. At B, arriving from A recovers C using 328 XOR 100 equals 300; arriving from C recovers A using 328 XOR 300 equals 100." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/xor-neighbour-recovery-v2.png" alt="Three nodes A, B, and C have illustrative addresses 100, 200, and 300. Their XOR link fields are 200, 328, and 200. At B, arriving from A recovers C using 328 XOR 100 equals 300; arriving from C recovers A using 328 XOR 300 equals 100." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 The double-headed connectors in these illustrations show **logical adjacency**, not two separately stored pointers. Each node still stores only one encoded link field.
 
@@ -377,7 +377,7 @@ The result is:
 
 The link at `300` does not change.
 
-<img src="images/xor-insertion-update.png" alt="Before insertion, addresses 100, 200, and 300 are adjacent in that order. After inserting the gold node 400 between 100 and 200, the order is 100, 400, 200, 300. The new node stores 100 XOR 200. Node 100 cancels neighbour 200 and adds 400; node 200 cancels neighbour 100 and adds 400. Node 300 is unchanged." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/xor-insertion-update-v2.png" alt="Before insertion, addresses 100, 200, and 300 are adjacent in that order. After inserting the new node 400 between 100 and 200, the order is 100, 400, 200, 300. The new node stores 100 XOR 200. Node 100 cancels neighbour 200 and adds 400; node 200 cancels neighbour 100 and adds 400. Node 300 is unchanged." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 **Link updates take `O(1)` time once the gap is known.** Finding an insertion position by walking the list can take `O(n)`. Allocator costs are separate from the link-update count.
 
@@ -520,9 +520,9 @@ link at 600: replace 500 with 300
 
 Node `400` keeps `300 ^ 500`, because its two neighbours are still `300` and `500`.
 
-<img src="images/xor-section-reversal.png" alt="Reversing the section from address 300 through 500 changes the order 100, 200, 300, 400, 500, 600 to 100, 200, 500, 400, 300, 600. Gold highlights the section, and red connectors mark the changed boundary connections. P is 200, L is 300, R is 500, and S is 600. Only these four nodes need link updates; node 400 retains neighbours 300 and 500. Rewiring is constant-time when all four boundary nodes are known." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/xor-section-reversal-v2.png" alt="Reversing the section from address 300 through 500 changes the order 100, 200, 300, 400, 500, 600 to 100, 200, 500, 400, 300, 600. P is 200, L is 300, R is 500, and S is 600. Only these four nodes need link updates; node 400 retains neighbours 300 and 500. Rewiring is constant-time when all four boundary nodes are known." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
-The rows show traversal order, not physical movement in memory. The red connections change; the internal neighbour pairs remain the same.
+The rows show traversal order, not physical movement in memory. The boundary connections change from P-L and R-S to P-R and L-S; the internal neighbour pairs remain the same.
 
 ### C++ Implementation
 

@@ -62,7 +62,7 @@ These conditions must hold after every operation:
 
 The one-node case is especially important. Its link points **to itself**, not to `nullptr`.
 
-<img src="images/circular-list-boundary-cases.png" alt="Circular singly linked-list boundary cases: an empty list has head and tail equal to nullptr; a one-node list has head and tail pointing to node 10, whose next points to itself; a three-node list follows 10 to 20 to 30 and then back to head at 10." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/circular-list-boundary-cases-v2.png" alt="Circular singly linked-list boundary cases: an empty list has head and tail equal to nullptr; a one-node list has head and tail pointing to node 10, whose next points to itself; a three-node list follows 10 to 20 to 30 and then back to head at 10." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 The code below assumes that the list starts empty and is modified through the supplied functions. It does not attempt to repair arbitrary broken pointers or malformed cycles.
 
@@ -105,7 +105,7 @@ For a nonempty list:
 
 Inserting `5` into `10 -> 20 -> 30 -> head` produces `5 -> 10 -> 20 -> 30 -> head`. The tail stays at `30`, but its link must now point to `5`.
 
-<img src="images/circular-list-insert-front.png" alt="Before front insertion, head is node 10 and tail is node 30 in the ring 10 to 20 to 30 to 10. After inserting 5, head points to 5, the new node points to 10, and tail 30 points back to 5. The two changed links are highlighted in red." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/circular-list-insert-front-v2.png" alt="Before front insertion, head is node 10 and tail is node 30 in the ring 10 to 20 to 30 to 10. After inserting 5, head points to 5, the new node points to 10, and tail 30 points back to 5." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 **Time: `O(1)`**, because `tail` is already available.
 
@@ -143,7 +143,7 @@ Finding the predecessor takes **`O(n)`** time in the worst case. The code valida
 
 Simply advancing `head` is not enough: the tail would still point to the deleted node.
 
-<img src="images/circular-list-delete-front.png" alt="Deleting the front of the circular list 10 to 20 to 30 to 10 moves head to 20 and reconnects tail 30 to 20 before freeing node 10. The resulting ring contains 20 and 30. For a one-node list, deletion sets both head and tail to nullptr." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/circular-list-delete-front-v2.png" alt="Deleting the front of the circular list 10 to 20 to 30 to 10 moves head to 20 and reconnects tail 30 to 20 before freeing node 10. The resulting ring contains 20 and 30. For a one-node list, deletion sets both head and tail to nullptr." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 **Time: `O(1)`** with both pointers stored.
 

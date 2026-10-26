@@ -18,7 +18,7 @@ Enter the **Doubly Linked List**. In this structure, every node is upgraded to c
 
 This allows you to traverse the list in both directions, giving you ultimate flexibility!
 
-<img src="images/doubly-linked-list-structure.png" alt="Doubly linked list with nodes 10, 20 and 30, separate forward next and backward prev links, and nullptr at the first prev and last next pointers." style="max-width: 100%; height: auto;" identifier="az-img-upload">
+<img src="images/doubly-linked-list-structure-v2.png" alt="Doubly linked list with nodes 10, 20 and 30, separate forward next and backward prev links, and nullptr at the first prev and last next pointers." style="max-width: 100%; height: auto;" identifier="az-img-upload">
 
 ### Creating a Doubly Linked List
 
