@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3740</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -169,12 +169,12 @@ $$
 
 The difference is `8 - 5 = 3`. Starting from `A1`, three moves take `p` to `A4`, not `A3`.
 
-| Stage | `p` in list 1 | `q` in list 2 | Observation |
-| --- | --- | --- | --- |
-| Before alignment | `A1` | `B1` | 8 and 5 nodes remain |
-| After advancing `p` three times | `A4` | `B1` | Both have 5 nodes remaining |
-| After one paired move | `A5` | `B2` | Different nodes |
-| After two paired moves | `C1` | `C1` | Same address: return `C1` |
+| Stage                           | `p` in list 1 | `q` in list 2 | Observation                 |
+| ------------------------------- | ------------- | ------------- | --------------------------- |
+| Before alignment                | `A1`          | `B1`          | 8 and 5 nodes remain        |
+| After advancing `p` three times | `A4`          | `B1`          | Both have 5 nodes remaining |
+| After one paired move           | `A5`          | `B2`          | Different nodes             |
+| After two paired moves          | `C1`          | `C1`          | Same address: return `C1`   |
 
 “Nodes remaining” includes the node currently identified by the pointer.
 
@@ -294,20 +294,20 @@ If there is no intersection, each pointer traverses both lists and they meet at 
 
 The table records pointer positions **after** each loop iteration. Row 0 is the initial state.
 
-| Iterations completed | `p` | `q` |
-| --- | --- | --- |
-| 0 | `A1` | `B1` |
-| 1 | `A2` | `B2` |
-| 2 | `A3` | `C1` |
-| 3 | `A4` | `C2` |
-| 4 | `A5` | `C3` |
-| 5 | `C1` | `nullptr` |
-| 6 | `C2` | `A1` |
-| 7 | `C3` | `A2` |
-| 8 | `nullptr` | `A3` |
-| 9 | `B1` | `A4` |
-| 10 | `B2` | `A5` |
-| 11 | `C1` | `C1` |
+| Iterations completed | `p`       | `q`       |
+| -------------------- | --------- | --------- |
+| 0                    | `A1`      | `B1`      |
+| 1                    | `A2`      | `B2`      |
+| 2                    | `A3`      | `C1`      |
+| 3                    | `A4`      | `C2`      |
+| 4                    | `A5`      | `C3`      |
+| 5                    | `C1`      | `nullptr` |
+| 6                    | `C2`      | `A1`      |
+| 7                    | `C3`      | `A2`      |
+| 8                    | `nullptr` | `A3`      |
+| 9                    | `B1`      | `A4`      |
+| 10                   | `B2`      | `A5`      |
+| 11                   | `C1`      | `C1`      |
 
 The pointers stop at `C1`. Reaching a null pointer first does not mean the lists are disjoint; it may simply mean one list is shorter.
 
@@ -373,25 +373,25 @@ These nodes are local objects, not allocated with `new`. They remain alive while
 
 ## 7. Edge Cases to Check
 
-| Case | Expected result |
-| --- | --- |
-| Both heads are `nullptr` | `nullptr` |
-| Exactly one list is empty | `nullptr` |
-| Both heads identify the same non-null node | That head node |
-| One head lies inside the other list | That head node |
-| Only the tail node is shared | The shared tail |
-| Separate nodes contain equal values | No intersection unless some actual node is shared |
-| Disjoint lists of different lengths | `nullptr` after aligning the traversals |
+| Case                                       | Expected result                                   |
+| ------------------------------------------ | ------------------------------------------------- |
+| Both heads are `nullptr`                   | `nullptr`                                         |
+| Exactly one list is empty                  | `nullptr`                                         |
+| Both heads identify the same non-null node | That head node                                    |
+| One head lies inside the other list        | That head node                                    |
+| Only the tail node is shared               | The shared tail                                   |
+| Separate nodes contain equal values        | No intersection unless some actual node is shared |
+| Disjoint lists of different lengths        | `nullptr` after aligning the traversals           |
 
 All three implementations handle these cases without modifying either list.
 
 ## 8. Comparing the Approaches
 
-| Approach | Time | Auxiliary space | Main idea |
-| --- | --- | --- | --- |
-| Hashing | `O(n + m)` expected | `O(n)` | Remember addresses from the first list |
-| Length alignment | `O(n + m)` | `O(1)` | Advance the longer list by the length difference |
-| Head switching | `O(n + m)` | `O(1)` | Traverse both lists in opposite orders |
+| Approach         | Time                | Auxiliary space | Main idea                                        |
+| ---------------- | ------------------- | --------------- | ------------------------------------------------ |
+| Hashing          | `O(n + m)` expected | `O(n)`          | Remember addresses from the first list           |
+| Length alignment | `O(n + m)`          | `O(1)`          | Advance the longer list by the length difference |
+| Head switching   | `O(n + m)`          | `O(1)`          | Traverse both lists in opposite orders           |
 
 Length alignment is often the easiest constant-space solution to explain. Head switching is useful when asked for a solution without counting lengths. Neither constant-space approach requires sorting, modifying nodes, or allocating new nodes.
 

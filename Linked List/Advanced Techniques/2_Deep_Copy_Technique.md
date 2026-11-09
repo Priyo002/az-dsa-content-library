@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3744</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -71,12 +71,12 @@ A' -> B' -> C' -> D' -> E' -> nullptr
 The prime mark means “the copy of this node.” It is a label, not C++ syntax.
 
 | Original node | Data | Original random target | Required copied random target |
-| --- | --- | --- | --- |
-| `A` | 10 | `A` | `A'` |
-| `B` | 20 | `D` | `D'` |
-| `C` | 10 | `D` | `D'` |
-| `D` | 40 | `nullptr` | `nullptr` |
-| `E` | 50 | `A` | `A'` |
+| ------------- | ---- | ---------------------- | ----------------------------- |
+| `A`           | 10   | `A`                    | `A'`                          |
+| `B`           | 20   | `D`                    | `D'`                          |
+| `C`           | 10   | `D`                    | `D'`                          |
+| `D`           | 40   | `nullptr`              | `nullptr`                     |
+| `E`           | 50   | `A`                    | `A'`                          |
 
 This example includes a self-loop, forward and backward random links, a shared random target, and a null random pointer.
 
@@ -196,11 +196,11 @@ If `X->random` points to `R`, then `R->next` is `R'`. Therefore, the random poin
 
 The relationship only works while **every original still has its copy immediately after it**. That is why the phases must be completed in order:
 
-| Phase | What we do | What becomes true |
-| --- | --- | --- |
-| 1. Interleave | Insert one copy after each original | Every original can find its copy through `next` |
-| 2. Assign random links | Use the target original's `next` pointer | Every copied random pointer targets a copy or null |
-| 3. Separate | Restore original links and connect copied links | Two independent lists remain |
+| Phase                  | What we do                                      | What becomes true                                  |
+| ---------------------- | ----------------------------------------------- | -------------------------------------------------- |
+| 1. Interleave          | Insert one copy after each original             | Every original can find its copy through `next`    |
+| 2. Assign random links | Use the target original's `next` pointer        | Every copied random pointer targets a copy or null |
+| 3. Separate            | Restore original links and connect copied links | Two independent lists remain                       |
 
 The helpers below implement these phases separately. They are intended to be called in this order by the final copying function.
 
@@ -249,11 +249,11 @@ After insertion, `copy->next` is the next original node. Advancing only to `cur-
 
 ### Dry Run
 
-| After processing | Interleaved `next` chain |
-| --- | --- |
-| `A` | `A -> A' -> B -> C -> D -> E -> nullptr` |
-| `B` | `A -> A' -> B -> B' -> C -> D -> E -> nullptr` |
-| `C` | `A -> A' -> B -> B' -> C -> C' -> D -> E -> nullptr` |
+| After processing   | Interleaved `next` chain                                         |
+| ------------------ | ---------------------------------------------------------------- |
+| `A`                | `A -> A' -> B -> C -> D -> E -> nullptr`                         |
+| `B`                | `A -> A' -> B -> B' -> C -> D -> E -> nullptr`                   |
+| `C`                | `A -> A' -> B -> B' -> C -> C' -> D -> E -> nullptr`             |
 | All five originals | `A -> A' -> B -> B' -> C -> C' -> D -> D' -> E -> E' -> nullptr` |
 
 All original random pointers remain unchanged. All copied random pointers are still null at this point.
@@ -302,13 +302,13 @@ The lecture's expression `X->next->random = X->random->next` captures the centra
 
 ### Dry Run: Translate Each Random Link
 
-| Current original | Original random target | How we find the copied target | Assignment |
-| --- | --- | --- | --- |
-| `A` | `A` | `A->next` is `A'` | `A'->random = A'` |
-| `B` | `D` | `D->next` is `D'` | `B'->random = D'` |
-| `C` | `D` | `D->next` is `D'` | `C'->random = D'` |
-| `D` | `nullptr` | No dereference is needed | `D'->random = nullptr` |
-| `E` | `A` | `A->next` is `A'` | `E'->random = A'` |
+| Current original | Original random target | How we find the copied target | Assignment             |
+| ---------------- | ---------------------- | ----------------------------- | ---------------------- |
+| `A`              | `A`                    | `A->next` is `A'`             | `A'->random = A'`      |
+| `B`              | `D`                    | `D->next` is `D'`             | `B'->random = D'`      |
+| `C`              | `D`                    | `D->next` is `D'`             | `C'->random = D'`      |
+| `D`              | `nullptr`              | No dereference is needed      | `D'->random = nullptr` |
+| `E`              | `A`                    | `A->next` is `A'`             | `E'->random = A'`      |
 
 A self-loop needs no special algorithm: when `cur->random == cur`, the expression identifies the copy itself.
 
@@ -548,10 +548,10 @@ $$
 
 Three sequential passes are still linear time.
 
-| Approach | Time | Auxiliary space, excluding output | New nodes | Temporarily modifies original links? |
-| --- | --- | --- | --- | --- |
-| Hash map | `O(n)` expected | `O(n)` | `n` | No |
-| Interleaving | `O(n)` | `O(1)` | `n` | Yes; restores them before returning |
+| Approach     | Time            | Auxiliary space, excluding output | New nodes | Temporarily modifies original links? |
+| ------------ | --------------- | --------------------------------- | --------- | ------------------------------------ |
+| Hash map     | `O(n)` expected | `O(n)`                            | `n`       | No                                   |
+| Interleaving | `O(n)`          | `O(1)`                            | `n`       | Yes; restores them before returning  |
 
 **Constant auxiliary space does not mean constant total memory.** Both methods must allocate `n` copied nodes, which require `O(n)` output storage. Interleaving uses only a fixed number of working pointers beyond that output.
 
@@ -580,16 +580,16 @@ Before applying this idea elsewhere, check three things: the temporary relations
 
 ## 13. Edge Cases and Verification
 
-| Case | What to verify |
-| --- | --- |
-| Empty list | Return `nullptr` without allocating a node |
-| One node, null random | Create a distinct node with both links null |
-| One node, self-random | The copy's random pointer targets the copy itself |
-| All random pointers null | Every copied random pointer is null |
+| Case                                | What to verify                                     |
+| ----------------------------------- | -------------------------------------------------- |
+| Empty list                          | Return `nullptr` without allocating a node         |
+| One node, null random               | Create a distinct node with both links null        |
+| One node, self-random               | The copy's random pointer targets the copy itself  |
+| All random pointers null            | Every copied random pointer is null                |
 | Several nodes share a random target | Their copies share the corresponding copied target |
-| Repeated data values | Nodes remain distinct and links follow identities |
-| Forward and backward random links | Both translate to the correct copied nodes |
-| Random pointers form a cycle | Copy the cycle without traversing it indefinitely |
+| Repeated data values                | Nodes remain distinct and links follow identities  |
+| Forward and backward random links   | Both translate to the correct copied nodes         |
+| Random pointers form a cycle        | Copy the cycle without traversing it indefinitely  |
 
 A strong test checks more than printed values:
 

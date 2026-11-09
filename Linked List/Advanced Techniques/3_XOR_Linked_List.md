@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3742</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -106,19 +106,19 @@ The numbers in parentheses are **illustrative addresses**, not node values. Actu
 
 In a normal doubly linked list:
 
-| Node | Previous address | Next address |
-| --- | --- | --- |
-| `A` at `100` | `0` | `200` |
-| `B` at `200` | `100` | `300` |
-| `C` at `300` | `200` | `0` |
+| Node         | Previous address | Next address |
+| ------------ | ---------------- | ------------ |
+| `A` at `100` | `0`              | `200`        |
+| `B` at `200` | `100`            | `300`        |
+| `C` at `300` | `200`            | `0`          |
 
 In the XOR representation:
 
 | Node | Stored `link` | Decimal result |
-| --- | --- | --- |
-| `A` | `0 ^ 200` | `200` |
-| `B` | `100 ^ 300` | `328` |
-| `C` | `200 ^ 0` | `200` |
+| ---- | ------------- | -------------- |
+| `A`  | `0 ^ 200`     | `200`          |
+| `B`  | `100 ^ 300`   | `328`          |
+| `C`  | `200 ^ 0`     | `200`          |
 
 Notice that `B.link` is `328`, not the address of either neighbour. **The encoded link must not be dereferenced as if it were a pointer.**
 
@@ -230,10 +230,10 @@ The name `previous` means **previously visited in this traversal**. When walking
 ### Dry Run
 
 | Step | Previously visited address | Current address | Stored link | Recovered address |
-| --- | --- | --- | --- | --- |
-| 1 | `0` | `100` | `200` | `200 ^ 0 = 200` |
-| 2 | `100` | `200` | `328` | `328 ^ 100 = 300` |
-| 3 | `200` | `300` | `200` | `200 ^ 200 = 0` |
+| ---- | -------------------------- | --------------- | ----------- | ----------------- |
+| 1    | `0`                        | `100`           | `200`       | `200 ^ 0 = 200`   |
+| 2    | `100`                      | `200`           | `328`       | `328 ^ 100 = 300` |
+| 3    | `200`                      | `300`           | `200`       | `200 ^ 200 = 0`   |
 
 The traversal visits `A`, `B`, and `C`, then stops.
 
@@ -495,12 +495,12 @@ Every strictly internal node keeps the **same pair of neighbours**. Their order 
 
 Only the boundary relationships change:
 
-| Node | Remove this neighbour | Add this neighbour |
-| --- | --- | --- |
-| `P`, if present | `L` | `R` |
-| `L` | `P` | `S` |
-| `R` | `S` | `P` |
-| `S`, if present | `R` | `L` |
+| Node            | Remove this neighbour | Add this neighbour |
+| --------------- | --------------------- | ------------------ |
+| `P`, if present | `L`                   | `R`                |
+| `L`             | `P`                   | `S`                |
+| `R`             | `S`                   | `P`                |
+| `S`, if present | `R`                   | `L`                |
 
 ### Example: Reverse Addresses 300 Through 500
 
@@ -639,16 +639,16 @@ All nodes in this example are allocated with `new` and released by `clearList`. 
 
 Let `n` be the number of nodes.
 
-| Operation | Time | Required context |
-| --- | --- | --- |
-| Traverse in either direction | `O(n)` | Starting endpoint |
-| Find a node by position or value | `O(n)` | An endpoint |
-| Insert: link updates | `O(1)` | Valid insertion gap |
-| Delete: link updates | `O(1)` | Target and predecessor |
-| Reverse entire list | `O(1)` | Both endpoints maintained |
-| Reverse section: link updates | `O(1)` | Both section ends and outside neighbours |
-| Reverse section given positions | `O(n)` | Includes locating the boundaries |
-| Clear the list | `O(n)` | Head |
+| Operation                        | Time   | Required context                         |
+| -------------------------------- | ------ | ---------------------------------------- |
+| Traverse in either direction     | `O(n)` | Starting endpoint                        |
+| Find a node by position or value | `O(n)` | An endpoint                              |
+| Insert: link updates             | `O(1)` | Valid insertion gap                      |
+| Delete: link updates             | `O(1)` | Target and predecessor                   |
+| Reverse entire list              | `O(1)` | Both endpoints maintained                |
+| Reverse section: link updates    | `O(1)` | Both section ends and outside neighbours |
+| Reverse section given positions  | `O(n)` | Includes locating the boundaries         |
+| Clear the list                   | `O(n)` | Head                                     |
 
 Each operation uses `O(1)` auxiliary space. Insertion additionally creates the requested new node. Allocation and deallocation costs depend on the allocator.
 
@@ -667,16 +667,16 @@ The full list still uses **`O(n)` storage**.
 
 ## 13. Edge Cases and Common Mistakes
 
-| Case | Expected behaviour |
-| --- | --- |
-| Empty list | Both endpoints are null; traversal prints no values |
-| First insertion | Both endpoints become the new node; its link is `0` |
-| One-node traversal | Visit it once, then recover null |
-| Delete the only node | Both endpoints become null |
+| Case                            | Expected behaviour                                              |
+| ------------------------------- | --------------------------------------------------------------- |
+| Empty list                      | Both endpoints are null; traversal prints no values             |
+| First insertion                 | Both endpoints become the new node; its link is `0`             |
+| One-node traversal              | Visit it once, then recover null                                |
+| Delete the only node            | Both endpoints become null                                      |
 | Insert or delete at an endpoint | Update the appropriate endpoint as well as the neighbour's link |
-| Duplicate data values | No special handling; links encode node identities |
-| Reverse one node | No change |
-| Reverse a prefix or suffix | Update `head` or `tail`, respectively |
+| Duplicate data values           | No special handling; links encode node identities               |
+| Reverse one node                | No change                                                       |
+| Reverse a prefix or suffix      | Update `head` or `tail`, respectively                           |
 
 Watch for these mistakes:
 

@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3736</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -133,17 +133,17 @@ The arrows show iterator movement, not internal pointer storage. The dashed circ
 
 ## 4. Basic Operations at the Ends
 
-| Operation | Meaning | Time |
-| --- | --- | --- |
-| `values.front()` | Access the first element | `O(1)` |
-| `values.back()` | Access the last element | `O(1)` |
-| `values.push_front(x)` | Insert `x` at the front | `O(1)` |
-| `values.push_back(x)` | Insert `x` at the back | `O(1)` |
-| `values.pop_front()` | Erase the first element | `O(1)` |
-| `values.pop_back()` | Erase the last element | `O(1)` |
-| `values.size()` | Return the number of elements | `O(1)` in C++17 |
-| `values.empty()` | Return whether the list has no elements | `O(1)` |
-| `values.clear()` | Erase every element | `O(n)` |
+| Operation              | Meaning                                 | Time            |
+| ---------------------- | --------------------------------------- | --------------- |
+| `values.front()`       | Access the first element                | `O(1)`          |
+| `values.back()`        | Access the last element                 | `O(1)`          |
+| `values.push_front(x)` | Insert `x` at the front                 | `O(1)`          |
+| `values.push_back(x)`  | Insert `x` at the back                  | `O(1)`          |
+| `values.pop_front()`   | Erase the first element                 | `O(1)`          |
+| `values.pop_back()`    | Erase the last element                  | `O(1)`          |
+| `values.size()`        | Return the number of elements           | `O(1)` in C++17 |
+| `values.empty()`       | Return whether the list has no elements | `O(1)`          |
+| `values.clear()`       | Erase every element                     | `O(n)`          |
 
 `front()`, `back()`, `pop_front()`, and `pop_back()` require a **nonempty list**. Check `empty()` when that is not already guaranteed. The pop operations erase an element but do not return its value.
 
@@ -383,16 +383,16 @@ List is empty
 
 For `n` elements, assuming constant-time integer operations:
 
-| Operation | Time |
-| --- | --- |
-| Access either end, check size or emptiness | `O(1)` |
-| Push or pop at either end | `O(1)` |
-| Insert or erase one element at a known iterator | `O(1)` |
-| Reach a position or search by value | `O(n)` worst case |
-| Traverse, clear, reverse, or remove consecutive duplicates | `O(n)` |
-| `sort()` | `O(n log n)` |
-| Merge two sorted lists of sizes `n` and `m` | `O(n + m)` |
-| Splice a whole distinct list at a known position, as shown | `O(1)` |
+| Operation                                                  | Time              |
+| ---------------------------------------------------------- | ----------------- |
+| Access either end, check size or emptiness                 | `O(1)`            |
+| Push or pop at either end                                  | `O(1)`            |
+| Insert or erase one element at a known iterator            | `O(1)`            |
+| Reach a position or search by value                        | `O(n)` worst case |
+| Traverse, clear, reverse, or remove consecutive duplicates | `O(n)`            |
+| `sort()`                                                   | `O(n log n)`      |
+| Merge two sorted lists of sizes `n` and `m`                | `O(n + m)`        |
+| Splice a whole distinct list at a known position, as shown | `O(1)`            |
 
 Erasing a range of `k` elements takes `O(k)`, not `O(1)`. Similarly, not every `splice` overload has the whole-list bound: transferring a range between different lists takes time linear in the number transferred.
 

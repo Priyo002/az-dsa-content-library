@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3739</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -26,11 +26,11 @@ A cycle can contain just one node pointing to itself; this is called a **self-lo
 
 Our required results are:
 
-| Task | If a cycle exists | If no cycle exists |
-| --- | --- | --- |
-| Detect a cycle | Return `true` | Return `false` |
-| Find its start | Return the first cycle node reached from `head` | Return `nullptr` |
-| Find its length | Return the number of distinct nodes in the cycle | Return `0` |
+| Task             | If a cycle exists                                                     | If no cycle exists       |
+| ---------------- | --------------------------------------------------------------------- | ------------------------ |
+| Detect a cycle   | Return `true`                                                         | Return `false`           |
+| Find its start   | Return the first cycle node reached from `head`                       | Return `nullptr`         |
+| Find its length  | Return the number of distinct nodes in the cycle                      | Return `0`               |
 | Correct the list | Remove the link that closes the cycle, preserving all reachable nodes | Leave the list unchanged |
 
 Assume that there are finitely many distinct reachable nodes and that no other operation changes the links while an algorithm runs. Detection, entry finding, and length counting must not modify the list. Only the final removal step changes a link.
@@ -257,15 +257,15 @@ It takes `x` moves for `slow` to enter the cycle, followed by at most `y` iterat
 
 For the running example, node `9` points back to node `4`:
 
-| Stage | `slow` | `fast` |
-| --- | --- | --- |
-| Initialization — not a cycle check | 1 | 1 |
-| After iteration 1 | 2 | 3 |
-| After iteration 2 | 3 | 5 |
-| After iteration 3 | 4 | 7 |
-| After iteration 4 | 5 | 9 |
-| After iteration 5 | 6 | 5 |
-| After iteration 6 | 7 | 7 |
+| Stage                              | `slow` | `fast` |
+| ---------------------------------- | ------ | ------ |
+| Initialization — not a cycle check | 1      | 1      |
+| After iteration 1                  | 2      | 3      |
+| After iteration 2                  | 3      | 5      |
+| After iteration 3                  | 4      | 7      |
+| After iteration 4                  | 5      | 9      |
+| After iteration 5                  | 6      | 5      |
+| After iteration 6                  | 7      | 7      |
 
 The pointers meet at node `7`, proving that a cycle exists.
 
@@ -301,12 +301,12 @@ Node* findCycleEntry(Node* head) {
 
 ### Dry Run: Meeting at the Entry
 
-| Stage | `fromHead` | `fromMeeting` |
-| --- | --- | --- |
-| Initialization | 1 | 7 |
-| After one move each | 2 | 8 |
-| After two moves each | 3 | 9 |
-| After three moves each | 4 | 4 |
+| Stage                  | `fromHead` | `fromMeeting` |
+| ---------------------- | ---------- | ------------- |
+| Initialization         | 1          | 7             |
+| After one move each    | 2          | 8             |
+| After two moves each   | 3          | 9             |
+| After three moves each | 4          | 4             |
 
 Return node `4`.
 
@@ -527,11 +527,11 @@ The demonstration calls detection several times to show independently usable fun
 
 Here, `n` means the number of **distinct reachable nodes**, not the number of visits in an endless traversal.
 
-| Approach | Detection | Entry finding | Cycle length | Auxiliary space |
-| --- | --- | --- | --- | --- |
-| Hashing | Expected `O(n)` | First repeated node, expected `O(n)` overall | One lap after finding the entry: `O(y)` more | `O(n)` |
-| Doubling scope | `O(n)` | After finding `y`, use a `y`-link gap: `O(n)` more | Obtained during detection | `O(1)` |
-| Floyd's slow/fast pointers | `O(n)` | Reset one pointer and walk together: `O(x)` more | One lap from any cycle node: `O(y)` more | `O(1)` |
+| Approach                   | Detection       | Entry finding                                      | Cycle length                                 | Auxiliary space |
+| -------------------------- | --------------- | -------------------------------------------------- | -------------------------------------------- | --------------- |
+| Hashing                    | Expected `O(n)` | First repeated node, expected `O(n)` overall       | One lap after finding the entry: `O(y)` more | `O(n)`          |
+| Doubling scope             | `O(n)`          | After finding `y`, use a `y`-link gap: `O(n)` more | Obtained during detection                    | `O(1)`          |
+| Floyd's slow/fast pointers | `O(n)`          | Reset one pointer and walk together: `O(x)` more   | One lap from any cycle node: `O(y)` more     | `O(1)`          |
 
 After the entry is known, removal needs at most one lap and one link update. Thus, all four tasks together take expected `O(n)` time with hashing, or worst-case `O(n)` time with either constant-space approach.
 
@@ -551,16 +551,16 @@ After the entry is known, removal needs at most one lap and one link update. Thu
 
 ### Edge Cases to Test
 
-| Input shape | Expected behavior |
-| --- | --- |
-| Empty list | No cycle, null entry, length `0`, no change |
-| One node pointing to null | No cycle |
-| One node pointing to itself | Entry is that node, length `1`; removal sets its next pointer to null |
-| Two nodes pointing to each other | Entry is `head`, length `2` |
-| A prefix followed by a self-loop | Entry is the self-loop node, length `1` |
-| A cycle beginning at `head` | Preserve every node when breaking the final link |
-| Long prefix and short cycle | Entry proof must account for multiple laps |
-| Distinct nodes with equal values | Detect by addresses, not values |
+| Input shape                      | Expected behavior                                                     |
+| -------------------------------- | --------------------------------------------------------------------- |
+| Empty list                       | No cycle, null entry, length `0`, no change                           |
+| One node pointing to null        | No cycle                                                              |
+| One node pointing to itself      | Entry is that node, length `1`; removal sets its next pointer to null |
+| Two nodes pointing to each other | Entry is `head`, length `2`                                           |
+| A prefix followed by a self-loop | Entry is the self-loop node, length `1`                               |
+| A cycle beginning at `head`      | Preserve every node when breaking the final link                      |
+| Long prefix and short cycle      | Entry proof must account for multiple laps                            |
+| Distinct nodes with equal values | Detect by addresses, not values                                       |
 
 After removal, verify that every originally reachable node appears exactly once, the last node points to `nullptr`, and calling `removeCycle` again returns `false` without changing anything.
 

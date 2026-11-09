@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3741</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -58,11 +58,11 @@ $$
 The floor symbol means “round down.” In C++, integer division gives this result because `n - 1` is nonnegative here.
 
 | Length `n` | First-middle index `(n - 1) / 2` | Position counting from 1 |
-| --- | --- | --- |
-| 1 | 0 | 1st |
-| 2 | 0 | 1st |
-| 5 | 2 | 3rd |
-| 6 | 2 | 3rd |
+| ---------- | -------------------------------- | ------------------------ |
+| 1          | 0                                | 1st                      |
+| 2          | 0                                | 1st                      |
+| 5          | 2                                | 3rd                      |
+| 6          | 2                                | 3rd                      |
 
 The index also tells us how many links to follow from `head`. For example, reaching index `2` requires two moves, not three.
 
@@ -210,11 +210,11 @@ The tables show positions after each completed iteration of the **compact first-
 10 -> 20 -> 30 -> 40 -> 50 -> nullptr
 ```
 
-| Stage | `slow` | `fast` | What happens next? |
-| --- | --- | --- | --- |
-| Initialization | 10 | 20 | Two-step move is safe |
-| After iteration 1 | 20 | 40 | Two-step move is safe |
-| After iteration 2 | 30 | `nullptr` | Stop |
+| Stage             | `slow` | `fast`    | What happens next?    |
+| ----------------- | ------ | --------- | --------------------- |
+| Initialization    | 10     | 20        | Two-step move is safe |
+| After iteration 1 | 20     | 40        | Two-step move is safe |
+| After iteration 2 | 30     | `nullptr` | Stop                  |
 
 Return the node containing `30`, the third of five nodes.
 
@@ -224,11 +224,11 @@ Return the node containing `30`, the third of five nodes.
 10 -> 20 -> 30 -> 40 -> 50 -> 60 -> nullptr
 ```
 
-| Stage | `slow` | `fast` | What happens next? |
-| --- | --- | --- | --- |
-| Initialization | 10 | 20 | Two-step move is safe |
-| After iteration 1 | 20 | 40 | Two-step move is safe |
-| After iteration 2 | 30 | 60 | Stop: `fast->next` is null |
+| Stage             | `slow` | `fast` | What happens next?         |
+| ----------------- | ------ | ------ | -------------------------- |
+| Initialization    | 10     | 20     | Two-step move is safe      |
+| After iteration 1 | 20     | 40     | Two-step move is safe      |
+| After iteration 2 | 30     | 60     | Stop: `fast->next` is null |
 
 Return the node containing `30`, the first middle. Moving `slow` once more would incorrectly select `40` for this convention.
 
@@ -286,10 +286,10 @@ For an empty list, both pointers are null, the loop is skipped, and the function
 
 On six nodes, the pointer pairs are `(10, 10)`, `(20, 30)`, `(30, 50)`, then `(40, nullptr)`. The returned node contains `40`.
 
-| Convention | Initial `slow` | Initial `fast` | Returned zero-based index for `n > 0` |
-| --- | --- | --- | --- |
-| First middle | `head` | `head->next`, after checking for an empty list | `(n - 1) / 2` |
-| Second middle | `head` | `head` | `n / 2` |
+| Convention    | Initial `slow` | Initial `fast`                                 | Returned zero-based index for `n > 0` |
+| ------------- | -------------- | ---------------------------------------------- | ------------------------------------- |
+| First middle  | `head`         | `head->next`, after checking for an empty list | `(n - 1) / 2`                         |
+| Second middle | `head`         | `head`                                         | `n / 2`                               |
 
 For odd lengths, both conventions return the same node. In the counting approach, choosing `length / 2` steps instead of `(length - 1) / 2` also selects the second middle.
 

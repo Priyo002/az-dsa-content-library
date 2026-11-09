@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3738</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -37,12 +37,12 @@ There is no natural endpoint in the ring. `head` gives us a chosen starting poin
 
 **Circular** describes how the ends connect. It does not determine how many links each node stores.
 
-| Property | Circular singly linked list | Circular doubly linked list |
-| --- | --- | --- |
-| Links in each node | `next` | `next` and `prev` |
-| Movement | Forward | Forward and backward |
-| Forward wraparound | `tail->next == head` | `tail->next == head` |
-| Backward wraparound | No `prev` pointer | `head->prev == tail` |
+| Property            | Circular singly linked list | Circular doubly linked list |
+| ------------------- | --------------------------- | --------------------------- |
+| Links in each node  | `next`                      | `next` and `prev`           |
+| Movement            | Forward                     | Forward and backward        |
+| Forward wraparound  | `tail->next == head`        | `tail->next == head`        |
+| Backward wraparound | No `prev` pointer           | `head->prev == tail`        |
 
 In a circular doubly linked list, consecutive nodes must agree in both directions: if `u->next == v`, then `v->prev == u`.
 
@@ -54,10 +54,10 @@ We maintain **both `head` and `tail`**. Keeping `tail` saves us from searching f
 
 These conditions must hold after every operation:
 
-| List state | Required conditions |
-| --- | --- |
-| Empty | `head == nullptr` and `tail == nullptr` |
-| One node | `head == tail` and `head->next == head` |
+| List state        | Required conditions                                                                                  |
+| ----------------- | ---------------------------------------------------------------------------------------------------- |
+| Empty             | `head == nullptr` and `tail == nullptr`                                                              |
+| One node          | `head == tail` and `head->next == head`                                                              |
 | Two or more nodes | `tail->next == head`; following `next` from `head` visits every node once before returning to `head` |
 
 The one-node case is especially important. Its link points **to itself**, not to `nullptr`.
@@ -79,11 +79,11 @@ Instead:
 
 For `10 -> 20 -> 30 -> head`, the progression is:
 
-| Current node | Action | Next node | Continue? |
-| --- | --- | --- | --- |
-| 10 | Process 10 | 20 | Yes |
-| 20 | Process 20 | 30 | Yes |
-| 30 | Process 30 | 10, which is `head` | No |
+| Current node | Action     | Next node           | Continue? |
+| ------------ | ---------- | ------------------- | --------- |
+| 10           | Process 10 | 20                  | Yes       |
+| 20           | Process 20 | 30                  | Yes       |
+| 30           | Process 30 | 10, which is `head` | No        |
 
 A **`do...while` loop** fits this pattern: it runs the body first and checks the condition afterward. A normal `while (cur != head)` loop would run zero times if `cur` initially equals `head`.
 
@@ -358,16 +358,16 @@ In `main`, `condition ? "Yes" : "No"` is shorthand for selecting one of two valu
 
 Each sequence below lists the nodes once, starting at `head`. In every nonempty row, the tail links back to that head.
 
-| Operation | Sequence | Head value | Tail value |
-| --- | --- | --- | --- |
-| Append 10, 20, 30 | `10 -> 20 -> 30` | 10 | 30 |
-| Insert 5 at front | `5 -> 10 -> 20 -> 30` | 5 | 30 |
-| Insert 15 at position 2 | `5 -> 10 -> 15 -> 20 -> 30` | 5 | 30 |
-| Delete front | `10 -> 15 -> 20 -> 30` | 10 | 30 |
-| Delete back | `10 -> 15 -> 20` | 10 | 20 |
-| Delete position 1 | `10 -> 20` | 10 | 20 |
-| Try insertion at position 10 | Unchanged: invalid position | 10 | 20 |
-| Clear the list | Empty | — | — |
+| Operation                    | Sequence                    | Head value | Tail value |
+| ---------------------------- | --------------------------- | ---------- | ---------- |
+| Append 10, 20, 30            | `10 -> 20 -> 30`            | 10         | 30         |
+| Insert 5 at front            | `5 -> 10 -> 20 -> 30`       | 5          | 30         |
+| Insert 15 at position 2      | `5 -> 10 -> 15 -> 20 -> 30` | 5          | 30         |
+| Delete front                 | `10 -> 15 -> 20 -> 30`      | 10         | 30         |
+| Delete back                  | `10 -> 15 -> 20`            | 10         | 20         |
+| Delete position 1            | `10 -> 20`                  | 10         | 20         |
+| Try insertion at position 10 | Unchanged: invalid position | 10         | 20         |
+| Clear the list               | Empty                       | —          | —          |
 
 The program takes no input. Its output is:
 
@@ -386,15 +386,15 @@ The text `(back to head)` is a display label, not another node.
 
 For a circular **singly** linked list containing `n` nodes, with both `head` and `tail` stored:
 
-| Operation | Time |
-| --- | --- |
-| Traverse once | `O(n)` |
-| Search for a value | `O(n)` worst case |
-| Insert at front or back | `O(1)` |
-| Delete front | `O(1)` |
-| Delete back | `O(n)` worst case: find the predecessor |
-| Insert or delete by position | `O(n)` worst case |
-| Clear the list | `O(n)` |
+| Operation                    | Time                                    |
+| ---------------------------- | --------------------------------------- |
+| Traverse once                | `O(n)`                                  |
+| Search for a value           | `O(n)` worst case                       |
+| Insert at front or back      | `O(1)`                                  |
+| Delete front                 | `O(1)`                                  |
+| Delete back                  | `O(n)` worst case: find the predecessor |
+| Insert or delete by position | `O(n)` worst case                       |
+| Clear the list               | `O(n)`                                  |
 
 The list occupies **`O(n)` space**. Each function uses **`O(1)` auxiliary space**, excluding the new node allocated by an insertion. As usual for these data-structure bounds, allocation and deallocation are treated as constant-time operations.
 
