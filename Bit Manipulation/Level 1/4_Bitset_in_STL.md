@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3762</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -107,13 +107,13 @@ For a modifiable bitset, `bits[pos]` returns a small **proxy object** that acts 
 
 Consider `bitset<8> bits("10111110")`:
 
-| Expression | Meaning | Result |
-| --- | --- | --- |
-| `bits.any()` | Is at least one bit set? | `true` |
-| `bits.none()` | Are all bits zero? | `false` |
-| `bits.all()` | Are all bits one? | `false` |
-| `bits.count()` | How many bits are set? | `6` |
-| `bits.size()` | How many bit positions exist? | `8` |
+| Expression     | Meaning                       | Result  |
+| -------------- | ----------------------------- | ------- |
+| `bits.any()`   | Is at least one bit set?      | `true`  |
+| `bits.none()`  | Are all bits zero?            | `false` |
+| `bits.all()`   | Are all bits one?             | `false` |
+| `bits.count()` | How many bits are set?        | `6`     |
+| `bits.size()`  | How many bit positions exist? | `8`     |
 
 **`count()` measures the number of ones; `size()` gives the fixed capacity.** Both return `size_t`.
 
@@ -138,13 +138,13 @@ These expressions produce new bitsets and leave `a` and `b` unchanged. To update
 
 When bits represent set membership:
 
-| Expression | Set interpretation |
-| --- | --- |
-| `a & b` | Intersection: items in both sets |
-| `a \| b` | Union: items in either set |
-| `a ^ b` | Items in exactly one set |
-| `a & ~b` | Items in `a` but not in `b` |
-| `~a` | Complement within the bitset's `N` positions |
+| Expression | Set interpretation                           |
+| ---------- | -------------------------------------------- |
+| `a & b`    | Intersection: items in both sets             |
+| `a \| b`   | Union: items in either set                   |
+| `a ^ b`    | Items in exactly one set                     |
+| `a & ~b`   | Items in `a` but not in `b`                  |
+| `~a`       | Complement within the bitset's `N` positions |
 
 Unlike complementing an integer mask for a smaller universe, `~a` already stays within the bitset's declared width. If only some positions represent actual items, however, you must still ignore or clear the unused positions.
 
@@ -202,11 +202,11 @@ With the default character mapping, a string containing characters other than `'
 
 We begin with `10101010`, set bit `2`, and then flip bit `4`.
 
-| Step | Operation | Bitset |
-| --- | --- | --- |
-| Initial state | Construct from `0b10101010` | `10101010` |
-| Set bit `2` | `bits.set(2)` | `10101110` |
-| Toggle bit `4` | `bits.flip(4)` | `10111110` |
+| Step           | Operation                   | Bitset     |
+| -------------- | --------------------------- | ---------- |
+| Initial state  | Construct from `0b10101010` | `10101010` |
+| Set bit `2`    | `bits.set(2)`               | `10101110` |
+| Toggle bit `4` | `bits.flip(4)`              | `10111110` |
 
 Bit `4` was zero, so flipping it makes it one. Bit `5` was already one; flipping bit `5` instead would produce `10001110`.
 
@@ -279,12 +279,12 @@ cout << (alice & bob).any() << '\n';   // 1: at least one common item
 
 A bitset can span many machine words. Under the usual packed implementation model, let `W` be the number of bits processed per word, often 64:
 
-| Operation | Typical cost |
-| --- | --- |
-| Access or modify one bit; `size()` | `O(1)` |
-| Whole-bitset AND, OR, XOR, flip, or shift | `O(ceil(N / W))` |
-| `count()`, `any()`, `none()`, `all()` | `O(ceil(N / W))` worst case |
-| Produce a string of all bits | `O(N)` |
+| Operation                                 | Typical cost                |
+| ----------------------------------------- | --------------------------- |
+| Access or modify one bit; `size()`        | `O(1)`                      |
+| Whole-bitset AND, OR, XOR, flip, or shift | `O(ceil(N / W))`            |
+| `count()`, `any()`, `none()`, `all()`     | `O(ceil(N / W))` worst case |
+| Produce a string of all bits              | `O(N)`                      |
 
 These are **practical estimates for common implementations**, not portable complexity guarantees from the bitset interface. Some queries can stop early. Processing a word at a time can be much faster than checking every flag individually, but it does not make arbitrarily large bitsets constant-time.
 

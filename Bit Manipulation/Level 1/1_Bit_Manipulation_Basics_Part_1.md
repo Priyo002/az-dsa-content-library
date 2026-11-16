@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3759</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -22,11 +22,11 @@ A **bit**, short for binary digit, can hold either `0` or `1`. A bit containing 
 
 Decimal uses powers of ten. Binary uses powers of two. Number bit positions from the right, starting at **0**:
 
-| Position | 3 | 2 | 1 | 0 |
-| --- | --- | --- | --- | --- |
-| Place value | `2^3 = 8` | `2^2 = 4` | `2^1 = 2` | `2^0 = 1` |
-| Bit in `1011` | 1 | 0 | 1 | 1 |
-| Contribution | 8 | 0 | 2 | 1 |
+| Position      | 3         | 2         | 1         | 0         |
+| ------------- | --------- | --------- | --------- | --------- |
+| Place value   | `2^3 = 8` | `2^2 = 4` | `2^1 = 2` | `2^0 = 1` |
+| Bit in `1011` | 1         | 0         | 1         | 1         |
+| Contribution  | 8         | 0         | 2         | 1         |
 
 Therefore:
 
@@ -41,11 +41,11 @@ For a non-negative integer with bits `b₀, b₁, ...`, its value is the sum of 
 Repeatedly divide by 2 and collect the remainders:
 
 | Current value | Quotient | Remainder |
-| --- | --- | --- |
-| 11 | 5 | 1 |
-| 5 | 2 | 1 |
-| 2 | 1 | 0 |
-| 1 | 0 | 1 |
+| ------------- | -------- | --------- |
+| 11            | 5        | 1         |
+| 5             | 2        | 1         |
+| 2             | 1        | 0         |
+| 1             | 0        | 1         |
 
 Read the remainders **from bottom to top** to get `1011`. The binary representation of zero is `0`.
 
@@ -77,12 +77,12 @@ Bitwise operators apply their rule **independently at every corresponding bit po
 
 ### Truth Table
 
-| A | B | `A & B` — AND | `A \| B` — OR | `A ^ B` — XOR |
-| --- | --- | --- | --- | --- |
-| 0 | 0 | 0 | 0 | 0 |
-| 0 | 1 | 0 | 1 | 1 |
-| 1 | 0 | 0 | 1 | 1 |
-| 1 | 1 | 1 | 1 | 0 |
+| A   | B   | `A & B` — AND | `A \| B` — OR | `A ^ B` — XOR |
+| --- | --- | ------------- | ------------- | ------------- |
+| 0   | 0   | 0             | 0             | 0             |
+| 0   | 1   | 0             | 1             | 1             |
+| 1   | 0   | 0             | 1             | 1             |
+| 1   | 1   | 1             | 1             | 0             |
 
 ### AND (`&`): Both Bits Must Be Set
 
@@ -130,8 +130,8 @@ At the leftmost position, `1 ^ 1 = 0`. At the other two positions, the bits diff
 
 ### Useful Identities
 
-| AND | OR | XOR |
-| --- | --- | --- |
+| AND         | OR           | XOR         |
+| ----------- | ------------ | ----------- |
 | `x & 0 = 0` | `x \| 0 = x` | `x ^ 0 = x` |
 | `x & x = x` | `x \| x = x` | `x ^ x = 0` |
 
@@ -145,10 +145,10 @@ AND, OR, and XOR are each commutative and associative. For example, `(a ^ b) ^ c
 
 Bitwise NOT changes `0` to `1` and `1` to `0`.
 
-| A | NOT A |
-| --- | --- |
-| 0 | 1 |
-| 1 | 0 |
+| A   | NOT A |
+| --- | ----- |
+| 0   | 1     |
+| 1   | 0     |
 
 In a **four-bit model**:
 
@@ -172,20 +172,20 @@ Here, AND with `1111` keeps positions 0 through 3 and clears higher positions. S
 
 NOR means NOT OR, NAND means NOT AND, and XNOR means NOT XOR. C++ has no dedicated symbolic operator for these combinations.
 
-| A | B | NOR | NAND | XNOR |
-| --- | --- | --- | --- | --- |
-| 0 | 0 | 1 | 1 | 1 |
-| 0 | 1 | 0 | 1 | 0 |
-| 1 | 0 | 0 | 1 | 0 |
-| 1 | 1 | 0 | 0 | 1 |
+| A   | B   | NOR | NAND | XNOR |
+| --- | --- | --- | ---- | ---- |
+| 0   | 0   | 1   | 1    | 1    |
+| 0   | 1   | 0   | 1    | 0    |
+| 1   | 0   | 0   | 1    | 0    |
+| 1   | 1   | 0   | 0    | 1    |
 
 Using `A = 1010` and `B = 1100`, and retaining four bits:
 
 | Operation | C++ expression with a four-bit mask | Binary result | Decimal |
-| --- | --- | --- | --- |
-| NOR | `~(A \| B) & 0b1111U` | `0001` | 1 |
-| NAND | `~(A & B) & 0b1111U` | `0111` | 7 |
-| XNOR | `~(A ^ B) & 0b1111U` | `1001` | 9 |
+| --------- | ----------------------------------- | ------------- | ------- |
+| NOR       | `~(A \| B) & 0b1111U`               | `0001`        | 1       |
+| NAND      | `~(A & B) & 0b1111U`                | `0111`        | 7       |
+| XNOR      | `~(A ^ B) & 0b1111U`                | `1001`        | 9       |
 
 XNOR marks positions where the two bits are equal. The mask is necessary when the intended result contains only four bits.
 
@@ -193,10 +193,10 @@ XNOR marks positions where the two bits are equal. The mask is necessary when th
 
 The board separates `&`, `|`, and `~` from `&&`, `||`, and `!`. These groups answer different questions.
 
-| Purpose | Operators | What they examine | Result |
-| --- | --- | --- | --- |
-| Bitwise operations | `&`, `\|`, `^`, `~` | Individual bits | An integer bit pattern |
-| Logical operations | `&&`, `\|\|`, `!` | Truth of whole operands | `bool`: `true` or `false` |
+| Purpose            | Operators           | What they examine       | Result                    |
+| ------------------ | ------------------- | ----------------------- | ------------------------- |
+| Bitwise operations | `&`, `\|`, `^`, `~` | Individual bits         | An integer bit pattern    |
+| Logical operations | `&&`, `\|\|`, `!`   | Truth of whole operands | `bool`: `true` or `false` |
 
 For conversion to `bool`, zero is false and every nonzero integer is true, including a negative integer.
 
@@ -248,24 +248,24 @@ The top bit has weight **`-2^(W-1)`**; all lower bits retain their positive weig
 The top bit is the sign bit: `0` indicates a non-negative value and `1` indicates a negative value. It is not a separate minus sign followed by the magnitude.
 
 | Eight-bit pattern | Unsigned interpretation | Signed two's-complement interpretation |
-| --- | --- | --- |
-| `00001010` | 10 | 10 |
-| `01111111` | 127 | 127 |
-| `10000000` | 128 | -128 |
-| `11111110` | 254 | -2 |
-| `11111111` | 255 | -1 |
+| ----------------- | ----------------------- | -------------------------------------- |
+| `00001010`        | 10                      | 10                                     |
+| `01111111`        | 127                     | 127                                    |
+| `10000000`        | 128                     | -128                                   |
+| `11111110`        | 254                     | -2                                     |
+| `11111111`        | 255                     | -1                                     |
 
 ### Common C++ Integer Types
 
 The following are common platform sizes, not universal guarantees. Ranges shown assume two's complement and the stated width.
 
-| Signed / unsigned type | Common width | Signed range | Unsigned range |
-| --- | --- | --- | --- |
-| `signed char` / `unsigned char` | 8 | `-128` to `127` | `0` to `255` |
-| `short` / `unsigned short` | 16 | `-2^15` to `2^15 - 1` | `0` to `2^16 - 1` |
-| `int` / `unsigned int` | 32 | `-2^31` to `2^31 - 1` | `0` to `2^32 - 1` |
-| `long` / `unsigned long` | 32 or 64 | Depends on width | Depends on width |
-| `long long` / `unsigned long long` | 64 | `-2^63` to `2^63 - 1` | `0` to `2^64 - 1` |
+| Signed / unsigned type             | Common width | Signed range          | Unsigned range    |
+| ---------------------------------- | ------------ | --------------------- | ----------------- |
+| `signed char` / `unsigned char`    | 8            | `-128` to `127`       | `0` to `255`      |
+| `short` / `unsigned short`         | 16           | `-2^15` to `2^15 - 1` | `0` to `2^16 - 1` |
+| `int` / `unsigned int`             | 32           | `-2^31` to `2^31 - 1` | `0` to `2^32 - 1` |
+| `long` / `unsigned long`           | 32 or 64     | Depends on width      | Depends on width  |
+| `long long` / `unsigned long long` | 64           | `-2^63` to `2^63 - 1` | `0` to `2^64 - 1` |
 
 C++ guarantees minimum widths of 8, 16, 16, 32, and 64 bits respectively. Plain `char` has implementation-defined signedness. Two's complement is required since C++20; C++17 also permitted other signed representations. See the [current fundamental-type rules](https://eel.is/c++draft/basic.fundamental) and the [C++17 draft](https://timsong-cpp.github.io/cppwp/n4659/basic.fundamental).
 
@@ -323,11 +323,11 @@ For a nonzero unsigned value `x`, the two's-complement pattern has unsigned valu
 
 ### Three Different Meanings of Negation
 
-| Expression | Meaning | Example for signed `x = 5` on a two's-complement system |
-| --- | --- | --- |
-| `!x` | Logical NOT | `false` |
-| `~x` | Bitwise complement | `-6` |
-| `-x` | Arithmetic negation | `-5` |
+| Expression | Meaning             | Example for signed `x = 5` on a two's-complement system |
+| ---------- | ------------------- | ------------------------------------------------------- |
+| `!x`       | Logical NOT         | `false`                                                 |
+| `~x`       | Bitwise complement  | `-6`                                                    |
+| `-x`       | Arithmetic negation | `-5`                                                    |
 
 The bit-pattern identity behind arithmetic negation is “complement, then add one.” On a two's-complement system, `~x = -x - 1` mathematically. However, evaluating `-x` or `~x + 1` as signed C++ arithmetic requires the intermediate results to be representable. In particular, the minimum signed value has no representable positive counterpart. Use `-x` for ordinary arithmetic and unsigned values for modular bit-pattern calculations.
 

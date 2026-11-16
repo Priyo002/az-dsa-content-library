@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3761</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -76,16 +76,16 @@ Every subset produces one unique bit pattern, and every `N`-bit pattern produces
 
 For `S = {1, 2, 3}`:
 
-| Decimal mask | Binary mask | Subset |
-| --- | --- | --- |
-| `0` | `000` | `{ }` |
-| `1` | `001` | `{1}` |
-| `2` | `010` | `{2}` |
-| `3` | `011` | `{1, 2}` |
-| `4` | `100` | `{3}` |
-| `5` | `101` | `{1, 3}` |
-| `6` | `110` | `{2, 3}` |
-| `7` | `111` | `{1, 2, 3}` |
+| Decimal mask | Binary mask | Subset      |
+| ------------ | ----------- | ----------- |
+| `0`          | `000`       | `{ }`       |
+| `1`          | `001`       | `{1}`       |
+| `2`          | `010`       | `{2}`       |
+| `3`          | `011`       | `{1, 2}`    |
+| `4`          | `100`       | `{3}`       |
+| `5`          | `101`       | `{1, 3}`    |
+| `6`          | `110`       | `{2, 3}`    |
+| `7`          | `111`       | `{1, 2, 3}` |
 
 Two masks are especially useful:
 
@@ -104,23 +104,23 @@ unsigned long long bit = 1ULL << i;
 
 The familiar bit operations now become set operations on a single item:
 
-| Operation | C++ expression | Meaning |
-| --- | --- | --- |
-| Set bit `i` | `mask \|= bit` | Insert item `i + 1` |
-| Clear bit `i` | `mask &= ~bit` | Remove item `i + 1` |
-| Check bit `i` | `(mask & bit) != 0` | Test whether item `i + 1` is present |
-| Toggle bit `i` | `mask ^= bit` | Remove the item if present; insert it otherwise |
+| Operation      | C++ expression      | Meaning                                         |
+| -------------- | ------------------- | ----------------------------------------------- |
+| Set bit `i`    | `mask \|= bit`      | Insert item `i + 1`                             |
+| Clear bit `i`  | `mask &= ~bit`      | Remove item `i + 1`                             |
+| Check bit `i`  | `(mask & bit) != 0` | Test whether item `i + 1` is present            |
+| Toggle bit `i` | `mask ^= bit`       | Remove the item if present; insert it otherwise |
 
 ### Dry Run on `01010`
 
 Each operation below starts independently from `mask = 01010`, representing `{2, 4}`.
 
-| Operation | Calculation | Result |
-| --- | --- | --- |
-| Insert item `1` | `01010 OR 00001` | `01011` → `{1, 2, 4}` |
-| Remove item `2` | `01010 AND 11101` | `01000` → `{4}` |
-| Check item `4` | `01010 AND 01000` | `01000`, nonzero → present |
-| Toggle item `3` | `01010 XOR 00100` | `01110` → `{2, 3, 4}` |
+| Operation       | Calculation       | Result                     |
+| --------------- | ----------------- | -------------------------- |
+| Insert item `1` | `01010 OR 00001`  | `01011` → `{1, 2, 4}`      |
+| Remove item `2` | `01010 AND 11101` | `01000` → `{4}`            |
+| Check item `4`  | `01010 AND 01000` | `01000`, nonzero → present |
+| Toggle item `3` | `01010 XOR 00100` | `01110` → `{2, 3, 4}`      |
 
 The complement in the second row is displayed using five bits. In C++, the higher bits of `~(1ULL << 1)` are also ones, so they preserve the higher bits of `mask`.
 
@@ -134,15 +134,15 @@ The complement in the second row is displayed using five bits. In C++, the highe
 
 Suppose `a` and `b` are masks over the same universe of `N` items. Each bit position can be processed independently.
 
-| Set operation | Mask expression |
-| --- | --- |
-| Union: items in either subset | `a \| b` |
-| Intersection: items in both subsets | `a & b` |
-| Symmetric difference: items in exactly one subset | `a ^ b` |
-| Difference: items in `a` but not in `b` | `a & ~b` |
-| Check whether `a` is a subset of `b` | `(a & b) == a` |
-| Check whether the subsets are disjoint | `(a & b) == 0` |
-| Complement within the universe | `fullMask & ~a` |
+| Set operation                                     | Mask expression |
+| ------------------------------------------------- | --------------- |
+| Union: items in either subset                     | `a \| b`        |
+| Intersection: items in both subsets               | `a & b`         |
+| Symmetric difference: items in exactly one subset | `a ^ b`         |
+| Difference: items in `a` but not in `b`           | `a & ~b`        |
+| Check whether `a` is a subset of `b`              | `(a & b) == a`  |
+| Check whether the subsets are disjoint            | `(a & b) == 0`  |
+| Complement within the universe                    | `fullMask & ~a` |
 
 Here, `fullMask = (1ULL << N) - 1`, with `N` smaller than the type's bit width. All input masks must use only the lowest `N` bits.
 
@@ -262,16 +262,16 @@ arr = [2, 3, 5]
 value = 5
 ```
 
-| Mask | Selected values | Sum | Sum at least `5`? |
-| --- | --- | --- | --- |
-| `000` | `{ }` | `0` | No |
-| `001` | `{2}` | `2` | No |
-| `010` | `{3}` | `3` | No |
-| `011` | `{2, 3}` | `5` | Yes |
-| `100` | `{5}` | `5` | Yes |
-| `101` | `{2, 5}` | `7` | Yes |
-| `110` | `{3, 5}` | `8` | Yes |
-| `111` | `{2, 3, 5}` | `10` | Yes |
+| Mask  | Selected values | Sum  | Sum at least `5`? |
+| ----- | --------------- | ---- | ----------------- |
+| `000` | `{ }`           | `0`  | No                |
+| `001` | `{2}`           | `2`  | No                |
+| `010` | `{3}`           | `3`  | No                |
+| `011` | `{2, 3}`        | `5`  | Yes               |
+| `100` | `{5}`           | `5`  | Yes               |
+| `101` | `{2, 5}`        | `7`  | Yes               |
+| `110` | `{3, 5}`        | `8`  | Yes               |
+| `111` | `{2, 3, 5}`     | `10` | Yes               |
 
 The answer is **`5`**.
 
@@ -372,14 +372,14 @@ Equivalently, treat the set positions of `mask` as the only usable digits of a b
 ### Dry Run for `mask = 10110`
 
 | Current `sub` | `sub - 1` | `(sub - 1) & mask` |
-| --- | --- | --- |
-| `10110` | `10101` | `10100` |
-| `10100` | `10011` | `10010` |
-| `10010` | `10001` | `10000` |
-| `10000` | `01111` | `00110` |
-| `00110` | `00101` | `00100` |
-| `00100` | `00011` | `00010` |
-| `00010` | `00001` | `00000` |
+| ------------- | --------- | ------------------ |
+| `10110`       | `10101`   | `10100`            |
+| `10100`       | `10011`   | `10010`            |
+| `10010`       | `10001`   | `10000`            |
+| `10000`       | `01111`   | `00110`            |
+| `00110`       | `00101`   | `00100`            |
+| `00100`       | `00011`   | `00010`            |
+| `00010`       | `00001`   | `00000`            |
 
 Notice the transition from `10000` to `00110`: lower positions can become selected again. The operation does more than simply remove one selected item.
 
@@ -464,11 +464,11 @@ $$
 
 There is also a direct counting argument. For each item in a pair `(mask, sub)`, there are three valid states:
 
-| State | In `mask`? | In `sub`? |
-| --- | --- | --- |
-| Not selected by the outer subset | No | No |
-| Selected only by the outer subset | Yes | No |
-| Selected by both | Yes | Yes |
+| State                             | In `mask`? | In `sub`? |
+| --------------------------------- | ---------- | --------- |
+| Not selected by the outer subset  | No         | No        |
+| Selected only by the outer subset | Yes        | No        |
+| Selected by both                  | Yes        | Yes       |
 
 An item cannot be in `sub` without being in `mask`. With three independent choices for each of `N` items, there are exactly `3^N` valid pairs.
 
@@ -602,16 +602,16 @@ Ordinary integer bitwise operations use numeric bit positions and are independen
 
 ## 14. Edge Cases to Check
 
-| Case | Expected behavior |
-| --- | --- |
-| `N = 1` | Two subsets: empty and the single item |
-| Empty input array | One subset, the empty subset |
-| Empty input in the sum problem | Answer `1` if `value <= 0`; otherwise `0` |
-| Threshold `0` and all values nonnegative | All `2^N` subsets qualify, including empty |
-| Negative array values | Compute the full sum before checking the threshold |
-| Repeated values | Distinct position selections remain distinct masks |
-| Outer mask `0` | Exactly one submask when empty is included: `0` |
-| Outer mask with `k` set bits | Exactly `2^k` submasks including empty |
+| Case                                     | Expected behavior                                  |
+| ---------------------------------------- | -------------------------------------------------- |
+| `N = 1`                                  | Two subsets: empty and the single item             |
+| Empty input array                        | One subset, the empty subset                       |
+| Empty input in the sum problem           | Answer `1` if `value <= 0`; otherwise `0`          |
+| Threshold `0` and all values nonnegative | All `2^N` subsets qualify, including empty         |
+| Negative array values                    | Compute the full sum before checking the threshold |
+| Repeated values                          | Distinct position selections remain distinct masks |
+| Outer mask `0`                           | Exactly one submask when empty is included: `0`    |
+| Outer mask with `k` set bits             | Exactly `2^k` submasks including empty             |
 
 ## Quick Recap
 

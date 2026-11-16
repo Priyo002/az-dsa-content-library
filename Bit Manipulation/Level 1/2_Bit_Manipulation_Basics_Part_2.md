@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3760</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -170,12 +170,12 @@ Flipping the same position twice restores the original number because `(x ^ mask
 
 For a valid single-bit mask `m = 1ULL << i`:
 
-| Operation | Expression | Effect at bit `i` |
-| --- | --- | --- |
-| Set | `x \| m` | Becomes `1` |
-| Unset | `x & ~m` | Becomes `0` |
-| Check | `(x & m) != 0` | Reports whether it is `1` |
-| Flip | `x ^ m` | Changes to the opposite value |
+| Operation | Expression     | Effect at bit `i`             |
+| --------- | -------------- | ----------------------------- |
+| Set       | `x \| m`       | Becomes `1`                   |
+| Unset     | `x & ~m`       | Becomes `0`                   |
+| Check     | `(x & m) != 0` | Reports whether it is `1`     |
+| Flip      | `x ^ m`        | Changes to the opposite value |
 
 The functions return a result; they do not modify the caller's variable. To keep a change, assign it: `x = setBit(x, 2)`. Compound assignments such as `x |= mask`, `x &= ~mask`, and `x ^= mask` also update `x` directly.
 
@@ -329,10 +329,10 @@ int countSetBits(Bits x) {
 ### Dry Run for `84`
 
 | Iteration | Value before clearing | Value afterward | Count so far |
-| --- | --- | --- | --- |
-| 1 | `1010100` = 84 | `1010000` = 80 | 1 |
-| 2 | `1010000` = 80 | `1000000` = 64 | 2 |
-| 3 | `1000000` = 64 | `0000000` = 0 | 3 |
+| --------- | --------------------- | --------------- | ------------ |
+| 1         | `1010100` = 84        | `1010000` = 80  | 1            |
+| 2         | `1010000` = 80        | `1000000` = 64  | 2            |
+| 3         | `1000000` = 64        | `0000000` = 0   | 3            |
 
 Each iteration removes exactly one set bit, so the number of iterations equals the original number of ones. If that number is `k`, the algorithm takes **`O(k)` time** for positive inputs and **`O(1)` auxiliary space**; zero takes constant time without entering the loop.
 
@@ -428,10 +428,10 @@ The two masks identify distinct positions because `a < b`. OR combines those pos
 
 ### Dry Run
 
-| Compared positions | Values before the step | Action | Number afterward |
-| --- | --- | --- | --- |
-| 1 and 4 | `1` and `1` | No change | `00010110` = 22 |
-| 2 and 3 | `1` and `0` | Flip both positions | `00011010` = 26 |
+| Compared positions | Values before the step | Action              | Number afterward |
+| ------------------ | ---------------------- | ------------------- | ---------------- |
+| 1 and 4            | `1` and `1`            | No change           | `00010110` = 22  |
+| 2 and 3            | `1` and `0`            | Flip both positions | `00011010` = 26  |
 
 The indices then cross, so the function returns `26`.
 
@@ -501,20 +501,20 @@ Result in eight bits: 00011010
 
 ## 12. Edge Cases and Common Mistakes
 
-| Case | Expected behavior |
-| --- | --- |
-| Set an already set bit | Value unchanged |
-| Unset an already clear bit | Value unchanged |
-| Flip a bit twice | Original value restored |
-| Count set bits of zero | `0` |
-| Clear or isolate the rightmost set bit of zero | `0` in our unsigned implementations |
-| Test zero for power of two | `false` |
-| Operate on bit `W - 1` | Valid with `1ULL` and our chosen type |
-| Reverse a one-position range | Value unchanged |
-| Reverse a range of all zeros or all ones | Value unchanged |
-| Reverse a range twice | Original value restored |
-| Flip the full range `[0, W - 1]` | Every bit toggled; no shift by `W` |
-| Index outside `[0, W - 1]` or invalid range | Our helpers throw `out_of_range` |
+| Case                                           | Expected behavior                     |
+| ---------------------------------------------- | ------------------------------------- |
+| Set an already set bit                         | Value unchanged                       |
+| Unset an already clear bit                     | Value unchanged                       |
+| Flip a bit twice                               | Original value restored               |
+| Count set bits of zero                         | `0`                                   |
+| Clear or isolate the rightmost set bit of zero | `0` in our unsigned implementations   |
+| Test zero for power of two                     | `false`                               |
+| Operate on bit `W - 1`                         | Valid with `1ULL` and our chosen type |
+| Reverse a one-position range                   | Value unchanged                       |
+| Reverse a range of all zeros or all ones       | Value unchanged                       |
+| Reverse a range twice                          | Original value restored               |
+| Flip the full range `[0, W - 1]`               | Every bit toggled; no shift by `W`    |
+| Index outside `[0, W - 1]` or invalid range    | Our helpers throw `out_of_range`      |
 
 ### Parenthesize Bit Checks
 
