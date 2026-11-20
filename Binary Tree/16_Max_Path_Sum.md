@@ -65,6 +65,8 @@ Some valid paths are:
 
 The maximum path sum is **`42`**, from `15 -> 20 -> 7`.
 
+![The ringed path 15 to 20 to 7 has sum 42 and lies below root -10, which is not part of the optimal path.](images/16_Max_Path_Sum/01_optimal_path_below_root.png)
+
 This path lies entirely inside the root's right subtree. A solution that checks only paths containing the root would miss it.
 
 Also notice that the path with sum `34` contains more nodes than the path with sum `42`. **A longer path does not necessarily have a larger sum.**
@@ -166,6 +168,8 @@ Returned gain:  20 + max(15, 7) = 35
 
 The value `42` is retained in the answer, while `35` is returned to the parent. Keeping these two meanings separate is the central idea of the algorithm.
 
+![At node 20, the complete path uses both children for a candidate of 42. The branch returned to the parent uses only 20 and 15, giving a gain of 35. Rings mark the nodes used in each calculation.](images/16_Max_Path_Sum/02_return_gain_vs_complete_path.png)
+
 ## 5. Handling Negative Values Correctly
 
 ### Discard a Negative Gain, Not Every Negative Node
@@ -200,6 +204,8 @@ A negative node can even belong to the optimal path:
 
 The maximum path sum is `10 - 5 + 10 = 15`. The negative node connects two branches whose combined benefit outweighs its cost. We cannot skip that connecting node while retaining both branches because the resulting nodes would no longer form a connected path.
 
+![In the chain 2 to -5 to 10, the child rooted at -5 contributes a positive gain of 5, while the best complete path is the single node 10. In a separate tree, -5 connects two children valued 10 into the optimal path with sum 15.](images/16_Max_Path_Sum/03_negative_nodes_can_help.png)
+
 ### All-Negative Trees
 
 Consider:
@@ -211,6 +217,8 @@ Consider:
 ```
 
 Each child's negative gain is discarded by its parent. Every local candidate is therefore the current node's value, and the largest candidate is `-2`.
+
+![In the all-negative tree, children -2 and -5 each contribute zero to root -3. The root candidate is -3, but the best nonempty path is the ringed single node -2.](images/16_Max_Path_Sum/04_all_negative_nonempty_path.png)
 
 More generally, if all values are negative, any path containing multiple nodes has a smaller sum than at least one of its individual nodes. The answer is the **largest node value**.
 
@@ -369,6 +377,8 @@ Returned gain      = -10 + max(9, 35) = 25
 The root's candidate corresponds to `9 -> -10 -> 20 -> 15`. Its returned gain corresponds to `-10 -> 20 -> 15`.
 
 Neither improves the complete path with sum `42` already found below the root. The wrapper returns **`42`** from `answer`, not the root's gain of `25`.
+
+![Postorder processes 9, 15, 7, 20, then -10 and returns gains 9, 15, 7, 35, and 25. The candidate of 42 at node 20 remains the answer after the root produces candidate 34.](images/16_Max_Path_Sum/05_postorder_gains.png)
 
 ### A Short Negative-Value Dry Run
 

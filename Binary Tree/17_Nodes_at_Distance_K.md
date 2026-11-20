@@ -43,6 +43,8 @@ Multi-source BFS is the extension in which several starting nodes are placed in 
 
 Consider the following tree, with target node `5` and `K = 2`:
 
+![The binary tree rooted at 3 has target 5. Ringed nodes 7, 4, and 1 are exactly two edges from the target; reaching 1 requires moving through parent 3.](images/17_Nodes_at_Distance_K/01_target_and_answer.png)
+
 ```text
             3
            / \
@@ -88,6 +90,8 @@ parent[root] = nullptr
 ```
 
 There is no need to construct a separate adjacency list. The two child pointers and the parent map together describe every neighbor.
+
+![At current node 5, arrows show possible moves to left child 6, right child 2, and parent 3. DFS supplies parent access without changing the tree.](images/17_Nodes_at_Distance_K/02_parent_access.png)
 
 ### Why Use BFS?
 
@@ -300,6 +304,8 @@ The nodes are local objects that remain alive throughout the call. No dynamic al
 
 ## 7. Dry Run: Target 5, K = 2
 
+![BFS layers from target 5: distance 0 contains 5; distance 1 contains 6, 2, and 3; distance 2 contains 7, 4, and 1. Arrows show first discovery, and BFS stops before expanding layer 2.](images/17_Nodes_at_Distance_K/03_bfs_layers.png)
+
 After the parent-map DFS:
 
 ```text
@@ -444,6 +450,8 @@ Remaining downward distance             = K - leftDistance - 2
 Collect nodes at that remaining distance in the right subtree. A negative remaining distance simply produces no nodes.
 
 If the target is found in the right subtree instead, apply the symmetric logic to the left subtree.
+
+![Local DFS example at node 3: target 5 returns leftDistance 0. Moving from 5 up to 3 and down to opposite child 1 uses two edges. With K equal to 2, the remaining distance is 0, so collect 1 without descending to 0 or 8.](images/17_Nodes_at_Distance_K/04_opposite_subtree_distance.png)
 
 ### C++ Implementation
 

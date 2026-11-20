@@ -87,6 +87,8 @@ Top view:    4, 2, 1, 3, 7
 Bottom view: 4, 9, 6, 8, 7
 ```
 
+![Left and right views of the running tree: arrows select the first and last node of each level, giving left view 1, 2, 4, 8 and right view 1, 3, 7, 9.](images/13_Left_Right_Top_Bottom_View/01_side_views.png)
+
 We will derive each answer separately. Notice that the left view continues with `8` even though `4` has no children. A view is not simply a path obtained by following left or right child pointers.
 
 ## 3. Shared C++ Setup
@@ -289,6 +291,8 @@ Right child: hd = parent's hd + 1, depth = parent's depth + 1
 
 Nodes with the same `hd` belong to the same vertical column, even when they are in different subtrees. These are logical coordinates; the spacing used to draw a tree does not change them.
 
+![The running tree with horizontal-distance labels: root 1, node 5 and node 6 have hd 0; nodes 2 and 9 have hd -1; nodes 3 and 8 have hd +1; nodes 4 and 7 have hd -2 and +2.](images/13_Left_Right_Top_Bottom_View/02_horizontal_distances.png)
+
 For the running example:
 
 | Node | Depth | Horizontal distance |
@@ -329,6 +333,10 @@ We will store one selected value per column in `map<int, int>`. A C++ `map` iter
 The first node BFS reaches at a horizontal distance has the smallest depth in that column. Any later node in the same column is equally deep or deeper.
 
 Therefore, **insert a column only when it has not been seen before**. Once its top-view value is stored, leave it unchanged.
+
+![Top-view selections ring the shallowest node in each horizontal-distance column, producing 4, 2, 1, 3, 7 from left to right.](images/13_Left_Right_Top_Bottom_View/03_top_view.png)
+
+Nodes `5` and `6` are drawn beside each other within the `hd = 0` column to avoid overlap; both have depth `2` and the same horizontal distance.
 
 ### Approach
 
@@ -443,6 +451,8 @@ For the bottom view, a deeper node replaces a shallower node at the same horizon
 Because BFS processes depths in increasing order, we can **overwrite the map entry every time we visit a column**. The last value written is from a deepest node in that column.
 
 If two candidates share both horizontal distance and depth, this overwriting selects the later one in left-to-right level order, exactly matching our tie rule.
+
+![Bottom-view selections ring the deepest node in each column, producing 4, 9, 6, 8, 7. At hd 0, node 6 replaces node 5 because it is visited later at the same depth.](images/13_Left_Right_Top_Bottom_View/04_bottom_view.png)
 
 ### Approach
 

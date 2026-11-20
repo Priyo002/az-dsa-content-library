@@ -106,6 +106,8 @@ Notice the child assignments. If the left child was null, `insertRecursive(root-
 
 ### Dry Run: Insert `65`
 
+![Before and after inserting 65: the search follows 50, 70, and 60, then attaches 65 as the right child of 60. The new leaf satisfies all ancestor constraints.](images/18_BST_Insert_and_Delete/01_insert_65.png)
+
 Start with this tree:
 
 ```text
@@ -222,6 +224,8 @@ A leaf has no descendants to preserve. Release the node and return `nullptr` so 
 
 **Dry run: delete `20`.**
 
+![Leaf deletion: remove node 20 and assign nullptr to 30's left child. Every other node and link remains unchanged.](images/18_BST_Insert_and_Delete/02_delete_leaf.png)
+
 | Step | Current node | Action |
 | --- | --- | --- |
 | 1 | `50` | `20 < 50`: recurse left |
@@ -251,6 +255,8 @@ If the deleted leaf were the only node in the tree, the returned `nullptr` would
 Replace the matched node with its only child. That child brings along its **entire subtree**, not just its own key.
 
 **Dry run: delete `60`.**
+
+![One-child deletion: save node 65, delete its parent 60, and return 65 so that 70's left child points to it. Node 65 remains between ancestor keys 50 and 70.](images/18_BST_Insert_and_Delete/03_delete_one_child.png)
 
 | Step | Current node | Action |
 | --- | --- | --- |
@@ -298,6 +304,8 @@ We will use the successor in the main implementation:
 ### Dry Run: Delete `50` Using Its Successor
 
 The root has two children. Starting at its right child `70`, follow the left pointer to `60`. Since `60` has no left child, it is the successor.
+
+![Three stages of deleting 50: find successor 60 via 70's left child, copy 60 into the existing root, then delete the original successor and reconnect 65 as 70's left child. The duplicate 60 exists only in the intermediate state.](images/18_BST_Insert_and_Delete/04_delete_two_children.png)
 
 | Step | Location | Action |
 | --- | --- | --- |
@@ -438,6 +446,8 @@ On the original example, deleting `50` this way finds `40` along `30 -> 40`, cop
 ```
 
 The final inorder sequence is again `20 30 40 60 65 70 80`. Successor and predecessor replacement can produce different tree shapes while preserving the same remaining keys.
+
+![Two valid results of deleting 50 from the original tree: successor replacement produces root 60 and promotes 65; predecessor replacement produces root 40 and removes the original leaf 40. Both have inorder sequence 20, 30, 40, 60, 65, 70, 80.](images/18_BST_Insert_and_Delete/05_successor_vs_predecessor.png)
 
 A predecessor cannot have a right child, but it may have a left child. In that situation, its left child is promoted when the original predecessor node is deleted.
 

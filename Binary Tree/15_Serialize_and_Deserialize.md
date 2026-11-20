@@ -78,6 +78,8 @@ Tree B: 1,#,2,#,#
 
 The strings now distinguish the trees. `#` represents an empty subtree; it is not a node whose value happens to be special.
 
+![Two trees with the same preorder values 1,2 but different left and right child positions. Null markers distinguish the encodings 1,2,#,#,# and 1,#,2,#,#.](images/15_Serialize_and_Deserialize/01_null_markers_preserve_structure.png)
+
 ### How Is This Different from Reconstruction from Two Traversals?
 
 In the earlier reconstruction problem, we were given inorder and preorder sequences containing only node values. Preorder identified the root, while inorder identified the boundary between its left and right subtrees. Distinct values were required by that reconstruction method to locate each root unambiguously.
@@ -205,6 +207,8 @@ The complete BFS string is:
 
 The `#` after `3` is essential: it reserves the missing left child of the first `2`, so `-4` is attached as that node's right child.
 
+![The running tree with every null child shown. Reading positions level by level produces the BFS tokens 1,2,3,#,-4,2,#,#,#,#,#; null positions do not produce children.](images/15_Serialize_and_Deserialize/02_bfs_serialization.png)
+
 ### Deserialization: Give Each Real Parent Two Child Tokens
 
 Read the first token to determine the root. If it is `#`, return `nullptr`. Otherwise, create the root and put it in a queue.
@@ -291,6 +295,8 @@ Read `1`, create the root, and initialize the queue to `[1]`. The remaining toke
 | `2b` | `#` | `#` | Empty |
 
 Every token has been consumed, and every real node has both child positions assigned. The result is the original shape, including the right child `-4` and both occurrences of `2`.
+
+![BFS reconstruction pairs each queued parent with its left and right child tokens. Parents are processed in the order 1,2a,3,-4,2b; both 2a and 2b store the value 2.](images/15_Serialize_and_Deserialize/03_bfs_deserialization.png)
 
 ### Why Does BFS Decoding Work?
 
@@ -415,6 +421,8 @@ These are token indices for explanation; the code's `pos` is a character index i
 | 10 | Right of `3` | Return null; finish `3`, then finish `1` |
 
 After token `5`, the entire left subtree of `1` is complete. The next token, `3`, therefore starts its right subtree. No subtree sizes or value comparisons are needed.
+
+![DFS preorder tokens grouped into root at index 0, complete left subtree at indices 1 through 5, and complete right subtree at indices 6 through 10. The next recursive call begins at token 6 after the left subtree is consumed.](images/15_Serialize_and_Deserialize/04_dfs_subtree_boundaries.png)
 
 ### Why Does Preorder Decoding Work?
 

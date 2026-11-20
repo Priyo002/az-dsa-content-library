@@ -28,17 +28,7 @@ Given roots `a` and `b`, return `true` if the trees have:
 
 The nodes do not need to occupy the same memory addresses. Two separately allocated trees can be identical.
 
-```text
-Tree A:              Tree B:
-
-       1                    1
-      / \                  / \
-     2   3                2   3
-      \                    \
-       4                    4
-
-Result: true
-```
+![Two identical trees with root 1, left child 2, right child 3, and node 4 as the right child of 2. Corresponding positions and values match, so the result is true.](images/14_Identical_and_Symmetric_Tree/01_identical_trees.png)
 
 Changing `4` in Tree B to `9` makes the answer `false`. Moving it from the right child of `2` to the left child also makes the answer `false`, even though all values remain the same.
 
@@ -46,15 +36,9 @@ Changing `4` in Tree B to `9` makes the answer `false`. Moving it from the right
 
 Given `root`, return `true` if its left and right subtrees are **mirror images of each other**, considering both structure and values.
 
-```text
-          1
-        /   \
-       2     2
-      / \   / \
-     3   4 4   3
+![A symmetric tree with root 1 and two children valued 2. The outer mirror pair LL and RR contains 3, and the inner pair LR and RL contains 4. Both pairs match across the vertical axis.](images/14_Identical_and_Symmetric_Tree/02_symmetric_mirror_pairs.png)
 
-Result: true
-```
+The path labels use `L` for left and `R` for right: `LL` means left then left, while `LR` means left then right.
 
 The outer nodes containing `3` match, and the inner nodes containing `4` match. The left and right subtrees are mirrors, even though they are not identical in their original orientation.
 
@@ -160,15 +144,7 @@ Use the identical trees from Section 1. In the table, a pair such as `(2, 2)` re
 
 Now move `4` in Tree B to the **left** of `2`:
 
-```text
-Tree A:              Tree B:
-
-       1                    1
-      / \                  / \
-     2   3                2   3
-      \                  /
-       4                4
-```
+![A structure mismatch between trees with the same values: node 4 is the right child of 2 in Tree A but the left child of 2 in Tree B. Comparing the left children of 2 gives null versus 4, so identity fails.](images/14_Identical_and_Symmetric_Tree/03_identical_structure_mismatch.png)
 
 The comparisons reach `(2, 2)`, then compare their left children: `(#, 4)`. Exactly one pointer is null, so the result is `false`. Short-circuiting carries this failure back to the root.
 
@@ -300,13 +276,7 @@ Therefore, `isSymmetric(root)` returns `true`.
 
 Now consider a tree whose two children both have only a **right** child:
 
-```text
-          1
-        /   \
-       2     2
-        \     \
-         3     3
-```
+![An asymmetric tree whose two children valued 2 both have only a right child valued 3. The subtrees are identical, but the outer mirror comparison pairs LL, which is null, with RR, which contains 3, so symmetry fails.](images/14_Identical_and_Symmetric_Tree/04_identical_but_not_symmetric.png)
 
 The pair `(L, R)` has matching values. But its first cross comparison is `(LL, RR)`, whose values are `(#, 3)`. The function returns `false` because the missing positions do not mirror each other.
 
