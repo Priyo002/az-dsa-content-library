@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3769</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -116,12 +116,12 @@ Start with this tree:
    20 40 60 80
 ```
 
-| Current subtree root | Comparison | Action |
-| --- | --- | --- |
-| `50` | `65 > 50` | Insert into the right subtree |
-| `70` | `65 < 70` | Insert into the left subtree |
-| `60` | `65 > 60` | Insert into the right subtree |
-| `nullptr` | Empty position | Create and return node `65` |
+| Current subtree root | Comparison     | Action                        |
+| -------------------- | -------------- | ----------------------------- |
+| `50`                 | `65 > 50`      | Insert into the right subtree |
+| `70`                 | `65 < 70`      | Insert into the left subtree  |
+| `60`                 | `65 > 60`      | Insert into the right subtree |
+| `nullptr`            | Empty position | Create and return node `65`   |
 
 As recursion returns, `60->right` receives the new node. The calls at `70` and `50` return their existing subtree roots.
 
@@ -192,11 +192,11 @@ To delete `x`, first locate it using the usual BST comparisons:
 - If the subtree is empty, the key is absent; return `nullptr`.
 - On equality, handle the node according to its number of children.
 
-| Children of the matched node | Replacement for that subtree root |
-| --- | --- |
-| Zero: a leaf | `nullptr` |
-| One | Its only child |
-| Two | Keep the node, copy a suitable replacement key, then remove the replacement's original node |
+| Children of the matched node | Replacement for that subtree root                                                           |
+| ---------------------------- | ------------------------------------------------------------------------------------------- |
+| Zero: a leaf                 | `nullptr`                                                                                   |
+| One                          | Its only child                                                                              |
+| Two                          | Keep the node, copy a suitable replacement key, then remove the replacement's original node |
 
 The following deletion dry runs are **independent**. Each starts from this same eight-node tree:
 
@@ -222,13 +222,13 @@ A leaf has no descendants to preserve. Release the node and return `nullptr` so 
 
 **Dry run: delete `20`.**
 
-| Step | Current node | Action |
-| --- | --- | --- |
-| 1 | `50` | `20 < 50`: recurse left |
-| 2 | `30` | `20 < 30`: recurse left |
-| 3 | `20` | Match; both children are null; delete the node and return `nullptr` |
-| 4 | `30` | Assign the returned pointer to `30->left` |
-| 5 | `50` | Retain the updated left subtree and return `50` |
+| Step | Current node | Action                                                              |
+| ---- | ------------ | ------------------------------------------------------------------- |
+| 1    | `50`         | `20 < 50`: recurse left                                             |
+| 2    | `30`         | `20 < 30`: recurse left                                             |
+| 3    | `20`         | Match; both children are null; delete the node and return `nullptr` |
+| 4    | `30`         | Assign the returned pointer to `30->left`                           |
+| 5    | `50`         | Retain the updated left subtree and return `50`                     |
 
 Result:
 
@@ -252,14 +252,14 @@ Replace the matched node with its only child. That child brings along its **enti
 
 **Dry run: delete `60`.**
 
-| Step | Current node | Action |
-| --- | --- | --- |
-| 1 | `50` | `60 > 50`: recurse right |
-| 2 | `70` | `60 < 70`: recurse left |
-| 3 | `60` | Match; save its only child, node `65` |
-| 4 | `60` | Delete node `60` and return the saved pointer to `65` |
-| 5 | `70` | Set `70->left` to `65` |
-| 6 | `50` | Retain the updated right subtree and return `50` |
+| Step | Current node | Action                                                |
+| ---- | ------------ | ----------------------------------------------------- |
+| 1    | `50`         | `60 > 50`: recurse right                              |
+| 2    | `70`         | `60 < 70`: recurse left                               |
+| 3    | `60`         | Match; save its only child, node `65`                 |
+| 4    | `60`         | Delete node `60` and return the saved pointer to `65` |
+| 5    | `70`         | Set `70->left` to `65`                                |
+| 6    | `50`         | Retain the updated right subtree and return `50`      |
 
 Result:
 
@@ -299,15 +299,15 @@ We will use the successor in the main implementation:
 
 The root has two children. Starting at its right child `70`, follow the left pointer to `60`. Since `60` has no left child, it is the successor.
 
-| Step | Location | Action |
-| --- | --- | --- |
-| 1 | Root `50` | Match; both children exist |
-| 2 | Right subtree | Follow `70 -> 60`; successor key is `60` |
-| 3 | Root | Copy `60` into the root's `data` field |
-| 4 | Right subtree rooted at `70` | Delete key `60`; descend left |
-| 5 | Original node `60` | It has only a right child, `65`; delete it and return `65` |
-| 6 | Node `70` | Set `70->left` to `65` |
-| 7 | Root, now containing `60` | Reconnect its right subtree and return the root |
+| Step | Location                     | Action                                                     |
+| ---- | ---------------------------- | ---------------------------------------------------------- |
+| 1    | Root `50`                    | Match; both children exist                                 |
+| 2    | Right subtree                | Follow `70 -> 60`; successor key is `60`                   |
+| 3    | Root                         | Copy `60` into the root's `data` field                     |
+| 4    | Right subtree rooted at `70` | Delete key `60`; descend left                              |
+| 5    | Original node `60`           | It has only a right child, `65`; delete it and return `65` |
+| 6    | Node `70`                    | Set `70->left` to `65`                                     |
+| 7    | Root, now containing `60`    | Reconnect its right subtree and return the root            |
 
 Result:
 
@@ -537,13 +537,13 @@ After deleting 50: 20 30 40 60 65 70 80
 
 For a nonempty tree, insertion and deletion depend on its height `h`:
 
-| Operation | Worst-case time | Auxiliary space |
-| --- | --- | --- |
-| Recursive insertion | `O(h)` | `O(h)` call stack |
-| Iterative insertion | `O(h)` | `O(1)` |
-| Recursive deletion using successor | `O(h)` | `O(h)` call stack |
-| Recursive deletion using predecessor | `O(h)` | `O(h)` call stack |
-| Inorder traversal or tree cleanup | `O(n)` | `O(h)` call stack |
+| Operation                            | Worst-case time | Auxiliary space   |
+| ------------------------------------ | --------------- | ----------------- |
+| Recursive insertion                  | `O(h)`          | `O(h)` call stack |
+| Iterative insertion                  | `O(h)`          | `O(1)`            |
+| Recursive deletion using successor   | `O(h)`          | `O(h)` call stack |
+| Recursive deletion using predecessor | `O(h)`          | `O(h)` call stack |
+| Inorder traversal or tree cleanup    | `O(n)`          | `O(h)` call stack |
 
 Auxiliary-space bounds exclude the tree's storage. A successful insertion allocates one new node, and a successful deletion frees one node. Operations on an empty input take constant time and space.
 
@@ -561,22 +561,22 @@ The algorithm follows a path to the target, walks to its successor, and then fol
 
 ## 9. Edge Cases and Common Mistakes
 
-| Situation | Expected behavior or required care |
-| --- | --- |
-| Insert into an empty tree | Create a node and save the returned root |
-| Insert a duplicate key | Return the existing tree without allocating a node |
-| Delete from an empty tree | Return `nullptr` |
-| Delete a missing key | Leave all keys and links unchanged |
-| Delete the only node | Free it and return `nullptr` |
-| Delete the root with one child | Return that child as the new root |
-| Delete a node with only a left child | Promote the left subtree |
-| Delete a node with only a right child | Promote the right subtree |
-| Successor is the immediate right child | Delete it from `root->right`; reconnect its right child if present |
-| Successor is deeper and has a right child | Promote that child into the successor's old position |
-| Predecessor has a left child | Promote that child into the predecessor's old position |
-| Delete the same key twice | First call removes it; second call makes no change |
-| Keys include `INT_MIN` or `INT_MAX` | Direct comparisons work; no sentinel keys or arithmetic adjustments are used |
-| Tree is a long chain | Recursive operations may exhaust the call stack |
+| Situation                                 | Expected behavior or required care                                           |
+| ----------------------------------------- | ---------------------------------------------------------------------------- |
+| Insert into an empty tree                 | Create a node and save the returned root                                     |
+| Insert a duplicate key                    | Return the existing tree without allocating a node                           |
+| Delete from an empty tree                 | Return `nullptr`                                                             |
+| Delete a missing key                      | Leave all keys and links unchanged                                           |
+| Delete the only node                      | Free it and return `nullptr`                                                 |
+| Delete the root with one child            | Return that child as the new root                                            |
+| Delete a node with only a left child      | Promote the left subtree                                                     |
+| Delete a node with only a right child     | Promote the right subtree                                                    |
+| Successor is the immediate right child    | Delete it from `root->right`; reconnect its right child if present           |
+| Successor is deeper and has a right child | Promote that child into the successor's old position                         |
+| Predecessor has a left child              | Promote that child into the predecessor's old position                       |
+| Delete the same key twice                 | First call removes it; second call makes no change                           |
+| Keys include `INT_MIN` or `INT_MAX`       | Direct comparisons work; no sentinel keys or arithmetic adjustments are used |
+| Tree is a long chain                      | Recursive operations may exhaust the call stack                              |
 
 Common implementation mistakes include:
 

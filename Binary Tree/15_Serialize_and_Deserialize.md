@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3773</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -90,12 +90,12 @@ Plain preorder of a general binary tree is insufficient. Preorder **with null ma
 
 Both approaches will use the same token rules, but different traversal orders:
 
-| Component | Encoding |
-| --- | --- |
-| Real node | Decimal integer, such as `12`, `0`, or `-4` |
-| Empty subtree or child position | `#` |
-| Token separator | Comma `,` |
-| Empty tree | `#` |
+| Component                       | Encoding                                    |
+| ------------------------------- | ------------------------------------------- |
+| Real node                       | Decimal integer, such as `12`, `0`, or `-4` |
+| Empty subtree or child position | `#`                                         |
+| Token separator                 | Comma `,`                                   |
+| Empty tree                      | `#`                                         |
 
 We keep every null marker, use no spaces, and omit a trailing comma. For example, a single node containing `12` becomes `12,#,#` in both approaches.
 
@@ -187,15 +187,15 @@ Queue entries below are shown from front to back. Subscripts distinguish the two
 2b = left child of 3
 ```
 
-| Popped position | Token written | Queue after processing |
-| --- | --- | --- |
-| `1` | `1` | `2a, 3` |
-| `2a` | `2` | `3, #, -4` |
-| `3` | `3` | `#, -4, 2b, #` |
-| Null | `#` | `-4, 2b, #` |
-| `-4` | `-4` | `2b, #, #, #` |
-| `2b` | `2` | `#, #, #, #, #` |
-| Five null positions | `#,#,#,#,#` | Empty |
+| Popped position     | Token written | Queue after processing |
+| ------------------- | ------------- | ---------------------- |
+| `1`                 | `1`           | `2a, 3`                |
+| `2a`                | `2`           | `3, #, -4`             |
+| `3`                 | `3`           | `#, -4, 2b, #`         |
+| Null                | `#`           | `-4, 2b, #`            |
+| `-4`                | `-4`          | `2b, #, #, #`          |
+| `2b`                | `2`           | `#, #, #, #, #`        |
+| Five null positions | `#,#,#,#,#`   | Empty                  |
 
 The complete BFS string is:
 
@@ -283,12 +283,12 @@ No level-size loop is needed. FIFO order already ensures that parents receive th
 Read `1`, create the root, and initialize the queue to `[1]`. The remaining tokens are assigned as follows:
 
 | Parent popped | Left token | Right token | Queue after attaching children |
-| --- | --- | --- | --- |
-| `1` | `2` | `3` | `2a, 3` |
-| `2a` | `#` | `-4` | `3, -4` |
-| `3` | `2` | `#` | `-4, 2b` |
-| `-4` | `#` | `#` | `2b` |
-| `2b` | `#` | `#` | Empty |
+| ------------- | ---------- | ----------- | ------------------------------ |
+| `1`           | `2`        | `3`         | `2a, 3`                        |
+| `2a`          | `#`        | `-4`        | `3, -4`                        |
+| `3`           | `2`        | `#`         | `-4, 2b`                       |
+| `-4`          | `#`        | `#`         | `2b`                           |
+| `2b`          | `#`        | `#`         | Empty                          |
 
 Every token has been consumed, and every real node has both child positions assigned. The result is the original shape, including the right child `-4` and both occurrences of `2`.
 
@@ -400,19 +400,19 @@ Token:       1  2  #  -4  #  #  3  2  #  #  #
 
 These are token indices for explanation; the code's `pos` is a character index in the string.
 
-| Token index | Subtree being decoded | Action |
-| --- | --- | --- |
-| 0 | Whole tree | Create `1`; begin its left subtree |
-| 1 | Left of `1` | Create `2`; begin its left subtree |
-| 2 | Left of the first `2` | Return null |
-| 3 | Right of the first `2` | Create `-4` |
-| 4 | Left of `-4` | Return null |
-| 5 | Right of `-4` | Return null; finish `-4`, then finish the first `2` |
-| 6 | Right of `1` | Create `3`; begin its left subtree |
-| 7 | Left of `3` | Create the second `2` |
-| 8 | Left of the second `2` | Return null |
-| 9 | Right of the second `2` | Return null; finish the second `2` |
-| 10 | Right of `3` | Return null; finish `3`, then finish `1` |
+| Token index | Subtree being decoded   | Action                                              |
+| ----------- | ----------------------- | --------------------------------------------------- |
+| 0           | Whole tree              | Create `1`; begin its left subtree                  |
+| 1           | Left of `1`             | Create `2`; begin its left subtree                  |
+| 2           | Left of the first `2`   | Return null                                         |
+| 3           | Right of the first `2`  | Create `-4`                                         |
+| 4           | Left of `-4`            | Return null                                         |
+| 5           | Right of `-4`           | Return null; finish `-4`, then finish the first `2` |
+| 6           | Right of `1`            | Create `3`; begin its left subtree                  |
+| 7           | Left of `3`             | Create the second `2`                               |
+| 8           | Left of the second `2`  | Return null                                         |
+| 9           | Right of the second `2` | Return null; finish the second `2`                  |
+| 10          | Right of `3`            | Return null; finish `3`, then finish `1`            |
 
 After token `5`, the entire left subtree of `1` is complete. The next token, `3`, therefore starts its right subtree. No subtree sizes or value comparisons are needed.
 
@@ -433,10 +433,10 @@ Appending to the shared string takes amortized `O(L)` total time under the usual
 
 For fixed-width `int` values, each token has a bounded number of characters, so `L = O(n + 1)`. For nonempty trees, this gives the usual `O(n)` bounds:
 
-| Approach | Serialization time | Deserialization time | Auxiliary space, excluding input and output |
-| --- | --- | --- | --- |
-| BFS | `O(n)` | `O(n)` | `O(w)` queue |
-| DFS preorder | `O(n)` | `O(n)` | `O(h)` recursion stack |
+| Approach     | Serialization time | Deserialization time | Auxiliary space, excluding input and output |
+| ------------ | ------------------ | -------------------- | ------------------------------------------- |
+| BFS          | `O(n)`             | `O(n)`               | `O(w)` queue                                |
+| DFS preorder | `O(n)`             | `O(n)`               | `O(h)` recursion stack                      |
 
 For an empty tree, both operations take constant time and space.
 
@@ -525,15 +525,15 @@ Each deserializer allocates new nodes with `new`; the caller owns the returned t
 
 ## 8. Edge Cases and Format Boundaries
 
-| Case | BFS encoding | DFS preorder encoding |
-| --- | --- | --- |
-| Empty tree | `#` | `#` |
-| Single node `12` | `12,#,#` | `12,#,#` |
-| Root `1`, only left child `2` | `1,2,#,#,#` | `1,2,#,#,#` |
-| Root `1`, only right child `2` | `1,#,2,#,#` | `1,#,2,#,#` |
-| Root `1`, children `2` and `3` | `1,2,3,#,#,#,#` | `1,2,#,#,3,#,#` |
-| Root `0`, only left child `-12` | `0,-12,#,#,#` | `0,-12,#,#,#` |
-| Root `5`, children both `5` | `5,5,5,#,#,#,#` | `5,5,#,#,5,#,#` |
+| Case                            | BFS encoding    | DFS preorder encoding |
+| ------------------------------- | --------------- | --------------------- |
+| Empty tree                      | `#`             | `#`                   |
+| Single node `12`                | `12,#,#`        | `12,#,#`              |
+| Root `1`, only left child `2`   | `1,2,#,#,#`     | `1,2,#,#,#`           |
+| Root `1`, only right child `2`  | `1,#,2,#,#`     | `1,#,2,#,#`           |
+| Root `1`, children `2` and `3`  | `1,2,3,#,#,#,#` | `1,2,#,#,3,#,#`       |
+| Root `0`, only left child `-12` | `0,-12,#,#,#`   | `0,-12,#,#,#`         |
+| Root `5`, children both `5`     | `5,5,5,#,#,#,#` | `5,5,#,#,5,#,#`       |
 
 Also test longer left-only and right-only chains, broad trees, alternating missing children, and `INT_MIN`/`INT_MAX`. No arithmetic is performed on node values; `to_string` and `stoi` handle valid values throughout the `int` range.
 

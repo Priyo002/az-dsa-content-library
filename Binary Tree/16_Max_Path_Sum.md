@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3772</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -56,12 +56,12 @@ Consider this tree:
 
 Some valid paths are:
 
-| Path | Sum |
-| --- | --- |
-| `9` | `9` |
-| `-10 -> 20 -> 15` | `25` |
+| Path                   | Sum  |
+| ---------------------- | ---- |
+| `9`                    | `9`  |
+| `-10 -> 20 -> 15`      | `25` |
 | `9 -> -10 -> 20 -> 15` | `34` |
-| `15 -> 20 -> 7` | `42` |
+| `15 -> 20 -> 7`        | `42` |
 
 The maximum path sum is **`42`**, from `15 -> 20 -> 7`.
 
@@ -141,10 +141,10 @@ answer = max(answer, candidate(cur))
 
 The two calculations serve different purposes:
 
-| Quantity | Formula | Meaning |
-| --- | --- | --- |
-| Gain returned to the parent | `cur->data + max(left, right)` | One downward branch beginning at `cur` |
-| Candidate for the answer | `cur->data + left + right` | A complete path whose highest node is `cur` |
+| Quantity                    | Formula                        | Meaning                                     |
+| --------------------------- | ------------------------------ | ------------------------------------------- |
+| Gain returned to the parent | `cur->data + max(left, right)` | One downward branch beginning at `cur`      |
+| Candidate for the answer    | `cur->data + left + right`     | A complete path whose highest node is `cur` |
 
 ### Why Can't We Return Both Branches?
 
@@ -337,12 +337,12 @@ With left-child-first DFS, the non-null nodes finish in this order:
 Initially, `answer` is the lowest representable `long long`. Null calls return `0` and are omitted from the table. The `left` and `right` columns show gains **after clamping to zero**.
 
 | Node value | `left` | `right` | Candidate `value + left + right` | Gain returned | `answer` after update |
-| --- | --- | --- | --- | --- | --- |
-| `9` | `0` | `0` | `9` | `9` | `9` |
-| `15` | `0` | `0` | `15` | `15` | `15` |
-| `7` | `0` | `0` | `7` | `7` | `15` |
-| `20` | `15` | `7` | `42` | `35` | `42` |
-| `-10` | `9` | `35` | `34` | `25` | `42` |
+| ---------- | ------ | ------- | -------------------------------- | ------------- | --------------------- |
+| `9`        | `0`    | `0`     | `9`                              | `9`           | `9`                   |
+| `15`       | `0`    | `0`     | `15`                             | `15`          | `15`                  |
+| `7`        | `0`    | `0`     | `7`                              | `7`           | `15`                  |
+| `20`       | `15`   | `7`     | `42`                             | `35`          | `42`                  |
+| `-10`      | `9`    | `35`    | `34`                             | `25`          | `42`                  |
 
 ### At Node 20
 
@@ -375,10 +375,10 @@ Neither improves the complete path with sum `42` already found below the root. T
 For the all-negative tree from Section 5:
 
 | Node value | Raw left gain | Raw right gain | Contributions after clamping | Candidate | Gain returned | Best answer |
-| --- | --- | --- | --- | --- | --- | --- |
-| `-2` | `0` | `0` | `0, 0` | `-2` | `-2` | `-2` |
-| `-5` | `0` | `0` | `0, 0` | `-5` | `-5` | `-2` |
-| `-3` | `-2` | `-5` | `0, 0` | `-3` | `-3` | `-2` |
+| ---------- | ------------- | -------------- | ---------------------------- | --------- | ------------- | ----------- |
+| `-2`       | `0`           | `0`            | `0, 0`                       | `-2`      | `-2`          | `-2`        |
+| `-5`       | `0`           | `0`            | `0, 0`                       | `-5`      | `-5`          | `-2`        |
+| `-3`       | `-2`          | `-5`           | `0, 0`                       | `-3`      | `-3`          | `-2`        |
 
 Clamping the contributions does not create a zero-sum answer. Each candidate still includes its current node, and the result is correctly **`-2`**.
 
@@ -430,16 +430,16 @@ Both algorithms distinguish between **a branch that can extend upward** and **a 
 
 Using the earlier chapter's diameter-in-nodes convention:
 
-| Detail | Diameter in nodes | Maximum path sum |
-| --- | --- | --- |
-| Contribution of the current node | `1` | `cur->data` |
-| State returned by a child | Height in nodes | Best downward gain |
-| Can a child contribution be harmful? | No | Yes, if negative |
-| Usable child contributions | `leftHeight`, `rightHeight` | `max(0, leftGain)`, `max(0, rightGain)` |
-| Complete candidate | `1 + leftHeight + rightHeight` | `value + left + right` |
-| Return to the parent | `1 + max(leftHeight, rightHeight)` | `value + max(left, right)` |
-| Answer initialization | `0` | Lowest value, or a real node value |
-| Traversal | Postorder DFS | Postorder DFS |
+| Detail                               | Diameter in nodes                  | Maximum path sum                        |
+| ------------------------------------ | ---------------------------------- | --------------------------------------- |
+| Contribution of the current node     | `1`                                | `cur->data`                             |
+| State returned by a child            | Height in nodes                    | Best downward gain                      |
+| Can a child contribution be harmful? | No                                 | Yes, if negative                        |
+| Usable child contributions           | `leftHeight`, `rightHeight`        | `max(0, leftGain)`, `max(0, rightGain)` |
+| Complete candidate                   | `1 + leftHeight + rightHeight`     | `value + left + right`                  |
+| Return to the parent                 | `1 + max(leftHeight, rightHeight)` | `value + max(left, right)`              |
+| Answer initialization                | `0`                                | Lowest value, or a real node value      |
+| Traversal                            | Postorder DFS                      | Postorder DFS                           |
 
 If every node value is `1`, maximum path sum becomes exactly the **diameter in nodes**. For a nonempty tree, that result is one more than the diameter measured in edges.
 
@@ -456,10 +456,10 @@ Each node is visited once. After the two child calls finish, it performs constan
 - **Time:** `O(n)`.
 - **Auxiliary space:** `O(h)` for the recursion stack.
 
-| Tree shape | Height | Auxiliary space |
-| --- | --- | --- |
-| Balanced tree | `O(log n)` | `O(log n)` |
-| Skewed tree or chain | `O(n)` | `O(n)` |
+| Tree shape           | Height     | Auxiliary space |
+| -------------------- | ---------- | --------------- |
+| Balanced tree        | `O(log n)` | `O(log n)`      |
+| Skewed tree or chain | `O(n)`     | `O(n)`          |
 
 The two child calls execute sequentially. The maximum number of active calls follows one root-to-leaf path, rather than including every node visited so far.
 
@@ -506,21 +506,21 @@ The nodes are local objects whose lifetimes cover the calls. They are destroyed 
 
 ### Edge Cases
 
-| Case | Expected result | Reason |
-| --- | --- | --- |
-| Single node `8` | `8` | The single-node path is valid |
-| Single node `-8` | `-8` | A nonempty path is required |
-| Single node `0` | `0` | Zero is a valid node value |
-| Root `5` with children `-2` and `-3` | `5` | Both child gains are discarded |
-| Root `1` with children `2` and `3` | `6` | The best path uses both branches |
-| Root `-3` with children `-2` and `-5` | `-2` | The largest node wins in an all-negative tree |
-| Root `-5` with two children valued `10` | `15` | A negative connector can belong to the optimum |
-| Chain `2 -> -1 -> 3` | `4` | A negative value can connect profitable portions |
-| Chain `5 -> -100 -> 6` | `6` | A path cannot skip an internal node |
-| All values are zero | `0` | Many nonempty paths tie for the optimum |
-| Running example | `42` | The optimal path does not include the root |
-| Three-node chain, each value `1000000000` | `3000000000` | Sums can exceed a 32-bit signed integer |
-| Empty tree | Rejected by this implementation | No nonempty path exists |
+| Case                                      | Expected result                 | Reason                                           |
+| ----------------------------------------- | ------------------------------- | ------------------------------------------------ |
+| Single node `8`                           | `8`                             | The single-node path is valid                    |
+| Single node `-8`                          | `-8`                            | A nonempty path is required                      |
+| Single node `0`                           | `0`                             | Zero is a valid node value                       |
+| Root `5` with children `-2` and `-3`      | `5`                             | Both child gains are discarded                   |
+| Root `1` with children `2` and `3`        | `6`                             | The best path uses both branches                 |
+| Root `-3` with children `-2` and `-5`     | `-2`                            | The largest node wins in an all-negative tree    |
+| Root `-5` with two children valued `10`   | `15`                            | A negative connector can belong to the optimum   |
+| Chain `2 -> -1 -> 3`                      | `4`                             | A negative value can connect profitable portions |
+| Chain `5 -> -100 -> 6`                    | `6`                             | A path cannot skip an internal node              |
+| All values are zero                       | `0`                             | Many nonempty paths tie for the optimum          |
+| Running example                           | `42`                            | The optimal path does not include the root       |
+| Three-node chain, each value `1000000000` | `3000000000`                    | Sums can exceed a 32-bit signed integer          |
+| Empty tree                                | Rejected by this implementation | No nonempty path exists                          |
 
 Repeated values do not change the recurrence. If reconstructing a path, distinguish nodes by identity rather than by their stored values.
 

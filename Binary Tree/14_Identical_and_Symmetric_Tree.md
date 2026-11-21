@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3771</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -71,21 +71,21 @@ For identical trees, let the node counts be `n1` and `n2`, heights be `h1` and `
 
 Before deciding which children to compare, consider a pair of pointers `(a, b)`:
 
-| State of the pair | Result | Reason |
-| --- | --- | --- |
-| Both are null | `true` | Both positions are empty |
-| Exactly one is null | `false` | The structures differ |
-| Both exist, but values differ | `false` | Corresponding values do not match |
-| Both exist and values match | Check their children | A match at this position does not prove a match below it |
+| State of the pair             | Result               | Reason                                                   |
+| ----------------------------- | -------------------- | -------------------------------------------------------- |
+| Both are null                 | `true`               | Both positions are empty                                 |
+| Exactly one is null           | `false`              | The structures differ                                    |
+| Both exist, but values differ | `false`              | Corresponding values do not match                        |
+| Both exist and values match   | Check their children | A match at this position does not prove a match below it |
 
 **Check for null pointers before reading node values or children.**
 
 Once the current pair matches, the problem determines which children correspond:
 
-| Check | First child pair | Second child pair |
-| --- | --- | --- |
-| Identical | `(a->left, b->left)` | `(a->right, b->right)` |
-| Mirror | `(a->left, b->right)` | `(a->right, b->left)` |
+| Check     | First child pair      | Second child pair      |
+| --------- | --------------------- | ---------------------- |
+| Identical | `(a->left, b->left)`  | `(a->right, b->right)` |
+| Mirror    | `(a->left, b->right)` | `(a->right, b->left)`  |
 
 For identity, the directions are the same. For a mirror, the directions are opposite **at every depth**, not just at the root.
 
@@ -148,15 +148,15 @@ C++ evaluates `&&` from left to right and short-circuits: if the left comparison
 
 Use the identical trees from Section 1. In the table, a pair such as `(2, 2)` represents two corresponding nodes, one from each tree. `#` represents `nullptr`.
 
-| Call | What happens? |
-| --- | --- |
-| `(1, 1)` | Values match; compare the left subtrees |
-| `(2, 2)` | Values match; compare their left children |
-| `(#, #)` | Both positions are empty; return `true` |
-| `(4, 4)` | Values match; both child comparisons are `(#, #)`, so return `true` |
-| Return to `(2, 2)` | Both child comparisons succeeded; return `true` |
-| `(3, 3)` | Values match; both child comparisons are `(#, #)`, so return `true` |
-| Return to `(1, 1)` | Both subtree comparisons succeeded; return `true` |
+| Call               | What happens?                                                       |
+| ------------------ | ------------------------------------------------------------------- |
+| `(1, 1)`           | Values match; compare the left subtrees                             |
+| `(2, 2)`           | Values match; compare their left children                           |
+| `(#, #)`           | Both positions are empty; return `true`                             |
+| `(4, 4)`           | Values match; both child comparisons are `(#, #)`, so return `true` |
+| Return to `(2, 2)` | Both child comparisons succeeded; return `true`                     |
+| `(3, 3)`           | Values match; both child comparisons are `(#, #)`, so return `true` |
+| Return to `(1, 1)` | Both subtree comparisons succeeded; return `true`                   |
 
 Now move `4` in Tree B to the **left** of `2`:
 
@@ -213,14 +213,14 @@ For a pair of null pointers, use `continue`, not `return true`. That pair is val
 
 For the original identical trees, the queue evolves as follows. Its front is shown on the left.
 
-| Pair removed | Queue after processing the pair |
-| --- | --- |
-| Initial state | `[(1, 1)]` |
-| `(1, 1)` | `[(2, 2), (3, 3)]` |
-| `(2, 2)` | `[(3, 3), (#, #), (4, 4)]` |
-| `(3, 3)` | `[(#, #), (4, 4), (#, #), (#, #)]` |
-| `(#, #)` | `[(4, 4), (#, #), (#, #)]` |
-| `(4, 4)` | `[(#, #), (#, #), (#, #), (#, #)]` |
+| Pair removed              | Queue after processing the pair          |
+| ------------------------- | ---------------------------------------- |
+| Initial state             | `[(1, 1)]`                               |
+| `(1, 1)`                  | `[(2, 2), (3, 3)]`                       |
+| `(2, 2)`                  | `[(3, 3), (#, #), (4, 4)]`               |
+| `(3, 3)`                  | `[(#, #), (4, 4), (#, #), (#, #)]`       |
+| `(#, #)`                  | `[(4, 4), (#, #), (#, #)]`               |
+| `(4, 4)`                  | `[(#, #), (#, #), (#, #), (#, #)]`       |
 | Remaining four null pairs | Each is skipped; the queue becomes empty |
 
 The result is `true`. If the node values were `(4, 9)`, the algorithm would return `false` when that pair was removed.
@@ -289,12 +289,12 @@ Return to the symmetric tree:
 
 To distinguish repeated values, use paths from the root: `L` means left, `R` means right, and `LR` means left then right.
 
-| Call | Values | Result |
-| --- | --- | --- |
-| `areMirrors(L, R)` | `(2, 2)` | Values match; check the outer pair first |
-| `areMirrors(LL, RR)` | `(3, 3)` | Both cross-child comparisons are null pairs; return `true` |
-| `areMirrors(LR, RL)` | `(4, 4)` | Both cross-child comparisons are null pairs; return `true` |
-| Return to `areMirrors(L, R)` | `(2, 2)` | Both pairs succeeded; return `true` |
+| Call                         | Values   | Result                                                     |
+| ---------------------------- | -------- | ---------------------------------------------------------- |
+| `areMirrors(L, R)`           | `(2, 2)` | Values match; check the outer pair first                   |
+| `areMirrors(LL, RR)`         | `(3, 3)` | Both cross-child comparisons are null pairs; return `true` |
+| `areMirrors(LR, RL)`         | `(4, 4)` | Both cross-child comparisons are null pairs; return `true` |
+| Return to `areMirrors(L, R)` | `(2, 2)` | Both pairs succeeded; return `true`                        |
 
 Therefore, `isSymmetric(root)` returns `true`.
 
@@ -351,13 +351,13 @@ The base cases are unchanged from the identical-tree algorithm. The initial pair
 
 For the symmetric seven-node tree:
 
-| Pair removed | Queue after processing the pair |
-| --- | --- |
-| Initial state | `[(L, R)]`, with values `(2, 2)` |
-| `(L, R)` | `[(LL, RR), (LR, RL)]`, with values `(3, 3), (4, 4)` |
-| `(LL, RR)` | `[(LR, RL), (#, #), (#, #)]` |
-| `(LR, RL)` | `[(#, #), (#, #), (#, #), (#, #)]` |
-| Remaining four null pairs | Each is skipped; the queue becomes empty |
+| Pair removed              | Queue after processing the pair                      |
+| ------------------------- | ---------------------------------------------------- |
+| Initial state             | `[(L, R)]`, with values `(2, 2)`                     |
+| `(L, R)`                  | `[(LL, RR), (LR, RL)]`, with values `(3, 3), (4, 4)` |
+| `(LL, RR)`                | `[(LR, RL), (#, #), (#, #)]`                         |
+| `(LR, RL)`                | `[(#, #), (#, #), (#, #), (#, #)]`                   |
+| Remaining four null pairs | Each is skipped; the queue becomes empty             |
 
 All required pairs match, so the result is `true`.
 
@@ -393,10 +393,10 @@ For these implementations, a tighter bound is **`O(min(n1, n2) + 1)`**. Expansio
 
 **Queue space:** `O(w)` for a nonempty tree. The queue contains pending mirror pairs across at most two adjacent levels, including a constant number of null pairs per expanded pair. A broad tree can require `O(n)` queue space.
 
-| Problem | Recursive auxiliary space | Iterative BFS auxiliary space |
-| --- | --- | --- |
-| Identical trees | `O(min(h1, h2) + 1)` | `O(w1 + w2 + 1)` |
-| Symmetric tree | `O(h)` for nonempty trees | `O(w)` for nonempty trees |
+| Problem         | Recursive auxiliary space | Iterative BFS auxiliary space |
+| --------------- | ------------------------- | ----------------------------- |
+| Identical trees | `O(min(h1, h2) + 1)`      | `O(w1 + w2 + 1)`              |
+| Symmetric tree  | `O(h)` for nonempty trees | `O(w)` for nonempty trees     |
 
 These are upper bounds, not a claim that every input reaches them. A nontrivial one-sided chain is rejected by the symmetry check immediately because one root child is missing. In contrast, two matching chains require the identical-tree recursion to descend through their full height.
 
@@ -467,29 +467,29 @@ Only the demonstration code changes links or values to create new inputs. The ch
 
 ### Identical Trees
 
-| Input | Expected result |
-| --- | --- |
-| Both roots are null | `true` |
-| Exactly one root is null | `false` |
-| Single nodes with equal values | `true` |
-| Single nodes with unequal values | `false` |
-| Same values, but a child is on different sides | `false` |
-| Same structure, but one corresponding value differs | `false` |
-| Matching trees with repeated or negative values | `true` |
-| Same node count and height, but different structures | `false` |
+| Input                                                | Expected result |
+| ---------------------------------------------------- | --------------- |
+| Both roots are null                                  | `true`          |
+| Exactly one root is null                             | `false`         |
+| Single nodes with equal values                       | `true`          |
+| Single nodes with unequal values                     | `false`         |
+| Same values, but a child is on different sides       | `false`         |
+| Same structure, but one corresponding value differs  | `false`         |
+| Matching trees with repeated or negative values      | `true`          |
+| Same node count and height, but different structures | `false`         |
 
 ### Symmetric Tree
 
-| Input | Expected result |
-| --- | --- |
-| Empty tree | `true` |
-| Single node | `true` |
-| Root has exactly one child | `false` |
-| Equal-valued leaf children | `true` |
-| Mirrored structure, but one mirrored pair has unequal values | `false` |
-| Root has equal-valued children, each with only an equal-valued right child | `false` |
-| Root has equal-valued children; the left has only a left leaf, and the right has only an equal-valued right leaf | `true` |
-| All values are equal, but the structure is asymmetric | `false` |
+| Input                                                                                                            | Expected result |
+| ---------------------------------------------------------------------------------------------------------------- | --------------- |
+| Empty tree                                                                                                       | `true`          |
+| Single node                                                                                                      | `true`          |
+| Root has exactly one child                                                                                       | `false`         |
+| Equal-valued leaf children                                                                                       | `true`          |
+| Mirrored structure, but one mirrored pair has unequal values                                                     | `false`         |
+| Root has equal-valued children, each with only an equal-valued right child                                       | `false`         |
+| Root has equal-valued children; the left has only a left leaf, and the right has only an equal-valued right leaf | `true`          |
+| All values are equal, but the structure is asymmetric                                                            | `false`         |
 
 Watch for these mistakes:
 

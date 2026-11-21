@@ -1,6 +1,6 @@
 <VIDEO_WIDGET>
 
-<VIDEO_ID></VIDEO_ID>
+<VIDEO_ID>3770</VIDEO_ID>
 
 </VIDEO_WIDGET>
 
@@ -55,12 +55,12 @@ Consider the following tree, with target node `5` and `K = 2`:
 
 Group the nodes by their distance from `5`:
 
-| Distance | Nodes | How they are reached |
-| --- | --- | --- |
-| `0` | `5` | The target itself |
-| `1` | `6`, `2`, `3` | One move to a child or parent |
-| `2` | `7`, `4`, `1` | `5 -> 2 -> 7`, `5 -> 2 -> 4`, `5 -> 3 -> 1` |
-| `3` | `0`, `8` | Continue through node `1` |
+| Distance | Nodes         | How they are reached                        |
+| -------- | ------------- | ------------------------------------------- |
+| `0`      | `5`           | The target itself                           |
+| `1`      | `6`, `2`, `3` | One move to a child or parent               |
+| `2`      | `7`, `4`, `1` | `5 -> 2 -> 7`, `5 -> 2 -> 4`, `5 -> 3 -> 1` |
+| `3`      | `0`, `8`      | Continue through node `1`                   |
 
 The answer is **`[7, 4, 1]`**, in any order.
 
@@ -114,17 +114,17 @@ Pass both the current node and its parent into a recursive DFS:
 
 For the running example, the completed map is:
 
-| Node | Parent |
-| --- | --- |
-| `3` | `nullptr` |
-| `5` | `3` |
-| `1` | `3` |
-| `6` | `5` |
-| `2` | `5` |
-| `0` | `1` |
-| `8` | `1` |
-| `7` | `2` |
-| `4` | `2` |
+| Node | Parent    |
+| ---- | --------- |
+| `3`  | `nullptr` |
+| `5`  | `3`       |
+| `1`  | `3`       |
+| `6`  | `5`       |
+| `2`  | `5`       |
+| `0`  | `1`       |
+| `8`  | `1`       |
+| `7`  | `2`       |
+| `4`  | `2`       |
 
 These table entries use values as readable labels because the example has distinct values. The actual map uses **node pointers as keys**.
 
@@ -312,9 +312,9 @@ distance = 0
 
 The saved layer size is `1`.
 
-| Removed node | Neighbors considered | Newly enqueued |
-| --- | --- | --- |
-| `5` | Left `6`, right `2`, parent `3` | `6`, `2`, `3` |
+| Removed node | Neighbors considered            | Newly enqueued |
+| ------------ | ------------------------------- | -------------- |
+| `5`          | Left `6`, right `2`, parent `3` | `6`, `2`, `3`  |
 
 After processing that layer:
 
@@ -328,11 +328,11 @@ distance = 1
 
 The saved layer size is now `3`.
 
-| Removed node | Neighbors considered | Newly enqueued | Queue afterward |
-| --- | --- | --- | --- |
-| `6` | Two null children; parent `5` already visited | None | `[2, 3]` |
-| `2` | Children `7`, `4`; parent `5` already visited | `7`, `4` | `[3, 7, 4]` |
-| `3` | Child `5` already visited; child `1`; null parent | `1` | `[7, 4, 1]` |
+| Removed node | Neighbors considered                              | Newly enqueued | Queue afterward |
+| ------------ | ------------------------------------------------- | -------------- | --------------- |
+| `6`          | Two null children; parent `5` already visited     | None           | `[2, 3]`        |
+| `2`          | Children `7`, `4`; parent `5` already visited     | `7`, `4`       | `[3, 7, 4]`     |
+| `3`          | Child `5` already visited; child `1`; null parent | `1`            | `[7, 4, 1]`     |
 
 After processing that layer:
 
@@ -383,13 +383,13 @@ Hash-container operations are expected constant time, not guaranteed constant ti
 
 ### Space Complexity
 
-| Storage | Worst-case size |
-| --- | --- |
-| Parent map | `O(n)` |
-| Visited set | `O(n)` |
-| BFS queue | `O(n)` |
-| Parent-map DFS call stack | `O(h)` |
-| Returned answer | `O(m)` |
+| Storage                   | Worst-case size |
+| ------------------------- | --------------- |
+| Parent map                | `O(n)`          |
+| Visited set               | `O(n)`          |
+| BFS queue                 | `O(n)`          |
+| Parent-map DFS call stack | `O(h)`          |
+| Returned answer           | `O(m)`          |
 
 Total auxiliary space is **`O(n)`**, with another `O(m)` for the returned answer. Including the output, the overall extra space remains `O(n)` because `m <= n`.
 
@@ -519,11 +519,11 @@ If the target is absent, every search returns `-1`. No downward collection is tr
 
 For target `5` and `K = 2`:
 
-| Current node | Action | Result |
-| --- | --- | --- |
-| `5` | Target found; collect nodes `2` edges below it | Add `7`, `4`; return distance `0` |
-| `3` | Left child returned `0`, so target is `1` edge away | Current node is too close to be an answer |
-| `3` | Enter the opposite subtree at node `1` with remaining distance `2 - 1 - 1 = 0` | Add `1`; return distance `1` |
+| Current node | Action                                                                         | Result                                    |
+| ------------ | ------------------------------------------------------------------------------ | ----------------------------------------- |
+| `5`          | Target found; collect nodes `2` edges below it                                 | Add `7`, `4`; return distance `0`         |
+| `3`          | Left child returned `0`, so target is `1` edge away                            | Current node is too close to be an answer |
+| `3`          | Enter the opposite subtree at node `1` with remaining distance `2 - 1 - 1 = 0` | Add `1`; return distance `1`              |
 
 The answer is again **`[7, 4, 1]`**.
 
@@ -545,27 +545,27 @@ The active search frames and a downward collection follow a root-to-descendant r
 
 ### Comparing the Approaches
 
-| Approach | Time | Auxiliary space | Main idea |
-| --- | --- | --- | --- |
-| DFS parent map + BFS | Expected `O(n)` | `O(n)` | Explore neighbors in distance layers |
-| Recursive DFS only | `O(n)` | `O(h)` | Return target distance and search opposite subtrees |
+| Approach             | Time            | Auxiliary space | Main idea                                           |
+| -------------------- | --------------- | --------------- | --------------------------------------------------- |
+| DFS parent map + BFS | Expected `O(n)` | `O(n)`          | Explore neighbors in distance layers                |
+| Recursive DFS only   | `O(n)`          | `O(h)`          | Return target distance and search opposite subtrees |
 
 The BFS approach makes distance layers explicit and is straightforward to extend to multiple sources. The DFS-only approach reduces auxiliary storage in a balanced tree but requires careful distance arithmetic and recursion management.
 
 ## 11. Edge Cases and Common Mistakes
 
-| Case | Expected behavior |
-| --- | --- |
-| Empty tree | Return an empty vector |
-| Null target or target outside the tree | Return an empty vector |
-| Negative `K` | Return an empty vector under this lesson's convention |
-| `K = 0`, target exists | Return only the target's value |
-| Single-node tree | Return its value for `K = 0`; otherwise return empty |
-| Target is the root | Find nodes at depth `K` from the root |
-| Target is a leaf | Allow upward moves and entry into other branches |
-| `K` exceeds every distance from the target | Return an empty vector |
-| Different nodes contain the same value | Track them separately by pointer; repeated output values are valid |
-| Tree is a long chain | Count edges correctly and account for recursion depth |
+| Case                                       | Expected behavior                                                  |
+| ------------------------------------------ | ------------------------------------------------------------------ |
+| Empty tree                                 | Return an empty vector                                             |
+| Null target or target outside the tree     | Return an empty vector                                             |
+| Negative `K`                               | Return an empty vector under this lesson's convention              |
+| `K = 0`, target exists                     | Return only the target's value                                     |
+| Single-node tree                           | Return its value for `K = 0`; otherwise return empty               |
+| Target is the root                         | Find nodes at depth `K` from the root                              |
+| Target is a leaf                           | Allow upward moves and entry into other branches                   |
+| `K` exceeds every distance from the target | Return an empty vector                                             |
+| Different nodes contain the same value     | Track them separately by pointer; repeated output values are valid |
+| Tree is a long chain                       | Count edges correctly and account for recursion depth              |
 
 In the running example, target `5` with `K = 4` gives an empty answer because its farthest nodes, `0` and `8`, are only three edges away. With target `7` and `K = 2`, the answer is `[4, 5]` in any order.
 
